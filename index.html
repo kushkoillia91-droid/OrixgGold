@@ -1,106 +1,1227 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>OrixGold</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OrixGold — Ювелірні прикраси</title>
+  <meta name="description" content="Сучасний інтернет-магазин ювелірних прикрас OrixGold: каблучки, сережки, браслети, ланцюжки та підвіски." />
   <style>
+    :root {
+      --bg: #f8f4ef;
+      --paper: #fffdfb;
+      --text: #1f1a17;
+      --muted: #6d6157;
+      --line: #e7ddd2;
+      --gold: #b58949;
+      --gold-dark: #8b6630;
+      --dark: #241b16;
+      --danger: #a43f3f;
+      --success: #1f7a4e;
+      --shadow: 0 20px 60px rgba(36, 27, 22, 0.08);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f0f0f;
-      color: #fff;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
     }
 
-    header {
+    .topbar {
+      background: var(--dark);
+      color: #f8efe2;
+      font-size: 14px;
+      padding: 10px 0;
+    }
+    .topbar__row {
       display: flex;
       justify-content: space-between;
-      padding: 20px 40px;
-      background: #111;
-      border-bottom: 1px solid #333;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    header h1 {
-      color: gold;
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(248, 244, 239, 0.85);
+      border-bottom: 1px solid rgba(231, 221, 210, 0.75);
+    }
+    .header__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 0;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 145px;
+    }
+    .brand strong {
+      font-size: 26px;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+    .brand span {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav a {
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .nav a:hover { color: var(--text); }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .btn {
-      background: gold;
-      color: black;
-      padding: 10px 20px;
       border: none;
+      border-radius: 999px;
       cursor: pointer;
-      border-radius: 5px;
+      padding: 14px 22px;
+      transition: 0.2s ease;
+      font-weight: 600;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn--gold {
+      background: var(--gold);
+      color: white;
+      box-shadow: 0 10px 25px rgba(181, 137, 73, 0.28);
+    }
+    .btn--gold:hover { background: var(--gold-dark); }
+    .btn--ghost {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+    .btn--dark {
+      background: var(--dark);
+      color: white;
+    }
+    .icon-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: white;
+      position: relative;
+      cursor: pointer;
+    }
+    .badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--dark);
+      color: white;
+      font-size: 12px;
+      display: grid;
+      place-items: center;
     }
 
     .hero {
-      text-align: center;
-      padding: 100px 20px;
+      padding: 34px 0 26px;
+    }
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .hero__content, .hero__card {
+      background: linear-gradient(180deg, #fffdfb 0%, #f4ece3 100%);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+    }
+    .hero__content {
+      padding: 54px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 580px;
+    }
+    .eyebrow {
+      color: var(--gold-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(36px, 6vw, 68px);
+      line-height: 1.04;
+      margin: 0 0 18px;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 560px;
+      margin-bottom: 28px;
+    }
+    .hero__cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .fact {
+      background: rgba(255,255,255,0.65);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px;
+    }
+    .fact strong { display: block; font-size: 24px; margin-bottom: 6px; }
+    .fact span { color: var(--muted); font-size: 14px; }
+
+    .hero__card {
+      overflow: hidden;
+      position: relative;
+      min-height: 580px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      background:
+        radial-gradient(circle at top right, rgba(181,137,73,0.24), transparent 28%),
+        linear-gradient(180deg, #fffaf4 0%, #efe1cf 100%);
+    }
+    .hero__visual {
+      padding: 40px 34px 18px;
+      display: grid;
+      place-items: center;
+      min-height: 400px;
+    }
+    .hero__ring {
+      width: min(360px, 78%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 24px solid #d9b06a;
+      position: relative;
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.55), 0 28px 55px rgba(139, 102, 48, 0.22);
+      background: radial-gradient(circle at 35% 35%, #fdf4d7 0%, #e2bb72 42%, #b98b46 80%);
+    }
+    .hero__ring::before {
+      content: "";
+      position: absolute;
+      top: -48px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(145deg, #ffffff 0%, #ebf6ff 40%, #c5d7e8 100%);
+      clip-path: polygon(50% 0%, 100% 40%, 82% 100%, 18% 100%, 0% 40%);
+      box-shadow: 0 20px 38px rgba(130, 173, 205, 0.34);
+      border-radius: 12px;
+    }
+    .hero__info {
+      padding: 0 28px 28px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 12px;
+    }
+    .price-tag {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px 18px;
+    }
+    .price-tag small { display: block; color: var(--muted); margin-bottom: 6px; }
+    .price-tag strong { font-size: 28px; }
+
+    section {
+      padding: 38px 0;
+    }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 42px);
+    }
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 700px;
     }
 
-    .hero h2 {
-      font-size: 40px;
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
     }
+    .category {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .category strong { display: block; font-size: 22px; margin-bottom: 8px; }
+    .category p { color: var(--muted); margin: 0 0 16px; }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .search, .select {
+      height: 52px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: white;
+      padding: 0 18px;
+      min-width: 180px;
+    }
+    .search { flex: 1 1 320px; }
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 40px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
     }
-
-    .card {
-      background: #1a1a1a;
-      padding: 20px;
+    .product {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+    .product__media {
+      aspect-ratio: 1 / 1.05;
+      background: linear-gradient(180deg, #fffaf5 0%, #efe3d6 100%);
+      display: grid;
+      place-items: center;
+      padding: 18px;
+    }
+    .shape {
+      width: 74%;
+      aspect-ratio: 1;
+      position: relative;
+    }
+    .shape.ring {
+      border-radius: 50%;
+      border: 18px solid #d9b06a;
+      background: radial-gradient(circle at 35% 35%, #fff8de 0%, #e3bc74 45%, #bb8e48 100%);
+    }
+    .shape.earring::before,
+    .shape.earring::after {
+      content: "";
+      position: absolute;
+      width: 42%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 14px solid #d9b06a;
+      background: linear-gradient(180deg, #fff8de 0%, #e3bc74 45%, #bb8e48 100%);
+      top: 22%;
+    }
+    .shape.earring::before { left: 6%; }
+    .shape.earring::after { right: 6%; }
+    .shape.chain::before {
+      content: "";
+      position: absolute;
+      inset: 15% 8% 35% 8%;
+      border: 14px solid #d9b06a;
+      border-bottom: none;
+      border-radius: 120px 120px 0 0;
+    }
+    .shape.chain::after {
+      content: "";
+      position: absolute;
+      width: 28%;
+      height: 36%;
+      left: 50%;
+      bottom: 2%;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #f9dfb0 0%, #d6a965 100%);
+      clip-path: polygon(50% 0%, 100% 45%, 75% 100%, 25% 100%, 0% 45%);
       border-radius: 10px;
-      text-align: center;
+    }
+    .shape.bracelet {
+      border-radius: 50%;
+      border: 16px dashed #ca9a54;
+      background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, transparent 62%);
     }
 
-    footer {
+    .product__body {
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .product__meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .product h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .product__price {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .product__desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+    .product__footer {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+    .product__footer .btn { flex: 1; }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .panel p { color: var(--muted); }
+    .checklist {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .check {
+      display: flex;
+      gap: 12px;
+      align-items: start;
+    }
+    .check i {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #efe4d2;
+      color: var(--gold-dark);
+      display: grid;
+      place-items: center;
+      font-style: normal;
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+
+    .measure {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .measure-tool {
+      display: grid;
+      gap: 18px;
+    }
+    .ring-sizer {
+      display: grid;
+      place-items: center;
+      min-height: 360px;
+      background: linear-gradient(180deg, #fffaf5 0%, #efe1cf 100%);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ring-sizer::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 26px 0;
+      height: 2px;
+      background: rgba(36, 27, 22, 0.14);
+    }
+    .sizer-circle {
+      width: var(--ring-size, 120px);
+      height: var(--ring-size, 120px);
+      border: 12px solid #cb9953;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, transparent 62%);
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.4), 0 20px 40px rgba(181, 137, 73, 0.22);
+      transition: 0.25s ease;
+      position: relative;
+    }
+    .ruler {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .ruler input { width: 100%; }
+    .measure-result {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: #f2eadf;
+      color: var(--text);
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .contact-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .contact-item strong { display: block; margin-bottom: 4px; }
+    .contact-item span { color: var(--muted); }
+
+    .form {
+      display: grid;
+      gap: 14px;
+    }
+    .form input,
+    .form textarea,
+    .form select {
+      width: 100%;
+      padding: 15px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: white;
+    }
+    .form textarea { min-height: 130px; resize: vertical; }
+    .notice {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .footer {
+      background: var(--dark);
+      color: #f7ede2;
+      margin-top: 30px;
+      padding: 36px 0 20px;
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+    .footer p, .footer a { color: #d8cbbb; }
+    .footer strong { color: white; display: inline-block; margin-bottom: 10px; }
+    .footer__bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 16px;
+      color: #cab9a7;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cart {
+      position: fixed;
+      inset: 0 0 0 auto;
+      width: min(420px, 100%);
+      background: #fffdfb;
+      border-left: 1px solid var(--line);
+      box-shadow: -12px 0 40px rgba(36, 27, 22, 0.12);
+      z-index: 50;
+      transform: translateX(100%);
+      transition: 0.28s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart.open { transform: translateX(0); }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(36, 27, 22, 0.38);
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.25s ease;
+      z-index: 45;
+    }
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .cart__head,
+    .cart__foot {
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .cart__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .cart__items {
+      flex: 1;
+      overflow: auto;
+      padding: 16px 18px;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+    .cart-item {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 14px;
+      background: white;
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+    .cart-thumb {
+      width: 64px;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fffaf5 0%, #efe3d6 100%);
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+    }
+    .cart-item p { margin: 0; color: var(--muted); font-size: 14px; }
+    .cart-item strong { display: block; }
+    .cart__total {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .mini-btn {
+      border: none;
+      background: transparent;
+      color: var(--danger);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .empty {
+      border: 1px dashed var(--line);
+      border-radius: 22px;
+      padding: 26px;
       text-align: center;
-      padding: 20px;
-      border-top: 1px solid #333;
+      color: var(--muted);
+      background: #fff;
+    }
+    .hidden { display: none !important; }
+
+    @media (max-width: 1080px) {
+      .hero__grid,
+      .about,
+      .measure,
+      .contact-grid,
+      .footer__grid,
+      .hero__info,
+      .categories,
+      .products { grid-template-columns: repeat(2, 1fr); }
+      .hero__content, .hero__card { min-height: auto; }
+    }
+    @media (max-width: 860px) {
+      .header__row { flex-wrap: wrap; }
+      .nav { order: 3; width: 100%; justify-content: flex-start; }
+      .hero__grid,
+      .about,
+      .measure,
+      .contact-grid,
+      .categories,
+      .products,
+      .footer__grid,
+      .facts { grid-template-columns: 1fr; }
+      .hero__content { padding: 28px; }
+      .hero__info { grid-template-columns: 1fr; }
+      .product__footer { flex-direction: column; }
+      .toolbar { align-items: stretch; }
+      .search, .select { width: 100%; }
     }
   </style>
 </head>
-
 <body>
-
-<header>
-  <h1>OrixGold</h1>
-  <button class="btn">Купити</button>
-</header>
-
-<section class="hero">
-  <h2>Продаж ігрового золота</h2>
-  <p>Швидко. Надійно. Вигідно.</p>
-  <button class="btn">Почати</button>
-</section>
-
-<section class="products">
-  <div class="card">
-    <h3>WoW Gold</h3>
-    <p>Найкращі ціни</p>
-    <button class="btn">Купити</button>
+  <div class="topbar">
+    <div class="container topbar__row">
+      <span>Безкоштовна доставка по Україні від 3000 грн</span>
+      <span>Instagram: @orixgold • Telegram: @orixgold</span>
+    </div>
   </div>
 
-  <div class="card">
-    <h3>Dota 2</h3>
-    <p>Миттєва доставка</p>
-    <button class="btn">Купити</button>
-  </div>
+  <header class="header">
+    <div class="container header__row">
+      <a class="brand" href="#home">
+        <strong>ORIXGOLD</strong>
+        <span>Jewelry boutique</span>
+      </a>
 
-  <div class="card">
-    <h3>CS2</h3>
-    <p>Безпечні угоди</p>
-    <button class="btn">Купити</button>
-  </div>
-</section>
+      <nav class="nav">
+        <a href="#catalog">Каталог</a>
+        <a href="#about">Про бренд</a>
+        <a href="#sizer">Розмір каблучки</a>
+        <a href="#delivery">Доставка і оплата</a>
+        <a href="#contacts">Контакти</a>
+      </nav>
 
-<footer>
-  <p>© 2026 OrixGold</p>
-</footer>
+      <div class="actions">
+        <a class="btn btn--ghost" href="#contacts">Замовити консультацію</a>
+        <button class="icon-btn" id="cartButton" aria-label="Кошик">
+          🛍️
+          <span class="badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
 
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <div class="eyebrow">Нова колекція OrixGold</div>
+          <h1>Ювелірний магазин, який виглядає дорого — і продає зручно.</h1>
+          <p class="lead">Каблучки, сережки, ланцюжки та браслети з акуратним каталогом, швидким кошиком, замовленням онлайн і вбудованим вимірювачем розміру пальця.</p>
+          <div class="hero__cta">
+            <a class="btn btn--gold" href="#catalog">Перейти в каталог</a>
+            <a class="btn btn--ghost" href="#sizer">Визначити розмір</a>
+          </div>
+          <div class="facts">
+            <div class="fact"><strong>925</strong><span>Срібло найвищої якості</span></div>
+            <div class="fact"><strong>14 днів</strong><span>Обмін і повернення</span></div>
+            <div class="fact"><strong>1 день</strong><span>Швидка відправка в наявності</span></div>
+          </div>
+        </div>
+
+        <div class="hero__card">
+          <div class="hero__visual">
+            <div class="hero__ring"></div>
+          </div>
+          <div class="hero__info">
+            <div class="price-tag">
+              <small>Хіт продажу</small>
+              <strong>Каблучка Aurora</strong>
+              <div style="margin-top:8px;color:var(--muted);">Срібло 925 • фіаніт • розміри 16–19</div>
+            </div>
+            <button class="btn btn--dark" onclick="scrollToSection('catalog')">Дивитись</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Категорії</h2>
+            <p>Структура вже готова: можна розширювати каталог хоч до сотень товарів, просто додаючи нові позиції в масив товарів у коді.</p>
+          </div>
+        </div>
+        <div class="categories">
+          <article class="category">
+            <strong>Каблучки</strong>
+            <p>Класичні, мінімалістичні та акцентні моделі.</p>
+            <a href="#catalog" class="btn btn--ghost">Обрати</a>
+          </article>
+          <article class="category">
+            <strong>Сережки</strong>
+            <p>Лаконічні щоденні та святкові варіанти.</p>
+            <a href="#catalog" class="btn btn--ghost">Обрати</a>
+          </article>
+          <article class="category">
+            <strong>Браслети</strong>
+            <p>Тонкі та виразні моделі під будь-який стиль.</p>
+            <a href="#catalog" class="btn btn--ghost">Обрати</a>
+          </article>
+          <article class="category">
+            <strong>Ланцюжки і підвіски</strong>
+            <p>Базові прикраси для повсякденного образу.</p>
+            <a href="#catalog" class="btn btn--ghost">Обрати</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Каталог прикрас</h2>
+            <p>Нижче вже є демо-товари. Їх можна замінити на твої реальні фото, назви, ціни та розміри.</p>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <input class="search" id="searchInput" type="text" placeholder="Пошук за назвою товару..." />
+          <select class="select" id="categoryFilter">
+            <option value="all">Усі категорії</option>
+            <option value="Каблучки">Каблучки</option>
+            <option value="Сережки">Сережки</option>
+            <option value="Браслети">Браслети</option>
+            <option value="Ланцюжки">Ланцюжки</option>
+          </select>
+          <select class="select" id="sortFilter">
+            <option value="default">Сортування</option>
+            <option value="cheap">Спочатку дешевші</option>
+            <option value="expensive">Спочатку дорожчі</option>
+          </select>
+        </div>
+
+        <div class="products" id="productsGrid"></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about">
+        <div class="panel">
+          <div class="eyebrow">Про бренд</div>
+          <h2>OrixGold — сучасний ювелірний бренд з преміальною подачею.</h2>
+          <p>Цей макет вже заточений під реальний бізнес: великий hero-блок, каталог, картки товарів, кошик, замовлення, блоки довіри та окрема сторінка-розділ для визначення розміру пальця.</p>
+          <div class="checklist">
+            <div class="check"><i>✓</i><div><strong>Адаптивний дизайн</strong><div style="color:var(--muted)">Нормально виглядає і на телефоні, і на ноутбуці.</div></div></div>
+            <div class="check"><i>✓</i><div><strong>Підходить для Vercel</strong><div style="color:var(--muted)">Достатньо замінити твій поточний index.html.</div></div></div>
+            <div class="check"><i>✓</i><div><strong>Легко масштабувати</strong><div style="color:var(--muted)">Потім можна підключити оплату, CRM, Telegram або базу товарів.</div></div></div>
+          </div>
+        </div>
+
+        <div class="panel" id="delivery">
+          <div class="eyebrow">Доставка і оплата</div>
+          <h2>Все, що важливо покупцю, вже в одному блоці.</h2>
+          <div class="checklist">
+            <div class="check"><i>1</i><div><strong>Доставка</strong><div style="color:var(--muted)">Нова пошта по Україні 1–3 дні. Можливий самовивіз за домовленістю.</div></div></div>
+            <div class="check"><i>2</i><div><strong>Оплата</strong><div style="color:var(--muted)">Накладений платіж, онлайн-оплата або оплата на рахунок. Онлайн-оплату підключають окремо.</div></div></div>
+            <div class="check"><i>3</i><div><strong>Гарантія</strong><div style="color:var(--muted)">Обмін/повернення відповідно до умов магазину та чинного законодавства.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sizer">
+      <div class="container measure">
+        <div class="panel measure-tool">
+          <div>
+            <div class="eyebrow">Вимірювач пальця</div>
+            <h2>Підбери розмір каблучки прямо на сайті</h2>
+            <p>Пересувай повзунок, поки внутрішнє коло приблизно не співпаде з твоєю каблучкою на екрані. Це демо-версія вимірювача — її можна потім зробити точнішою під реальний фізичний масштаб.</p>
+          </div>
+          <div class="ring-sizer" id="ringSizerBox">
+            <div class="sizer-circle" id="sizerCircle"></div>
+          </div>
+          <div class="ruler">
+            <span>14</span>
+            <input type="range" min="14" max="23" step="0.5" value="17" id="ringRange" />
+            <span>23</span>
+          </div>
+          <div class="measure-result">
+            <div class="pill">Розмір: <span id="ringSizeLabel">17</span></div>
+            <div class="pill">Діаметр: <span id="ringDiameterLabel">17.0 мм</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="eyebrow">Як користуватись</div>
+          <h2>Проста інструкція для клієнта</h2>
+          <div class="checklist">
+            <div class="check"><i>1</i><div><strong>Візьми свою каблучку</strong><div style="color:var(--muted)">Поклади її на екран або орієнтуйся візуально по внутрішньому колу.</div></div></div>
+            <div class="check"><i>2</i><div><strong>Піджени повзунок</strong><div style="color:var(--muted)">Співстав внутрішній діаметр каблучки з колом на екрані.</div></div></div>
+            <div class="check"><i>3</i><div><strong>Збережи розмір</strong><div style="color:var(--muted)">Після цього вибери відповідний розмір при оформленні замовлення.</div></div></div>
+          </div>
+          <p class="notice" style="margin-top:22px;">Пізніше сюди можна додати PDF-шаблон для друку, калібрування банківською карткою або інтерактивний точний вимірювач.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container contact-grid">
+        <div class="panel">
+          <div class="eyebrow">Контакти</div>
+          <h2>Зв'яжіться з нами</h2>
+          <p>Цей блок уже можна використовувати як готову форму заявки. Поки що форма показує повідомлення без реальної відправки — для справжньої роботи її можна підключити до Telegram, email або CRM.</p>
+          <div class="contact-list">
+            <div class="contact-item"><strong>Телефон</strong><span>+38 (0XX) XXX-XX-XX</span></div>
+            <div class="contact-item"><strong>Instagram</strong><span>@orixgold</span></div>
+            <div class="contact-item"><strong>Telegram</strong><span>@orixgold</span></div>
+            <div class="contact-item"><strong>Email</strong><span>info@orixgold.ua</span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="eyebrow">Форма замовлення</div>
+          <h2>Залишити заявку</h2>
+          <form class="form" id="contactForm">
+            <input type="text" placeholder="Ваше ім'я" required />
+            <input type="tel" placeholder="Телефон" required />
+            <select required>
+              <option value="">Що вас цікавить?</option>
+              <option>Замовлення прикраси</option>
+              <option>Підібрати розмір</option>
+              <option>Індивідуальна консультація</option>
+            </select>
+            <textarea placeholder="Напишіть, який товар або запит вас цікавить"></textarea>
+            <button class="btn btn--gold" type="submit">Надіслати заявку</button>
+            <div class="notice" id="formMessage">Після натискання зараз з'явиться демо-повідомлення. Для реальної відправки потрібне підключення форми.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <strong>ORIXGOLD</strong>
+          <p>Сучасний ювелірний магазин з преміальним візуалом, каталогом товарів, кошиком, заявкою та блоком визначення розміру пальця.</p>
+        </div>
+        <div>
+          <strong>Меню</strong>
+          <p><a href="#catalog">Каталог</a></p>
+          <p><a href="#about">Про бренд</a></p>
+          <p><a href="#sizer">Розмір каблучки</a></p>
+        </div>
+        <div>
+          <strong>Покупцям</strong>
+          <p><a href="#delivery">Доставка і оплата</a></p>
+          <p><a href="#contacts">Контакти</a></p>
+          <p><a href="#contacts">Замовити консультацію</a></p>
+        </div>
+        <div>
+          <strong>Соцмережі</strong>
+          <p>Instagram</p>
+          <p>Telegram</p>
+          <p>TikTok</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 OrixGold. Усі права захищено.</span>
+        <span>Сайт-платформа готовий до подальшого підключення оплати та адмінки.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="overlay" id="overlay" onclick="closeCart()"></div>
+  <aside class="cart" id="cart">
+    <div class="cart__head">
+      <strong style="font-size:22px;">Ваш кошик</strong>
+      <button class="btn btn--ghost" onclick="closeCart()">Закрити</button>
+    </div>
+    <div class="cart__items" id="cartItems"></div>
+    <div class="cart__foot">
+      <div class="cart__total">
+        <span>Разом</span>
+        <span id="cartTotal">0 грн</span>
+      </div>
+      <button class="btn btn--gold" style="width:100%;" onclick="scrollToSection('contacts'); closeCart();">Оформити замовлення</button>
+      <p class="notice" style="margin-top:10px;">Це фронтенд-версія кошика. Щоб замовлення реально надсилались, треба підключити форму або оплату.</p>
+    </div>
+  </aside>
+
+  <script>
+    const products = [
+      {
+        id: 1,
+        name: 'Каблучка Aurora',
+        category: 'Каблучки',
+        price: 3290,
+        sizes: '16 / 16.5 / 17 / 17.5 / 18',
+        material: 'Срібло 925',
+        desc: 'Лаконічна каблучка з каменем, яка пасує і на щодень, і на подарунок.',
+        icon: '💍',
+        shape: 'ring'
+      },
+      {
+        id: 2,
+        name: 'Каблучка Milano',
+        category: 'Каблучки',
+        price: 2890,
+        sizes: '15.5 / 16 / 17 / 18',
+        material: 'Срібло 925',
+        desc: 'Мінімалістичний дизайн з тонким профілем та благородним блиском.',
+        icon: '💍',
+        shape: 'ring'
+      },
+      {
+        id: 3,
+        name: 'Сережки Stella',
+        category: 'Сережки',
+        price: 2590,
+        sizes: 'Універсальний',
+        material: 'Срібло 925',
+        desc: 'Акуратні сережки з чистою геометрією для повсякденного образу.',
+        icon: '✨',
+        shape: 'earring'
+      },
+      {
+        id: 4,
+        name: 'Браслет Grace',
+        category: 'Браслети',
+        price: 3490,
+        sizes: '17 / 18 / 19',
+        material: 'Срібло 925',
+        desc: 'Витончений браслет, який легко поєднувати з годинником або каблучками.',
+        icon: '🪄',
+        shape: 'bracelet'
+      },
+      {
+        id: 5,
+        name: 'Ланцюжок Nova',
+        category: 'Ланцюжки',
+        price: 3990,
+        sizes: '45 см / 50 см',
+        material: 'Срібло 925',
+        desc: 'Базовий ланцюжок у преміальній подачі з м'яким золотистим блиском.',
+        icon: '🔗',
+        shape: 'chain'
+      },
+      {
+        id: 6,
+        name: 'Сережки Crystal',
+        category: 'Сережки',
+        price: 2790,
+        sizes: 'Універсальний',
+        material: 'Срібло 925',
+        desc: 'Світлі акцентні сережки, які додають образу виразності.',
+        icon: '✨',
+        shape: 'earring'
+      },
+      {
+        id: 7,
+        name: 'Браслет Velvet',
+        category: 'Браслети',
+        price: 3090,
+        sizes: '16 / 17 / 18',
+        material: 'Срібло 925',
+        desc: 'Тонкий елегантний браслет для тих, хто любить стриману розкіш.',
+        icon: '🪄',
+        shape: 'bracelet'
+      },
+      {
+        id: 8,
+        name: 'Підвіска Shine',
+        category: 'Ланцюжки',
+        price: 2390,
+        sizes: '45 см',
+        material: 'Срібло 925',
+        desc: 'Підвіска з чистим силуетом для подарунка або особистої колекції.',
+        icon: '🔗',
+        shape: 'chain'
+      }
+    ];
+
+    let cart = [];
+
+    const productsGrid = document.getElementById('productsGrid');
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const sortFilter = document.getElementById('sortFilter');
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
+    const cart = document.getElementById('cart');
+    const overlay = document.getElementById('overlay');
+
+    function formatPrice(value) {
+      return new Intl.NumberFormat('uk-UA').format(value) + ' грн';
+    }
+
+    function renderProducts() {
+      let filtered = [...products];
+      const term = searchInput.value.trim().toLowerCase();
+      const category = categoryFilter.value;
+      const sort = sortFilter.value;
+
+      if (term) {
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(term));
+      }
+      if (category !== 'all') {
+        filtered = filtered.filter(p => p.category === category);
+      }
+      if (sort === 'cheap') {
+        filtered.sort((a, b) => a.price - b.price);
+      }
+      if (sort === 'expensive') {
+        filtered.sort((a, b) => b.price - a.price);
+      }
+
+      if (!filtered.length) {
+        productsGrid.innerHTML = '<div class="panel" style="grid-column:1/-1;text-align:center;"><h3 style="margin-top:0;">Нічого не знайдено</h3><p style="color:var(--muted);margin-bottom:0;">Спробуй іншу назву або зміни фільтр категорії.</p></div>';
+        return;
+      }
+
+      productsGrid.innerHTML = filtered.map(product => `
+        <article class="product">
+          <div class="product__media">
+            <div class="shape ${product.shape}"></div>
+          </div>
+          <div class="product__body">
+            <div class="product__meta">
+              <span>${product.category}</span>
+              <span>${product.material}</span>
+            </div>
+            <h3>${product.name}</h3>
+            <p class="product__desc">${product.desc}</p>
+            <div class="product__meta">
+              <span>Розміри: ${product.sizes}</span>
+            </div>
+            <div class="product__price">${formatPrice(product.price)}</div>
+            <div class="product__footer">
+              <button class="btn btn--ghost" onclick="quickOrder('${product.name}')">Швидке замовлення</button>
+              <button class="btn btn--gold" onclick="addToCart(${product.id})">У кошик</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      const found = cart.find(item => item.id === id);
+      if (found) {
+        found.qty += 1;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+      updateCart();
+      openCart();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(item => item.id !== id);
+      updateCart();
+    }
+
+    function updateCart() {
+      const count = cart.reduce((sum, item) => sum + item.qty, 0);
+      const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+      cartCount.textContent = count;
+      cartTotal.textContent = formatPrice(total);
+
+      if (!cart.length) {
+        cartItems.innerHTML = '<div class="empty">У кошику поки порожньо.<br>Додай товар із каталогу.</div>';
+        return;
+      }
+
+      cartItems.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div class="cart-thumb">${item.icon}</div>
+          <div>
+            <strong>${item.name}</strong>
+            <p>${item.category} • ${item.qty} шт.</p>
+            <p>${formatPrice(item.price)}</p>
+          </div>
+          <button class="mini-btn" onclick="removeFromCart(${item.id})">Видалити</button>
+        </div>
+      `).join('');
+    }
+
+    function openCart() {
+      document.getElementById('cart').classList.add('open');
+      overlay.classList.add('show');
+    }
+
+    function closeCart() {
+      document.getElementById('cart').classList.remove('open');
+      overlay.classList.remove('show');
+    }
+
+    function quickOrder(name) {
+      scrollToSection('contacts');
+      const formMessage = document.getElementById('formMessage');
+      formMessage.textContent = 'Обраний товар: ' + name + '. Додай це в текст заявки або підключи реальну форму надсилання.';
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    searchInput.addEventListener('input', renderProducts);
+    categoryFilter.addEventListener('change', renderProducts);
+    sortFilter.addEventListener('change', renderProducts);
+    document.getElementById('cartButton').addEventListener('click', openCart);
+
+    const ringRange = document.getElementById('ringRange');
+    const ringSizeLabel = document.getElementById('ringSizeLabel');
+    const ringDiameterLabel = document.getElementById('ringDiameterLabel');
+    const sizerCircle = document.getElementById('sizerCircle');
+
+    function updateRingSizer() {
+      const size = parseFloat(ringRange.value);
+      ringSizeLabel.textContent = size.toFixed(1).replace('.0', '');
+      ringDiameterLabel.textContent = size.toFixed(1) + ' мм';
+      const px = 65 + (size - 14) * 11;
+      sizerCircle.style.setProperty('--ring-size', px + 'px');
+    }
+
+    ringRange.addEventListener('input', updateRingSizer);
+    updateRingSizer();
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const message = document.getElementById('formMessage');
+      message.textContent = 'Заявка успішно заповнена. Щоб вона реально відправлялась, треба підключити Formspree, Telegram bot, email API або CRM.';
+      message.style.color = 'var(--success)';
+      this.reset();
+    });
+
+    renderProducts();
+    updateCart();
+  </script>
 </body>
 </html>
