@@ -3,1062 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OrixGold — Ювелірні прикраси</title>
-  <meta name="description" content="Сучасний інтернет-магазин ювелірних прикрас OrixGold: каблучки, сережки, браслети, ланцюжки та підвіски." />
+  <title>OrixGold — Ювелірний дім</title>
+  <meta name="description" content="OrixGold — ювелірний магазин з каталогом, кошиком, формою замовлення та вимірювачем розміру каблучки." />
   <style>
     :root {
-      --bg: #f8f4ef;
-      --paper: #fffdfb;
-      --text: #1f1a17;
-      --muted: #6d6157;
-      --line: #e7ddd2;
-      --gold: #b58949;
-      --gold-dark: #8b6630;
-      --dark: #241b16;
-      --danger: #a43f3f;
-      --success: #1f7a4e;
-      --shadow: 0 20px 60px rgba(36, 27, 22, 0.08);
-      --radius: 24px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
-    button, input, select, textarea { font: inherit; }
-
-    .container {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      background: var(--dark);
-      color: #f8efe2;
-      font-size: 14px;
-      padding: 10px 0;
-    }
-    .topbar__row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      backdrop-filter: blur(14px);
-      background: rgba(248, 244, 239, 0.85);
-      border-bottom: 1px solid rgba(231, 221, 210, 0.75);
-    }
-    .header__row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 18px 0;
-    }
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      min-width: 145px;
-    }
-    .brand strong {
-      font-size: 26px;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-    }
-    .brand span {
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .nav a {
-      color: var(--muted);
-      font-weight: 500;
-    }
-    .nav a:hover { color: var(--text); }
-
-    .actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      padding: 14px 22px;
-      transition: 0.2s ease;
-      font-weight: 600;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn--gold {
-      background: var(--gold);
-      color: white;
-      box-shadow: 0 10px 25px rgba(181, 137, 73, 0.28);
-    }
-    .btn--gold:hover { background: var(--gold-dark); }
-    .btn--ghost {
-      background: transparent;
-      border: 1px solid var(--line);
-      color: var(--text);
-    }
-    .btn--dark {
-      background: var(--dark);
-      color: white;
-    }
-    .icon-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 1px solid var(--line);
-      background: white;
-      position: relative;
-      cursor: pointer;
-    }
-    .badge {
-      position: absolute;
-      top: -3px;
-      right: -3px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: var(--dark);
-      color: white;
-      font-size: 12px;
-      display: grid;
-      place-items: center;
-    }
-
-    .hero {
-      padding: 34px 0 26px;
-    }
-    .hero__grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-    .hero__content, .hero__card {
-      background: linear-gradient(180deg, #fffdfb 0%, #f4ece3 100%);
-      border: 1px solid var(--line);
-      border-radius: 32px;
-      box-shadow: var(--shadow);
-    }
-    .hero__content {
-      padding: 54px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 580px;
-    }
-    .eyebrow {
-      color: var(--gold-dark);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-    h1 {
-      font-size: clamp(36px, 6vw, 68px);
-      line-height: 1.04;
-      margin: 0 0 18px;
-    }
-    .lead {
-      color: var(--muted);
-      font-size: 18px;
-      max-width: 560px;
-      margin-bottom: 28px;
-    }
-    .hero__cta {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-    .facts {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 10px;
-    }
-    .fact {
-      background: rgba(255,255,255,0.65);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 16px;
-    }
-    .fact strong { display: block; font-size: 24px; margin-bottom: 6px; }
-    .fact span { color: var(--muted); font-size: 14px; }
-
-    .hero__card {
-      overflow: hidden;
-      position: relative;
-      min-height: 580px;
-      display: flex;
-      flex-direction: column;
-      justify-content: end;
-      background:
-        radial-gradient(circle at top right, rgba(181,137,73,0.24), transparent 28%),
-        linear-gradient(180deg, #fffaf4 0%, #efe1cf 100%);
-    }
-    .hero__visual {
-      padding: 40px 34px 18px;
-      display: grid;
-      place-items: center;
-      min-height: 400px;
-    }
-    .hero__ring {
-      width: min(360px, 78%);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 24px solid #d9b06a;
-      position: relative;
-      box-shadow: inset 0 0 20px rgba(255,255,255,0.55), 0 28px 55px rgba(139, 102, 48, 0.22);
-      background: radial-gradient(circle at 35% 35%, #fdf4d7 0%, #e2bb72 42%, #b98b46 80%);
-    }
-    .hero__ring::before {
-      content: "";
-      position: absolute;
-      top: -48px;
-      left: 50%;
-      transform: translateX(-50%) rotate(45deg);
-      width: 90px;
-      height: 90px;
-      background: linear-gradient(145deg, #ffffff 0%, #ebf6ff 40%, #c5d7e8 100%);
-      clip-path: polygon(50% 0%, 100% 40%, 82% 100%, 18% 100%, 0% 40%);
-      box-shadow: 0 20px 38px rgba(130, 173, 205, 0.34);
-      border-radius: 12px;
-    }
-    .hero__info {
-      padding: 0 28px 28px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: end;
-      gap: 12px;
-    }
-    .price-tag {
-      background: rgba(255,255,255,0.88);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 18px 18px;
-    }
-    .price-tag small { display: block; color: var(--muted); margin-bottom: 6px; }
-    .price-tag strong { font-size: 28px; }
-
-    section {
-      padding: 38px 0;
-    }
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(28px, 4vw, 42px);
-    }
-    .section-head p {
-      margin: 8px 0 0;
-      color: var(--muted);
-      max-width: 700px;
-    }
-
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-    .category {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-    .category strong { display: block; font-size: 22px; margin-bottom: 8px; }
-    .category p { color: var(--muted); margin: 0 0 16px; }
-
-    .toolbar {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-    .search, .select {
-      height: 52px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: white;
-      padding: 0 18px;
-      min-width: 180px;
-    }
-    .search { flex: 1 1 320px; }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-    .product {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-    }
-    .product__media {
-      aspect-ratio: 1 / 1.05;
-      background: linear-gradient(180deg, #fffaf5 0%, #efe3d6 100%);
-      display: grid;
-      place-items: center;
-      padding: 18px;
-    }
-    .shape {
-      width: 74%;
-      aspect-ratio: 1;
-      position: relative;
-    }
-    .shape.ring {
-      border-radius: 50%;
-      border: 18px solid #d9b06a;
-      background: radial-gradient(circle at 35% 35%, #fff8de 0%, #e3bc74 45%, #bb8e48 100%);
-    }
-    .shape.earring::before,
-    .shape.earring::after {
-      content: "";
-      position: absolute;
-      width: 42%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 14px solid #d9b06a;
-      background: linear-gradient(180deg, #fff8de 0%, #e3bc74 45%, #bb8e48 100%);
-      top: 22%;
-    }
-    .shape.earring::before { left: 6%; }
-    .shape.earring::after { right: 6%; }
-    .shape.chain::before {
-      content: "";
-      position: absolute;
-      inset: 15% 8% 35% 8%;
-      border: 14px solid #d9b06a;
-      border-bottom: none;
-      border-radius: 120px 120px 0 0;
-    }
-    .shape.chain::after {
-      content: "";
-      position: absolute;
-      width: 28%;
-      height: 36%;
-      left: 50%;
-      bottom: 2%;
-      transform: translateX(-50%);
-      background: linear-gradient(180deg, #f9dfb0 0%, #d6a965 100%);
-      clip-path: polygon(50% 0%, 100% 45%, 75% 100%, 25% 100%, 0% 45%);
-      border-radius: 10px;
-    }
-    .shape.bracelet {
-      border-radius: 50%;
-      border: 16px dashed #ca9a54;
-      background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, transparent 62%);
-    }
-
-    .product__body {
-      padding: 18px 18px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex: 1;
-    }
-    .product__meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .product h3 {
-      margin: 0;
-      font-size: 20px;
-    }
-    .product__price {
-      font-size: 24px;
-      font-weight: 700;
-    }
-    .product__desc {
-      color: var(--muted);
-      font-size: 14px;
-      margin: 0;
-    }
-    .product__footer {
-      display: flex;
-      gap: 10px;
-      margin-top: auto;
-    }
-    .product__footer .btn { flex: 1; }
-
-    .about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-    .panel {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-    }
-    .panel p { color: var(--muted); }
-    .checklist {
-      display: grid;
-      gap: 12px;
-      margin-top: 20px;
-    }
-    .check {
-      display: flex;
-      gap: 12px;
-      align-items: start;
-    }
-    .check i {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: #efe4d2;
-      color: var(--gold-dark);
-      display: grid;
-      place-items: center;
-      font-style: normal;
-      font-weight: 700;
-      flex: 0 0 auto;
-    }
-
-    .measure {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    .measure-tool {
-      display: grid;
-      gap: 18px;
-    }
-    .ring-sizer {
-      display: grid;
-      place-items: center;
-      min-height: 360px;
-      background: linear-gradient(180deg, #fffaf5 0%, #efe1cf 100%);
-      border-radius: 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .ring-sizer::before {
-      content: "";
-      position: absolute;
-      inset: auto 0 26px 0;
-      height: 2px;
-      background: rgba(36, 27, 22, 0.14);
-    }
-    .sizer-circle {
-      width: var(--ring-size, 120px);
-      height: var(--ring-size, 120px);
-      border: 12px solid #cb9953;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, transparent 62%);
-      box-shadow: inset 0 0 20px rgba(255,255,255,0.4), 0 20px 40px rgba(181, 137, 73, 0.22);
-      transition: 0.25s ease;
-      position: relative;
-    }
-    .ruler {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 12px;
-    }
-    .ruler input { width: 100%; }
-    .measure-result {
-      display: grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      background: #f2eadf;
-      color: var(--text);
-      font-weight: 600;
-      width: fit-content;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-    .contact-list {
-      display: grid;
-      gap: 16px;
-      margin-top: 18px;
-    }
-    .contact-item strong { display: block; margin-bottom: 4px; }
-    .contact-item span { color: var(--muted); }
-
-    .form {
-      display: grid;
-      gap: 14px;
-    }
-    .form input,
-    .form textarea,
-    .form select {
-      width: 100%;
-      padding: 15px 16px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: white;
-    }
-    .form textarea { min-height: 130px; resize: vertical; }
-    .notice {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .footer {
-      background: var(--dark);
-      color: #f7ede2;
-      margin-top: 30px;
-      padding: 36px 0 20px;
-    }
-    .footer__grid {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr 1fr 1fr;
-      gap: 22px;
-      margin-bottom: 24px;
-    }
-    .footer p, .footer a { color: #d8cbbb; }
-    .footer strong { color: white; display: inline-block; margin-bottom: 10px; }
-    .footer__bottom {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 16px;
-      color: #cab9a7;
-      font-size: 14px;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .cart {
-      position: fixed;
-      inset: 0 0 0 auto;
-      width: min(420px, 100%);
-      background: #fffdfb;
-      border-left: 1px solid var(--line);
-      box-shadow: -12px 0 40px rgba(36, 27, 22, 0.12);
-      z-index: 50;
-      transform: translateX(100%);
-      transition: 0.28s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    .cart.open { transform: translateX(0); }
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(36, 27, 22, 0.38);
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.25s ease;
-      z-index: 45;
-    }
-    .overlay.show {
-      opacity: 1;
-      visibility: visible;
-    }
-    .cart__head,
-    .cart__foot {
-      padding: 18px;
-      border-bottom: 1px solid var(--line);
-    }
-    .cart__head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .cart__items {
-      flex: 1;
-      overflow: auto;
-      padding: 16px 18px;
-      display: grid;
-      gap: 12px;
-      align-content: start;
-    }
-    .cart-item {
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 14px;
-      background: white;
-      display: grid;
-      grid-template-columns: 64px 1fr auto;
-      gap: 12px;
-      align-items: center;
-    }
-    .cart-thumb {
-      width: 64px;
-      aspect-ratio: 1;
-      border-radius: 16px;
-      background: linear-gradient(180deg, #fffaf5 0%, #efe3d6 100%);
-      display: grid;
-      place-items: center;
-      font-size: 28px;
-    }
-    .cart-item p { margin: 0; color: var(--muted); font-size: 14px; }
-    .cart-item strong { display: block; }
-    .cart__total {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      font-size: 18px;
-      font-weight: 700;
-    }
-    .mini-btn {
-      border: none;
-      background: transparent;
-      color: var(--danger);
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .empty {
-      border: 1px dashed var(--line);
-      border-radius: 22px;
-      padding: 26px;
-      text-align: center;
-      color: var(--muted);
-      background: #fff;
-    }
-    .hidden { display: none !important; }
-
-    @media (max-width: 1080px) {
-      .hero__grid,
-      .about,
-      .measure,
-      .contact-grid,
-      .footer__grid,
-      .hero__info,
-      .categories,
-      .products { grid-template-columns: repeat(2, 1fr); }
-      .hero__content, .hero__card { min-height: auto; }
-    }
-    @media (max-width: 860px) {
-      .header__row { flex-wrap: wrap; }
-      .nav { order: 3; width: 100%; justify-content: flex-start; }
-      .hero__grid,
-      .about,
-      .measure,
-      .contact-grid,
-      .categories,
-      .products,
-      .footer__grid,
-      .facts { grid-template-columns: 1fr; }
-      .hero__content { padding: 28px; }
-      .hero__info { grid-template-columns: 1fr; }
-      .product__footer { flex-direction: column; }
-      .toolbar { align-items: stretch; }
-      .search, .select { width: 100%; }
-    }
+      --bg:#fbf7f2; --surface:#fffdfb; --text:#231b16; --muted:#76695d; --line:#e7ddd1;
+      --gold:#b68c53; --gold-dark:#8f6939; --dark:#1f1713; --danger:#b34747; --radius:26px;
+      --shadow:0 18px 60px rgba(35,27,22,.08);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    img{display:block;max-width:100%} a{text-decoration:none;color:inherit} button,input,select,textarea{font:inherit}
+    .container{width:min(1200px,calc(100% - 32px));margin:0 auto}
+    .topbar{background:var(--dark);color:#f7ecde;font-size:14px;padding:10px 0}.topbar__row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .header{position:sticky;top:0;z-index:40;background:rgba(251,247,242,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(231,221,209,.9)}
+    .header__row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 0}.brand{display:flex;flex-direction:column;gap:2px;min-width:165px}.brand strong{font-size:28px;letter-spacing:.08em}.brand span{font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+    .nav{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}.nav a{color:var(--muted);font-weight:500}.nav a:hover{color:var(--text)}
+    .actions{display:flex;align-items:center;gap:10px}.btn{border:none;border-radius:999px;padding:14px 22px;cursor:pointer;transition:.2s ease;font-weight:600}.btn:hover{transform:translateY(-1px)}
+    .btn--gold{background:var(--gold);color:#fff;box-shadow:0 10px 28px rgba(182,140,83,.25)} .btn--gold:hover{background:var(--gold-dark)}
+    .btn--ghost{background:#fff;color:var(--text);border:1px solid var(--line)} .btn--dark{background:var(--dark);color:#fff}
+    .icon-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;position:relative}
+    .badge{position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--dark);color:#fff;font-size:12px;display:grid;place-items:center}
+    .hero{padding:30px 0 24px}.hero__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}.hero__content,.hero__visual{border-radius:32px;border:1px solid var(--line);overflow:hidden;box-shadow:var(--shadow)}
+    .hero__content{background:linear-gradient(180deg,#fffdfb 0%,#f3eadf 100%);padding:56px;min-height:590px;display:flex;flex-direction:column;justify-content:center}.eyebrow{color:var(--gold-dark);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:16px}
+    h1{font-size:clamp(38px,6vw,68px);line-height:1.04;margin:0 0 18px}.lead{color:var(--muted);font-size:18px;max-width:580px;margin-bottom:26px}.hero__cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+    .hero__facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.fact{background:rgba(255,255,255,.74);border:1px solid var(--line);border-radius:20px;padding:16px}.fact strong{display:block;font-size:22px;margin-bottom:5px}.fact span{color:var(--muted);font-size:14px}
+    .hero__visual{background:linear-gradient(180deg,#fff9f2 0%,#ead9c4 100%);min-height:590px;display:grid;grid-template-rows:1fr auto}.hero__visual img{width:100%;height:100%;object-fit:contain;padding:42px 30px 0}
+    .hero__card{margin:0 24px 24px;padding:18px 20px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:24px;display:flex;justify-content:space-between;gap:12px;align-items:end}.hero__card p{color:var(--muted);margin:6px 0 0}.hero__price{font-size:30px;font-weight:700}
+    section{padding:34px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:22px}.section-head h2{margin:0;font-size:clamp(28px,4vw,42px)}.section-head p{margin:8px 0 0;color:var(--muted);max-width:720px}
+    .features,.info-grid,.measure-grid,.contact-grid,.footer__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.feature,.panel{background:var(--surface);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:26px}.feature strong{display:block;font-size:22px;margin-bottom:8px}.feature p,.panel p{color:var(--muted);margin:0}
+    .toolbar{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}.search,.select{height:52px;border-radius:999px;border:1px solid var(--line);background:#fff;padding:0 18px}.search{flex:1 1 320px}
+    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .product__media{aspect-ratio:1 / 1.04;background:linear-gradient(180deg,#fffaf4 0%,#efe2d3 100%);display:grid;place-items:center;overflow:hidden}.product__media img{width:100%;height:100%;object-fit:contain;padding:18px}
+    .product__placeholder{width:72%;aspect-ratio:1;border-radius:50%;border:16px solid rgba(182,140,83,.75);display:grid;place-items:center;color:var(--gold-dark);font-size:30px;font-weight:700;background:radial-gradient(circle,rgba(255,255,255,.55) 0%,transparent 60%)}
+    .product__body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}.product__meta{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:13px}.product h3{margin:0;font-size:20px}.product__sku{color:var(--muted);font-size:13px}.product__price{font-size:24px;font-weight:700}.product__desc{color:var(--muted);font-size:14px;margin:0}.product__footer{display:flex;gap:10px;margin-top:auto}.product__footer .btn{flex:1}
+    .checklist{display:grid;gap:12px;margin-top:18px}.check{display:flex;gap:12px;align-items:start}.check i{width:26px;height:26px;border-radius:50%;background:#f1e3d2;display:grid;place-items:center;flex:0 0 auto;font-style:normal;color:var(--gold-dark);font-weight:700}
+    .ring-tool{background:linear-gradient(180deg,#fffaf5 0%,#efe1cf 100%);border-radius:24px;min-height:340px;display:grid;place-items:center;position:relative;overflow:hidden}.ring-tool::after{content:'';position:absolute;left:20px;right:20px;bottom:26px;height:2px;background:rgba(31,23,19,.12)}
+    .sizer-circle{width:120px;height:120px;border-radius:50%;border:12px solid rgba(182,140,83,.9);box-shadow:inset 0 0 18px rgba(255,255,255,.45),0 18px 42px rgba(182,140,83,.22);transition:.2s ease;background:radial-gradient(circle,rgba(255,255,255,.42) 0%,transparent 62%)}
+    .ruler{display:flex;align-items:center;gap:12px;margin-top:12px}.ruler input{width:100%}.pill{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:999px;background:#f2e9df;font-weight:600;width:fit-content}.cal-bar{height:54px;width:260px;max-width:100%;border-radius:18px;background:linear-gradient(90deg,#ead2ae 0%,#b68c53 100%);border:1px solid var(--line)}
+    .form{display:grid;gap:14px}.form input,.form select,.form textarea{width:100%;padding:15px 16px;border-radius:16px;border:1px solid var(--line);background:#fff}.form textarea{min-height:130px;resize:vertical}.notice{color:var(--muted);font-size:14px}
+    .footer{background:var(--dark);color:#f6ebde;margin-top:30px;padding:38px 0 18px}.footer a,.footer p{color:#dacaba}.footer strong{color:#fff;display:inline-block;margin-bottom:10px}.footer__bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:24px;padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#cfbead;font-size:14px}
+    .overlay{position:fixed;inset:0;background:rgba(31,23,19,.38);opacity:0;visibility:hidden;transition:.25s ease;z-index:48}.overlay.show{opacity:1;visibility:visible}.cart{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:var(--surface);border-left:1px solid var(--line);box-shadow:-16px 0 40px rgba(31,23,19,.12);transform:translateX(100%);transition:.28s ease;z-index:50;display:flex;flex-direction:column}.cart.open{transform:translateX(0)}.cart__head,.cart__foot{padding:18px;border-bottom:1px solid var(--line)}.cart__head{display:flex;justify-content:space-between;gap:12px;align-items:center}.cart__items{flex:1;overflow:auto;padding:16px 18px;display:grid;gap:12px;align-content:start}.cart-item{background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px;display:grid;grid-template-columns:58px 1fr auto;gap:12px;align-items:center}.cart-thumb{width:58px;height:58px;border-radius:16px;background:linear-gradient(180deg,#fffaf4 0%,#efe2d3 100%);display:grid;place-items:center;font-size:18px;font-weight:700;color:var(--gold-dark)}.cart-item p{margin:0;color:var(--muted);font-size:13px}.cart-item strong{display:block}.cart__total{display:flex;justify-content:space-between;font-size:18px;font-weight:700;margin-bottom:12px}.mini-btn{border:none;background:transparent;color:var(--danger);cursor:pointer;font-weight:600}.empty{background:#fff;border:1px dashed var(--line);border-radius:22px;padding:28px;text-align:center;color:var(--muted)}
+    @media (max-width:1080px){.hero__grid,.features,.info-grid,.measure-grid,.contact-grid,.footer__grid,.products{grid-template-columns:repeat(2,1fr)}.hero__content,.hero__visual{min-height:auto}}
+    @media (max-width:860px){.header__row{flex-wrap:wrap}.nav{order:3;width:100%;justify-content:flex-start}.hero__grid,.features,.info-grid,.measure-grid,.contact-grid,.footer__grid,.products,.hero__facts{grid-template-columns:1fr}.hero__content{padding:30px}.hero__card{flex-direction:column;align-items:start}.toolbar{align-items:stretch}.search,.select{width:100%}.product__footer{flex-direction:column}}
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="container topbar__row">
-      <span>Безкоштовна доставка по Україні від 3000 грн</span>
-      <span>Instagram: @orixgold • Telegram: @orixgold</span>
-    </div>
-  </div>
-
-  <header class="header">
-    <div class="container header__row">
-      <a class="brand" href="#home">
-        <strong>ORIXGOLD</strong>
-        <span>Jewelry boutique</span>
-      </a>
-
-      <nav class="nav">
-        <a href="#catalog">Каталог</a>
-        <a href="#about">Про бренд</a>
-        <a href="#sizer">Розмір каблучки</a>
-        <a href="#delivery">Доставка і оплата</a>
-        <a href="#contacts">Контакти</a>
-      </nav>
-
-      <div class="actions">
-        <a class="btn btn--ghost" href="#contacts">Замовити консультацію</a>
-        <button class="icon-btn" id="cartButton" aria-label="Кошик">
-          🛍️
-          <span class="badge" id="cartCount">0</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
+  <div class="topbar"><div class="container topbar__row"><span>Orix — ювелірний дім</span><span>+38 (067) 430-40-91 • okshuk@gmail.com</span></div></div>
+  <header class="header"><div class="container header__row"><a class="brand" href="#home"><strong>ORIXGOLD</strong><span>Jewelry house</span></a><nav class="nav"><a href="#catalog">Каталог</a><a href="#categories">Категорії</a><a href="#sizer">Розмір каблучки</a><a href="#delivery">Доставка і оплата</a><a href="#contacts">Контакти</a></nav><div class="actions"><a class="btn btn--ghost" href="#contacts">Зв'язатися</a><button class="icon-btn" id="cartButton" aria-label="Кошик">🛍️<span class="badge" id="cartCount">0</span></button></div></div></header>
   <main>
-    <section class="hero" id="home">
-      <div class="container hero__grid">
-        <div class="hero__content">
-          <div class="eyebrow">Нова колекція OrixGold</div>
-          <h1>Ювелірний магазин, який виглядає дорого — і продає зручно.</h1>
-          <p class="lead">Каблучки, сережки, ланцюжки та браслети з акуратним каталогом, швидким кошиком, замовленням онлайн і вбудованим вимірювачем розміру пальця.</p>
-          <div class="hero__cta">
-            <a class="btn btn--gold" href="#catalog">Перейти в каталог</a>
-            <a class="btn btn--ghost" href="#sizer">Визначити розмір</a>
-          </div>
-          <div class="facts">
-            <div class="fact"><strong>925</strong><span>Срібло найвищої якості</span></div>
-            <div class="fact"><strong>14 днів</strong><span>Обмін і повернення</span></div>
-            <div class="fact"><strong>1 день</strong><span>Швидка відправка в наявності</span></div>
-          </div>
-        </div>
-
-        <div class="hero__card">
-          <div class="hero__visual">
-            <div class="hero__ring"></div>
-          </div>
-          <div class="hero__info">
-            <div class="price-tag">
-              <small>Хіт продажу</small>
-              <strong>Каблучка Aurora</strong>
-              <div style="margin-top:8px;color:var(--muted);">Срібло 925 • фіаніт • розміри 16–19</div>
-            </div>
-            <button class="btn btn--dark" onclick="scrollToSection('catalog')">Дивитись</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Категорії</h2>
-            <p>Структура вже готова: можна розширювати каталог хоч до сотень товарів, просто додаючи нові позиції в масив товарів у коді.</p>
-          </div>
-        </div>
-        <div class="categories">
-          <article class="category">
-            <strong>Каблучки</strong>
-            <p>Класичні, мінімалістичні та акцентні моделі.</p>
-            <a href="#catalog" class="btn btn--ghost">Обрати</a>
-          </article>
-          <article class="category">
-            <strong>Сережки</strong>
-            <p>Лаконічні щоденні та святкові варіанти.</p>
-            <a href="#catalog" class="btn btn--ghost">Обрати</a>
-          </article>
-          <article class="category">
-            <strong>Браслети</strong>
-            <p>Тонкі та виразні моделі під будь-який стиль.</p>
-            <a href="#catalog" class="btn btn--ghost">Обрати</a>
-          </article>
-          <article class="category">
-            <strong>Ланцюжки і підвіски</strong>
-            <p>Базові прикраси для повсякденного образу.</p>
-            <a href="#catalog" class="btn btn--ghost">Обрати</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="catalog">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Каталог прикрас</h2>
-            <p>Нижче вже є демо-товари. Їх можна замінити на твої реальні фото, назви, ціни та розміри.</p>
-          </div>
-        </div>
-
-        <div class="toolbar">
-          <input class="search" id="searchInput" type="text" placeholder="Пошук за назвою товару..." />
-          <select class="select" id="categoryFilter">
-            <option value="all">Усі категорії</option>
-            <option value="Каблучки">Каблучки</option>
-            <option value="Сережки">Сережки</option>
-            <option value="Браслети">Браслети</option>
-            <option value="Ланцюжки">Ланцюжки</option>
-          </select>
-          <select class="select" id="sortFilter">
-            <option value="default">Сортування</option>
-            <option value="cheap">Спочатку дешевші</option>
-            <option value="expensive">Спочатку дорожчі</option>
-          </select>
-        </div>
-
-        <div class="products" id="productsGrid"></div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="container about">
-        <div class="panel">
-          <div class="eyebrow">Про бренд</div>
-          <h2>OrixGold — сучасний ювелірний бренд з преміальною подачею.</h2>
-          <p>Цей макет вже заточений під реальний бізнес: великий hero-блок, каталог, картки товарів, кошик, замовлення, блоки довіри та окрема сторінка-розділ для визначення розміру пальця.</p>
-          <div class="checklist">
-            <div class="check"><i>✓</i><div><strong>Адаптивний дизайн</strong><div style="color:var(--muted)">Нормально виглядає і на телефоні, і на ноутбуці.</div></div></div>
-            <div class="check"><i>✓</i><div><strong>Підходить для Vercel</strong><div style="color:var(--muted)">Достатньо замінити твій поточний index.html.</div></div></div>
-            <div class="check"><i>✓</i><div><strong>Легко масштабувати</strong><div style="color:var(--muted)">Потім можна підключити оплату, CRM, Telegram або базу товарів.</div></div></div>
-          </div>
-        </div>
-
-        <div class="panel" id="delivery">
-          <div class="eyebrow">Доставка і оплата</div>
-          <h2>Все, що важливо покупцю, вже в одному блоці.</h2>
-          <div class="checklist">
-            <div class="check"><i>1</i><div><strong>Доставка</strong><div style="color:var(--muted)">Нова пошта по Україні 1–3 дні. Можливий самовивіз за домовленістю.</div></div></div>
-            <div class="check"><i>2</i><div><strong>Оплата</strong><div style="color:var(--muted)">Накладений платіж, онлайн-оплата або оплата на рахунок. Онлайн-оплату підключають окремо.</div></div></div>
-            <div class="check"><i>3</i><div><strong>Гарантія</strong><div style="color:var(--muted)">Обмін/повернення відповідно до умов магазину та чинного законодавства.</div></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="sizer">
-      <div class="container measure">
-        <div class="panel measure-tool">
-          <div>
-            <div class="eyebrow">Вимірювач пальця</div>
-            <h2>Підбери розмір каблучки прямо на сайті</h2>
-            <p>Пересувай повзунок, поки внутрішнє коло приблизно не співпаде з твоєю каблучкою на екрані. Це демо-версія вимірювача — її можна потім зробити точнішою під реальний фізичний масштаб.</p>
-          </div>
-          <div class="ring-sizer" id="ringSizerBox">
-            <div class="sizer-circle" id="sizerCircle"></div>
-          </div>
-          <div class="ruler">
-            <span>14</span>
-            <input type="range" min="14" max="23" step="0.5" value="17" id="ringRange" />
-            <span>23</span>
-          </div>
-          <div class="measure-result">
-            <div class="pill">Розмір: <span id="ringSizeLabel">17</span></div>
-            <div class="pill">Діаметр: <span id="ringDiameterLabel">17.0 мм</span></div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="eyebrow">Як користуватись</div>
-          <h2>Проста інструкція для клієнта</h2>
-          <div class="checklist">
-            <div class="check"><i>1</i><div><strong>Візьми свою каблучку</strong><div style="color:var(--muted)">Поклади її на екран або орієнтуйся візуально по внутрішньому колу.</div></div></div>
-            <div class="check"><i>2</i><div><strong>Піджени повзунок</strong><div style="color:var(--muted)">Співстав внутрішній діаметр каблучки з колом на екрані.</div></div></div>
-            <div class="check"><i>3</i><div><strong>Збережи розмір</strong><div style="color:var(--muted)">Після цього вибери відповідний розмір при оформленні замовлення.</div></div></div>
-          </div>
-          <div class="form" style="margin-top:22px;">
-            <label style="font-weight:600;">Калібрування екрана</label>
-            <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;">
-              <input id="calibrationInput" type="number" min="40" max="120" step="0.5" value="85.6" placeholder="Ширина картки в мм" />
-              <button class="btn btn--ghost" type="button" onclick="setCalibration()">Калібрувати</button>
-            </div>
-            <p class="notice">Постав банківську картку до еталонної смуги, зміни значення при потребі і натисни «Калібрувати».</p>
-            <div id="calibrationBar" style="height:54px;border-radius:18px;background:linear-gradient(90deg,#e7d3b2,#b58c52);width:260px;max-width:100%;border:1px solid var(--line);"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contacts">
-      <div class="container contact-grid">
-        <div class="panel">
-          <div class="eyebrow">Контакти</div>
-          <h2>Зв'яжіться з нами</h2>
-          <p>Цей блок уже можна використовувати як готову форму заявки. Поки що форма показує повідомлення без реальної відправки — для справжньої роботи її можна підключити до Telegram, email або CRM.</p>
-          <div class="contact-list">
-            <div class="contact-item"><strong>Телефон</strong><span>+38 (0XX) XXX-XX-XX</span></div>
-            <div class="contact-item"><strong>Instagram</strong><span>@orixgold</span></div>
-            <div class="contact-item"><strong>Telegram</strong><span>@orixgold</span></div>
-            <div class="contact-item"><strong>Email</strong><span>info@orixgold.ua</span></div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="eyebrow">Форма замовлення</div>
-          <h2>Залишити заявку</h2>
-          <form class="form" id="contactForm">
-            <input type="text" placeholder="Ваше ім'я" required />
-            <input type="tel" placeholder="Телефон" required />
-            <select required>
-              <option value="">Що вас цікавить?</option>
-              <option>Замовлення прикраси</option>
-              <option>Підібрати розмір</option>
-              <option>Індивідуальна консультація</option>
-            </select>
-            <textarea placeholder="Напишіть, який товар або запит вас цікавить"></textarea>
-            <button class="btn btn--gold" type="submit">Надіслати заявку</button>
-            <div class="notice" id="formMessage">Після натискання зараз з'явиться демо-повідомлення. Для реальної відправки потрібне підключення форми.</div>
-          </form>
-        </div>
-      </div>
-    </section>
+    <section class="hero" id="home"><div class="container hero__grid"><div class="hero__content"><div class="eyebrow">Ювелірний дім Orix</div><h1>Вишукані прикраси з оновленим каталогом і зручним замовленням.</h1><p class="lead">Каталог з актуальними категоріями, пошуком, кошиком, блоком доставки й інтерактивним підбором розміру каблучки.</p><div class="hero__cta"><a class="btn btn--gold" href="#catalog">Перейти в каталог</a><a class="btn btn--ghost" href="#sizer">Визначити розмір</a></div><div class="hero__facts"><div class="fact"><strong>8</strong><span>основних категорій</span></div><div class="fact"><strong>10 000+</strong><span>безкоштовна доставка від цієї суми</span></div><div class="fact"><strong>1 рік</strong><span>гарантія на вироби</span></div></div></div><div class="hero__visual"><img src="https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png" alt="Каблучка Orix" /><div class="hero__card"><div><strong style="font-size:22px;">Каблучка</strong><p>Жовте золото з діамантом • артикул 410-0178</p></div><div class="hero__price">16 108 ₴</div></div></div></div></section>
+    <section id="categories"><div class="container"><div class="section-head"><div><h2>Категорії</h2><p>Структура каталогу побудована під категорії чинного сайту Orix.</p></div></div><div class="features"><article class="feature"><strong>Обручки</strong><p>Американка, класика, двоколірні, триколірні, доріжки, з візерунком.</p></article><article class="feature"><strong>Каблучки</strong><p>Заручальні, із камінням, без вставок.</p></article><article class="feature"><strong>Сережки</strong><p>Пусети, з дорогоцінним камінням, без вставок.</p></article><article class="feature"><strong>Браслети</strong><p>З дорогоцінним камінням та без вставок.</p></article><article class="feature"><strong>Підвіси</strong><p>Зі вставками та без вставок.</p></article><article class="feature"><strong>Ланцюжки</strong><p>Моделі із червоного золота.</p></article><article class="feature"><strong>Шпильки</strong><p>Окремі акцентні моделі.</p></article><article class="feature"><strong>Хрестики</strong><p>Окрема категорія релігійних прикрас.</p></article></div></div></section>
+    <section id="catalog"><div class="container"><div class="section-head"><div><h2>Каталог товарів</h2><p>Каталог очищено від демо-текстів. Залишено тільки реальні категорії та реальні товари, які вдалося підтвердити з сайту.</p></div></div><div class="toolbar"><input class="search" id="searchInput" type="text" placeholder="Пошук за назвою або артикулом..." /><select class="select" id="categoryFilter"><option value="all">Усі категорії</option><option value="Обручки">Обручки</option><option value="Каблучки">Каблучки</option><option value="Підвіси">Підвіси</option><option value="Шпильки">Шпильки</option><option value="Хрестики">Хрестики</option></select><select class="select" id="sortFilter"><option value="default">Сортування</option><option value="cheap">Спочатку дешевші</option><option value="expensive">Спочатку дорожчі</option></select></div><div class="products" id="productsGrid"></div></div></section>
+    <section><div class="container info-grid"><article class="panel" id="delivery"><div class="eyebrow">Доставка і оплата</div><h2 style="margin-top:0;">Умови замовлення</h2><div class="checklist"><div class="check"><i>1</i><div><strong>Доставка</strong><div style="color:var(--muted)">Нова Пошта у відділення або кур'єром. Термін виготовлення й відправки — до 10 робочих днів.</div></div></div><div class="check"><i>2</i><div><strong>Безкоштовна доставка</strong><div style="color:var(--muted)">Вироби вартістю понад 10 000 грн відправляються безкоштовно.</div></div></div><div class="check"><i>3</i><div><strong>Оплата</strong><div style="color:var(--muted)">Онлайн банківською карткою або банківським переказом після оформлення.</div></div></div><div class="check"><i>4</i><div><strong>Гарантія</strong><div style="color:var(--muted)">На сайті зазначено 1 рік гарантії на вироби, а для частини виробів з діамантами — 10 років.</div></div></div></div></article><article class="panel"><div class="eyebrow">Контактна інформація</div><h2 style="margin-top:0;">Orix</h2><div class="checklist"><div class="check"><i>✓</i><div><strong>Телефон</strong><div style="color:var(--muted)">+38 (067) 430-40-91</div></div></div><div class="check"><i>✓</i><div><strong>Email</strong><div style="color:var(--muted)">okshuk@gmail.com</div></div></div><div class="check"><i>✓</i><div><strong>Соцмережі</strong><div style="color:var(--muted)">Instagram, Facebook, YouTube, TikTok</div></div></div></div></article></div></section>
+    <section id="sizer"><div class="container measure-grid"><article class="panel"><div class="eyebrow">Розмір каблучки</div><h2 style="margin-top:0;">Вимірювач</h2><div class="ring-tool"><div class="sizer-circle" id="sizerCircle"></div></div><div class="ruler"><span>14</span><input type="range" min="14" max="23" step="0.5" value="17" id="ringRange" /><span>23</span></div><div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px"><div class="pill">Розмір: <span id="ringSizeLabel">17</span></div><div class="pill">Діаметр: <span id="ringDiameterLabel">17.0 мм</span></div></div></article><article class="panel"><div class="eyebrow">Калібрування екрана</div><h2 style="margin-top:0;">Налаштування</h2><p>Приклади банківську картку до смуги нижче. Якщо смуга не збігається по ширині, введи фактичну ширину еталона в міліметрах та натисни кнопку.</p><div style="display:grid;gap:14px;margin-top:18px"><div class="cal-bar" id="calibrationBar"></div><div style="display:grid;grid-template-columns:1fr auto;gap:10px"><input id="calibrationInput" type="number" min="40" max="120" step="0.1" value="85.6" /><button class="btn btn--ghost" type="button" onclick="setCalibration()">Калібрувати</button></div><p class="notice">Стандартна ширина банківської картки — 85.6 мм.</p></div></article></div></section>
+    <section id="contacts"><div class="container contact-grid"><article class="panel"><div class="eyebrow">Замовлення</div><h2 style="margin-top:0;">Форма заявки</h2><form class="form" id="contactForm"><input type="text" placeholder="Ваше ім'я" required /><input type="tel" placeholder="Телефон" required /><textarea placeholder="Який виріб вас цікавить, розмір, додаткові побажання"></textarea><button class="btn btn--gold" type="submit">Надіслати заявку</button><div class="notice" id="formMessage">Поки що форма працює як інтерфейс. Наступним кроком можна підключити реальне надсилання.</div></form></article><article class="panel"><div class="eyebrow">Кошик</div><h2 style="margin-top:0;">Оформлення</h2><p>Додай товари у кошик і переходь до заявки. Після цього можна буде підключити Telegram, email або оплату.</p><div class="checklist"><div class="check"><i>1</i><div><strong>Обери товар</strong><div style="color:var(--muted)">Додай потрібну позицію в кошик.</div></div></div><div class="check"><i>2</i><div><strong>Заповни заявку</strong><div style="color:var(--muted)">Вкажи ім'я, телефон і побажання.</div></div></div><div class="check"><i>3</i><div><strong>Підтвердження</strong><div style="color:var(--muted)">На наступному етапі можна додати реальне надсилання менеджеру.</div></div></div></div></article></div></section>
   </main>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div>
-          <strong>ORIXGOLD</strong>
-          <p>Сучасний ювелірний магазин з преміальним візуалом, каталогом товарів, кошиком, заявкою та блоком визначення розміру пальця.</p>
-        </div>
-        <div>
-          <strong>Меню</strong>
-          <p><a href="#catalog">Каталог</a></p>
-          <p><a href="#about">Про бренд</a></p>
-          <p><a href="#sizer">Розмір каблучки</a></p>
-        </div>
-        <div>
-          <strong>Покупцям</strong>
-          <p><a href="#delivery">Доставка і оплата</a></p>
-          <p><a href="#contacts">Контакти</a></p>
-          <p><a href="#contacts">Замовити консультацію</a></p>
-        </div>
-        <div>
-          <strong>Соцмережі</strong>
-          <p>Instagram</p>
-          <p>Telegram</p>
-          <p>TikTok</p>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <span>© 2026 OrixGold. Усі права захищено.</span>
-        <span>Сайт-платформа готовий до подальшого підключення оплати та адмінки.</span>
-      </div>
-    </div>
-  </footer>
-
+  <footer class="footer"><div class="container"><div class="footer__grid"><div><strong>ORIXGOLD</strong><p>Ювелірний сайт з каталогом, кошиком і вимірювачем розміру каблучки.</p></div><div><strong>Каталог</strong><p><a href="#catalog">Товари</a></p><p><a href="#categories">Категорії</a></p></div><div><strong>Покупцям</strong><p><a href="#delivery">Доставка і оплата</a></p><p><a href="#sizer">Розмір каблучки</a></p></div><div><strong>Контакти</strong><p><a href="#contacts">Форма заявки</a></p><p>+38 (067) 430-40-91</p></div></div><div class="footer__bottom"><span>© 2026 OrixGold</span><span>Оновлена версія без демо-текстів</span></div></div></footer>
   <div class="overlay" id="overlay" onclick="closeCart()"></div>
-  <aside class="cart" id="cart">
-    <div class="cart__head">
-      <strong style="font-size:22px;">Ваш кошик</strong>
-      <button class="btn btn--ghost" onclick="closeCart()">Закрити</button>
-    </div>
-    <div class="cart__items" id="cartItems"></div>
-    <div class="cart__foot">
-      <div class="cart__total">
-        <span>Разом</span>
-        <span id="cartTotal">0 грн</span>
-      </div>
-      <button class="btn btn--gold" style="width:100%;" onclick="scrollToSection('contacts'); closeCart();">Оформити замовлення</button>
-      <p class="notice" style="margin-top:10px;">Це фронтенд-версія кошика. Щоб замовлення реально надсилались, треба підключити форму або оплату.</p>
-    </div>
-  </aside>
-
+  <aside class="cart" id="cart"><div class="cart__head"><strong style="font-size:22px">Ваш кошик</strong><button class="btn btn--ghost" onclick="closeCart()">Закрити</button></div><div class="cart__items" id="cartItems"></div><div class="cart__foot"><div class="cart__total"><span>Разом</span><span id="cartTotal">0 грн</span></div><button class="btn btn--gold" style="width:100%" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'});closeCart();">Перейти до заявки</button></div></aside>
   <script>
     const products = [
-      {
-        id: 1,
-        name: 'Каблучка',
-        category: 'Каблучки',
-        price: 16108,
-        sizes: 'Усі розміри доступні під замовлення',
-        material: 'Жовте золото з діамантом',
-        desc: 'Каблучка із жовтого золота з діамантовою вставкою. Артикул 410-0178.',
-        icon: '💍',
-        shape: 'ring',
-        image: 'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'
-      },
-      {
-        id: 2,
-        name: 'Обручка',
-        category: 'Обручки',
-        price: 11154,
-        sizes: 'Уточнюйте у менеджера',
-        material: 'Біле золото',
-        desc: 'Реальний товар з головної сторінки Orix.',
-        icon: '💍',
-        shape: 'ring',
-        image: 'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'
-      },
-      {
-        id: 3,
-        name: 'Обручка',
-        category: 'Обручки',
-        price: 27002,
-        sizes: 'Уточнюйте у менеджера',
-        material: 'Червоне золото',
-        desc: 'Реальний товар з головної сторінки Orix.',
-        icon: '💍',
-        shape: 'ring',
-        image: 'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'
-      },
-      {
-        id: 4,
-        name: 'Шпилька',
-        category: 'Шпильки',
-        price: 1987,
-        sizes: 'Під замовлення',
-        material: 'Червоне золото, цирконій/діамант',
-        desc: 'Шпилька із червоного золота з фігуркою-метеликом. Артикул 368-0004.',
-        icon: '✨',
-        shape: 'earring',
-        image: 'https://static.wixstatic.com/media/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png'
-      },
-      {
-        id: 5,
-        name: 'Підвіс',
-        category: 'Підвіси',
-        price: 32917,
-        sizes: 'Уточнюйте у менеджера',
-        material: 'Біле золото',
-        desc: 'Реальний підвіс з головної сторінки Orix.',
-        icon: '🔗',
-        shape: 'chain',
-        image: 'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'
-      },
-      {
-        id: 6,
-        name: 'Підвіс',
-        category: 'Підвіси',
-        price: 44177,
-        sizes: 'Уточнюйте у менеджера',
-        material: 'Біле золото',
-        desc: 'Реальний підвіс з головної сторінки Orix.',
-        icon: '🔗',
-        shape: 'chain',
-        image: 'https://static.wixstatic.com/media/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png'
-      }
+      {id:1,name:'Каблучка',sku:'410-0178',category:'Каблучки',price:16108,material:'Жовте золото, діамант',desc:'Каблучка із жовтого золота із діамантовою вставкою.',sizes:'Усі розміри доступні під замовлення',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:2,name:'Обручка',sku:'420-0191',category:'Обручки',price:14982,material:'Жовте золото, діамант',desc:'Американка із жовтого золота.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:3,name:'Обручка',sku:'—',category:'Обручки',price:11154,material:'Біле золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:4,name:'Обручка',sku:'—',category:'Обручки',price:27002,material:'Червоне золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
+      {id:5,name:'Каблучка',sku:'423-0317',category:'Каблучки',price:25907,material:'Жовте золото, діаманти',desc:'Каблучка у вигляді квіткової гілки із діамантами.',sizes:'Усі розміри доступні під замовлення',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:6,name:'Шпилька',sku:'368-0004',category:'Шпильки',price:1987,material:'Червоне золото, цирконій/діамант',desc:'Шпилька із червоного золота з фігуркою-метеликом.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png'},
+      {id:7,name:'Підвіс',sku:'225-0942',category:'Підвіси',price:8045,material:'Червоне та біле золото, діаманти',desc:'Підвіс у вигляді об’ємної кульки.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:8,name:'Підвіс',sku:'—',category:'Підвіси',price:32917,material:'Біле золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:9,name:'Підвіс',sku:'—',category:'Підвіси',price:44177,material:'Біле золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png'},
+      {id:10,name:'Підвіс',sku:'—',category:'Підвіси',price:36272,material:'Золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png'},
+      {id:11,name:'Підвіс',sku:'—',category:'Підвіси',price:10064,material:'Золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:12,name:'Підвіс',sku:'—',category:'Підвіси',price:22955,material:'Золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:13,name:'Підвіс',sku:'—',category:'Підвіси',price:10451,material:'Золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:14,name:'Підвіс',sku:'—',category:'Підвіси',price:9059,material:'Золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:15,name:'Підвіс',sku:'—',category:'Підвіси',price:8221,material:'Золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:16,name:'Підвіс',sku:'—',category:'Підвіси',price:7241,material:'Золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:17,name:'Підвіс',sku:'—',category:'Підвіси',price:5845,material:'Золото',desc:'Модель з головної сторінки каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:18,name:'Хрестик',sku:'305-0902',category:'Хрестики',price:14675,material:'Червоне та біле золото',desc:'Хрестик з деталізованим елементом.',sizes:'Під замовлення',image:''}
     ];
 
     let cartItemsState = [];
-
+    let pxPerMm = 3.0;
     const productsGrid = document.getElementById('productsGrid');
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
@@ -1068,164 +94,51 @@
     const cartTotal = document.getElementById('cartTotal');
     const cartPanel = document.getElementById('cart');
     const overlay = document.getElementById('overlay');
-
-    function formatPrice(value) {
-      return new Intl.NumberFormat('uk-UA').format(value) + ' грн';
-    }
-
-    function renderProducts() {
-      let filtered = [...products];
-      const term = searchInput.value.trim().toLowerCase();
-      const category = categoryFilter.value;
-      const sort = sortFilter.value;
-
-      if (term) {
-        filtered = filtered.filter(p => p.name.toLowerCase().includes(term));
-      }
-      if (category !== 'all') {
-        filtered = filtered.filter(p => p.category === category);
-      }
-      if (sort === 'cheap') {
-        filtered.sort((a, b) => a.price - b.price);
-      }
-      if (sort === 'expensive') {
-        filtered.sort((a, b) => b.price - a.price);
-      }
-
-      if (!filtered.length) {
-        productsGrid.innerHTML = '<div class="panel" style="grid-column:1/-1;text-align:center;"><h3 style="margin-top:0;">Нічого не знайдено</h3><p style="color:var(--muted);margin-bottom:0;">Спробуй іншу назву або зміни фільтр категорії.</p></div>';
-        return;
-      }
-
-      productsGrid.innerHTML = filtered.map(product => `
-        <article class="product">
-          <div class="product__media">
-            ${product.image ? `<img src="${product.image}" alt="${product.name}" style="width:100%;height:100%;object-fit:contain;padding:18px;">` : `<div class="shape ${product.shape}"></div>`}
-          </div>
-          <div class="product__body">
-            <div class="product__meta">
-              <span>${product.category}</span>
-              <span>${product.material}</span>
-            </div>
-            <h3>${product.name}</h3>
-            <p class="product__desc">${product.desc}</p>
-            <div class="product__meta">
-              <span>Розміри: ${product.sizes}</span>
-            </div>
-            <div class="product__price">${formatPrice(product.price)}</div>
-            <div class="product__footer">
-              <button class="btn btn--ghost" onclick="quickOrder('${product.name}')">Швидке замовлення</button>
-              <button class="btn btn--gold" onclick="addToCart(${product.id})">У кошик</button>
-            </div>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    function addToCart(id) {
-      const product = products.find(p => p.id === id);
-      const found = cartItemsState.find(item => item.id === id);
-      if (found) {
-        found.qty += 1;
-      } else {
-        cartItemsState.push({ ...product, qty: 1 });
-      }
-      updateCart();
-      openCart();
-    }
-
-    function removeFromCart(id) {
-      cartItemsState = cartItemsState.filter(item => item.id !== id);
-      updateCart();
-    }
-
-    function updateCart() {
-      const count = cartItemsState.reduce((sum, item) => sum + item.qty, 0);
-      const total = cartItemsState.reduce((sum, item) => sum + item.qty * item.price, 0);
-      cartCount.textContent = count;
-      cartTotal.textContent = formatPrice(total);
-
-      if (!cartItemsState.length) {
-        cartItems.innerHTML = '<div class="empty">У кошику поки порожньо.<br>Додай товар із каталогу.</div>';
-        return;
-      }
-
-      cartItems.innerHTML = cartItemsState.map(item => `
-        <div class="cart-item">
-          <div class="cart-thumb">${item.icon}</div>
-          <div>
-            <strong>${item.name}</strong>
-            <p>${item.category} • ${item.qty} шт.</p>
-            <p>${formatPrice(item.price)}</p>
-          </div>
-          <button class="mini-btn" onclick="removeFromCart(${item.id})">Видалити</button>
-        </div>
-      `).join('');
-    }
-
-    function openCart() {
-      cartPanel.classList.add('open');
-      overlay.classList.add('show');
-    }
-
-    function closeCart() {
-      cartPanel.classList.remove('open');
-      overlay.classList.remove('show');
-    }
-
-    function quickOrder(name) {
-      scrollToSection('contacts');
-      const formMessage = document.getElementById('formMessage');
-      formMessage.textContent = 'Обраний товар: ' + name + '. Додай це в текст заявки або підключи реальну форму надсилання.';
-    }
-
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
-
-    searchInput.addEventListener('input', renderProducts);
-    categoryFilter.addEventListener('change', renderProducts);
-    sortFilter.addEventListener('change', renderProducts);
-    document.getElementById('cartButton').addEventListener('click', openCart);
-
     const ringRange = document.getElementById('ringRange');
     const ringSizeLabel = document.getElementById('ringSizeLabel');
     const ringDiameterLabel = document.getElementById('ringDiameterLabel');
     const sizerCircle = document.getElementById('sizerCircle');
 
-    let pxPerMm = 3.0;
+    function formatPrice(value){return new Intl.NumberFormat('uk-UA').format(value)+' грн'}
 
-    function updateRingSizer() {
-      const size = parseFloat(ringRange.value);
-      ringSizeLabel.textContent = size.toFixed(1).replace('.0', '');
-      ringDiameterLabel.textContent = size.toFixed(1) + ' мм';
-      const px = size * pxPerMm;
-      sizerCircle.style.width = px + 'px';
-      sizerCircle.style.height = px + 'px';
+    function renderProducts(){
+      let filtered=[...products];
+      const term=searchInput.value.trim().toLowerCase();
+      const category=categoryFilter.value;
+      const sort=sortFilter.value;
+      if(term){filtered=filtered.filter(p=>p.name.toLowerCase().includes(term)||String(p.sku).toLowerCase().includes(term))}
+      if(category!=='all'){filtered=filtered.filter(p=>p.category===category)}
+      if(sort==='cheap'){filtered.sort((a,b)=>a.price-b.price)}
+      if(sort==='expensive'){filtered.sort((a,b)=>b.price-a.price)}
+      if(!filtered.length){productsGrid.innerHTML='<div class="panel" style="grid-column:1/-1;text-align:center"><h3 style="margin-top:0">Нічого не знайдено</h3><p>Спробуйте змінити запит або фільтр.</p></div>';return}
+      productsGrid.innerHTML=filtered.map(product=>`
+        <article class="product">
+          <div class="product__media">${product.image?`<img src="${product.image}" alt="${product.name}">`:`<div class="product__placeholder">✦</div>`}</div>
+          <div class="product__body">
+            <div class="product__meta"><span>${product.category}</span><span>${product.material}</span></div>
+            <h3>${product.name}</h3>
+            <div class="product__sku">Артикул: ${product.sku}</div>
+            <p class="product__desc">${product.desc}</p>
+            <div class="product__meta"><span>${product.sizes}</span></div>
+            <div class="product__price">${formatPrice(product.price)}</div>
+            <div class="product__footer"><button class="btn btn--ghost" onclick="quickOrder('${product.name.replace(/'/g,"&#39;")}')">Швидке замовлення</button><button class="btn btn--gold" onclick="addToCart(${product.id})">У кошик</button></div>
+          </div>
+        </article>`).join('');
     }
 
-    function setCalibration() {
-      const input = document.getElementById('calibrationInput');
-      const bar = document.getElementById('calibrationBar');
-      const mm = parseFloat(input.value) || 85.6;
-      const barPx = bar.offsetWidth;
-      pxPerMm = barPx / mm;
-      updateRingSizer();
-    }
+    function addToCart(id){const product=products.find(p=>p.id===id);const found=cartItemsState.find(item=>item.id===id);if(found){found.qty+=1}else{cartItemsState.push({...product,qty:1})}updateCart();openCart()}
+    function removeFromCart(id){cartItemsState=cartItemsState.filter(item=>item.id!==id);updateCart()}
+    function updateCart(){const count=cartItemsState.reduce((s,i)=>s+i.qty,0);const total=cartItemsState.reduce((s,i)=>s+i.qty*i.price,0);cartCount.textContent=count;cartTotal.textContent=formatPrice(total);if(!cartItemsState.length){cartItems.innerHTML='<div class="empty">У кошику поки порожньо.</div>';return}cartItems.innerHTML=cartItemsState.map(item=>`<div class="cart-item"><div class="cart-thumb">${item.sku!=='—'?item.sku.split('-')[0]:'OR'}</div><div><strong>${item.name}</strong><p>${item.category} • ${item.qty} шт.</p><p>${formatPrice(item.price)}</p></div><button class="mini-btn" onclick="removeFromCart(${item.id})">Видалити</button></div>`).join('')}
+    function openCart(){cartPanel.classList.add('open');overlay.classList.add('show')}
+    function closeCart(){cartPanel.classList.remove('open');overlay.classList.remove('show')}
+    function quickOrder(name){document.getElementById('contacts').scrollIntoView({behavior:'smooth'});document.getElementById('formMessage').textContent='Обраний товар: '+name}
 
-    ringRange.addEventListener('input', updateRingSizer);
-    updateRingSizer();
+    function updateRingSizer(){const size=parseFloat(ringRange.value);ringSizeLabel.textContent=size.toFixed(1).replace('.0','');ringDiameterLabel.textContent=size.toFixed(1)+' мм';const px=size*pxPerMm;sizerCircle.style.width=px+'px';sizerCircle.style.height=px+'px'}
+    function setCalibration(){const input=document.getElementById('calibrationInput');const bar=document.getElementById('calibrationBar');const mm=parseFloat(input.value)||85.6;pxPerMm=bar.offsetWidth/mm;updateRingSizer()}
 
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const message = document.getElementById('formMessage');
-      message.textContent = 'Заявка успішно заповнена. Щоб вона реально відправлялась, треба підключити Formspree, Telegram bot, email API або CRM.';
-      message.style.color = 'var(--success)';
-      this.reset();
-    });
-
-    renderProducts();
-    updateCart();
+    searchInput.addEventListener('input',renderProducts);categoryFilter.addEventListener('change',renderProducts);sortFilter.addEventListener('change',renderProducts);document.getElementById('cartButton').addEventListener('click',openCart);ringRange.addEventListener('input',updateRingSizer);
+    document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('formMessage').textContent='Заявка заповнена. Наступним кроком можна підключити реальне надсилання менеджеру.';this.reset()});
+    renderProducts(); updateCart(); updateRingSizer();
   </script>
 </body>
 </html>
