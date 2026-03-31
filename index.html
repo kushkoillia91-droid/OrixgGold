@@ -1,183 +1,467 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORIX — ювелірний дім</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OrixGold — Ювелірний дім</title>
+  <meta name="description" content="OrixGold — ювелірний магазин з великим каталогом, фільтрами, кошиком та вимірювачем розміру каблучки." />
+  <style>
+    :root{
+      --bg:#f6f3ef;
+      --surface:#ffffff;
+      --surface-2:#f3ede6;
+      --text:#241c17;
+      --muted:#75695d;
+      --line:#e7ddd1;
+      --brown:#2b1f18;
+      --brown-2:#3b2a20;
+      --gold:#b88c52;
+      --gold-dark:#8d693a;
+      --danger:#b64848;
+      --shadow:0 18px 40px rgba(36,28,23,.07);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font:inherit}
+    .container{width:min(1320px,calc(100% - 32px));margin:0 auto}
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f7f5f2;
-  color: #222;
-}
+    .topline{background:#fff;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+    .topline__row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:8px 0;flex-wrap:wrap}
+    .topline__row strong{color:var(--brown)}
 
-/* HEADER */
-.header {
-  background: #fff;
-  border-bottom: 1px solid #eee;
-}
+    .header{position:sticky;top:0;z-index:50;background:rgba(246,243,239,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .header__row{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:14px;min-width:220px}
+    .brand img{width:70px;height:auto;object-fit:contain;filter:grayscale(100%)}
+    .brand__text strong{display:block;font-size:20px;letter-spacing:.08em}
+    .brand__text span{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.18em}
 
-.header__inner {
-  max-width: 1200px;
-  margin: auto;
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+    .nav{display:flex;justify-content:center;gap:22px;flex-wrap:wrap}
+    .nav a{font-weight:600;color:#6d6258}
+    .nav a:hover{color:var(--brown)}
 
-.logo img {
-  height: 50px;
-}
+    .actions{display:flex;align-items:center;gap:10px}
+    .btn{border:none;border-radius:999px;padding:13px 20px;cursor:pointer;transition:.2s ease;font-weight:600}
+    .btn:hover{transform:translateY(-1px)}
+    .btn--gold{background:var(--gold);color:#fff;box-shadow:0 10px 24px rgba(184,140,82,.22)}
+    .btn--gold:hover{background:var(--gold-dark)}
+    .btn--ghost{background:#fff;border:1px solid var(--line);color:var(--brown)}
+    .icon-btn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;position:relative}
+    .badge{position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--brown);color:#fff;font-size:12px;display:grid;place-items:center}
 
-.nav {
-  display: flex;
-  gap: 25px;
-}
+    .catalog-hero{padding:22px 0 12px}
+    .catalog-hero__box{background:linear-gradient(180deg,#faf7f3 0%, #efe7de 100%);border:1px solid var(--line);border-radius:30px;padding:22px 24px;box-shadow:var(--shadow)}
+    .crumbs{font-size:13px;color:#8b7e72;margin-bottom:10px}
+    .hero-top{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:stretch}
+    .hero-copy h1{margin:0 0 10px;font-size:44px;line-height:1.05}
+    .hero-copy p{margin:0;color:var(--muted);max-width:760px}
+    .hero-pills{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;align-content:start}
+    .pill-chip{padding:11px 16px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:600;color:#5f554c}
+    .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+    .stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px}.stat strong{display:block;font-size:22px}.stat span{font-size:13px;color:var(--muted)}
 
-.nav a {
-  text-decoration: none;
-  color: #222;
-  font-weight: 500;
-}
+    .main-grid{display:grid;grid-template-columns:290px 1fr;gap:18px;padding:18px 0 30px}
+    .sidebar,.content-panel,.panel{background:var(--surface);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow)}
+    .sidebar{padding:18px;position:sticky;top:92px;height:fit-content}
+    .sidebar h3{margin:4px 0 14px;font-size:24px}
+    .filter-block{padding:14px 0;border-top:1px solid var(--line)}
+    .filter-block:first-of-type{border-top:none;padding-top:0}
+    .filter-title{display:flex;justify-content:space-between;align-items:center;font-weight:700;margin-bottom:10px}
+    .filter-options{display:grid;gap:8px}
+    .filter-option{display:flex;align-items:center;gap:10px;color:#5f554c;font-size:14px}
+    .filter-option input{accent-color:var(--brown)}
+    .small-note{font-size:13px;color:var(--muted)}
 
-.nav a:hover {
-  color: #c8a96a;
-}
+    .content-panel{padding:18px}
+    .toolbar{display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;margin-bottom:18px}
+    .search,.select{height:50px;border-radius:999px;border:1px solid var(--line);background:#fff;padding:0 18px}
+    .toolbar .summary{font-size:14px;color:var(--muted)}
 
-.actions {
-  display: flex;
-  gap: 10px;
-}
+    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .product{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:.2s ease}
+    .product:hover{transform:translateY(-3px);box-shadow:0 18px 34px rgba(36,28,23,.08)}
+    .product__media{aspect-ratio:1 / 1.04;background:linear-gradient(180deg,#fffaf4 0%,#f2e7da 100%);display:grid;place-items:center;overflow:hidden;position:relative}
+    .product__media img{width:100%;height:100%;object-fit:contain;padding:16px}
+    .product__placeholder{width:70%;aspect-ratio:1;border-radius:50%;border:14px solid rgba(184,140,82,.8);display:grid;place-items:center;font-size:30px;color:var(--gold-dark);background:radial-gradient(circle,rgba(255,255,255,.56) 0%,transparent 62%)}
+    .product__body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .product__meta{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px}
+    .product h3{margin:0;font-size:19px}
+    .product__sku{font-size:12px;color:var(--muted)}
+    .product__desc{font-size:14px;color:#665b51;margin:0}
+    .product__price{font-size:26px;font-weight:800;color:var(--brown)}
+    .product__footer{display:flex;gap:8px;margin-top:auto}.product__footer .btn{flex:1;padding:12px 14px;font-size:14px}
 
-.btn {
-  padding: 8px 15px;
-  border: 1px solid #c8a96a;
-  background: transparent;
-  border-radius: 20px;
-  cursor: pointer;
-}
+    .lower-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding-bottom:36px}
+    .panel{padding:24px}
+    .panel h2{margin:0 0 10px;font-size:32px}
+    .panel p{color:var(--muted);margin:0}
+    .checklist{display:grid;gap:12px;margin-top:18px}
+    .check{display:flex;gap:12px;align-items:start}.check i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#f2e5d4;color:var(--gold-dark);font-style:normal;font-weight:700;flex:0 0 auto}
 
-/* TITLE */
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 30px 20px;
-}
+    .ring-tool{background:linear-gradient(180deg,#fffaf5 0%,#efe2d0 100%);border-radius:24px;min-height:320px;display:grid;place-items:center;position:relative;overflow:hidden;margin:18px 0 12px}
+    .ring-tool::after{content:'';position:absolute;left:20px;right:20px;bottom:24px;height:2px;background:rgba(43,31,24,.12)}
+    .sizer-circle{width:120px;height:120px;border-radius:50%;border:12px solid rgba(184,140,82,.9);box-shadow:inset 0 0 18px rgba(255,255,255,.45),0 18px 42px rgba(184,140,82,.18);background:radial-gradient(circle,rgba(255,255,255,.42) 0%,transparent 62%)}
+    .ruler{display:flex;align-items:center;gap:12px}.ruler input{width:100%}.pill-info{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:999px;background:#f3eadf;font-weight:700;margin-right:8px;margin-top:8px}.cal-bar{height:54px;width:260px;max-width:100%;border-radius:18px;background:linear-gradient(90deg,#ead2ae 0%,#b68c53 100%);border:1px solid var(--line)}
 
-h1 {
-  font-size: 36px;
-  margin-bottom: 10px;
-}
+    .form{display:grid;gap:12px;margin-top:18px}.form input,.form textarea{width:100%;padding:15px 16px;border-radius:16px;border:1px solid var(--line);background:#fff}.form textarea{min-height:120px;resize:vertical}
+    .notice{font-size:14px;color:var(--muted)}
 
-/* CATALOG */
-.catalog {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-top: 30px;
-}
+    .footer{background:var(--brown);color:#f4eadf;padding:34px 0 18px}.footer__grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:18px}.footer a,.footer p{color:#dccbbb}.footer strong{display:inline-block;margin-bottom:10px;color:#fff}.footer__bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:14px;margin-top:22px;color:#cdb9a7;font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-.card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 15px;
-  transition: 0.3s;
-}
+    .overlay{position:fixed;inset:0;background:rgba(24,18,14,.38);opacity:0;visibility:hidden;transition:.25s ease;z-index:58}.overlay.show{opacity:1;visibility:visible}
+    .cart{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:#fff;border-left:1px solid var(--line);box-shadow:-16px 0 40px rgba(31,23,19,.12);transform:translateX(100%);transition:.28s ease;z-index:60;display:flex;flex-direction:column}.cart.open{transform:translateX(0)}
+    .cart__head,.cart__foot{padding:18px;border-bottom:1px solid var(--line)}.cart__head{display:flex;justify-content:space-between;align-items:center;gap:12px}.cart__items{flex:1;overflow:auto;padding:16px 18px;display:grid;gap:12px;align-content:start}
+    .cart-item{background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px;display:grid;grid-template-columns:58px 1fr auto;gap:12px;align-items:center}.cart-thumb{width:58px;height:58px;border-radius:16px;background:linear-gradient(180deg,#fffaf4 0%,#efe2d3 100%);display:grid;place-items:center;font-size:18px;font-weight:700;color:var(--gold-dark)}.cart-item p{margin:0;color:var(--muted);font-size:13px}.mini-btn{border:none;background:transparent;color:var(--danger);cursor:pointer;font-weight:600}.cart__total{display:flex;justify-content:space-between;font-size:18px;font-weight:800;margin-bottom:12px}.empty{background:#fff;border:1px dashed var(--line);border-radius:22px;padding:28px;text-align:center;color:var(--muted)}
 
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card img {
-  width: 100%;
-}
-
-.card h3 {
-  font-size: 16px;
-}
-
-.price {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.btn-buy {
-  background: #c8a96a;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  width: 100%;
-  border-radius: 10px;
-  cursor: pointer;
-}
-</style>
-
+    @media (max-width:1180px){.products{grid-template-columns:repeat(3,1fr)}.toolbar{grid-template-columns:1fr 1fr 1fr}.toolbar .summary{grid-column:1/-1}.hero-top{grid-template-columns:1fr}.hero-pills{justify-content:flex-start}.hero-stats{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:980px){.header__row{grid-template-columns:1fr;justify-items:start}.nav{justify-content:flex-start}.main-grid,.lower-grid,.footer__grid{grid-template-columns:1fr}.sidebar{position:static}.products{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.products,.hero-stats{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr}.product__footer{flex-direction:column}.brand{min-width:unset}.brand img{width:58px}.hero-copy h1{font-size:34px}}
+  </style>
 </head>
 <body>
-
-<header class="header">
-  <div class="header__inner">
-
-    <!-- ЛОГО (ТВОЄ) -->
-    <div class="logo">
-      <img src="https://i.imgur.com/6XGQx9p.png" alt="ORIX">
+  <div class="topline">
+    <div class="container topline__row">
+      <div><strong>Orix</strong> — ювелірний дім</div>
+      <div>Безкоштовна доставка від 10 000 грн • +38 (067) 430-40-91 • okshuk@gmail.com</div>
     </div>
-
-    <!-- МЕНЮ -->
-    <nav class="nav">
-      <a href="#">Каталог</a>
-      <a href="#">Категорії</a>
-      <a href="#">Розмір каблучки</a>
-      <a href="#">Доставка</a>
-      <a href="#">Контакти</a>
-    </nav>
-
-    <div class="actions">
-      <button class="btn">Зв'язатися</button>
-    </div>
-
   </div>
-</header>
 
-<div class="container">
-  <h1>Каталог ювелірних прикрас</h1>
-
-  <div class="catalog">
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e">
-      <h3>Каблучка золота</h3>
-      <div class="price">16 108 грн</div>
-      <button class="btn-buy">У кошик</button>
+  <header class="header">
+    <div class="container header__row">
+      <a class="brand" href="#home">
+        <img alt="Orix logo" src="data:image/png;base64,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S29eO9CeS29eO6hGlBC4XK6SzWVdLhfJycm0bt3a+Aix+9Dr9QXH3pfiWyIiIiIiIiIiIiIiXrRWRhARERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUrVvLI0RERERERERERETEU+auOi2Bx7NGEhEREf9UT08PNWvWZNmyZY3LH374YZo3b+7cTYiIiIiIbiFzV51w+PBhioqKLNsjIiLw8vIydQ6IiIgonq5z585s3rxZ89D06dNRFIUff/yx1G2ffPIJISEh5Obmcvr06Sq2MCIiIiIi4tVl7qoTxGIxdu7cyVNPPYXf76d58+ZERUUxZ84cqqqqTJ2NiIiIiIhXOXPmDOHh4dx222189tlnlJWV8dJLL5GTk8Pw4cM9pKSIiIhXnLuqznjuuedISkrik08+4cyZM6xYsYJXXnmF8vJymjdvbuw8RERERES8ik2bNhEbG8vixYsB2LJlCzt27GDr1q307dvXk8qJiIh4xblrIiIiIiIiIiIiIiKeMndPREREJkOpVGLlypVUV1dTUVFh23d0dLBx40bc3d0JDAxk7dq1LF26tGSb8+fP06NHD2xtbRk+fDhnz54t2WfNmjUUFhYyefJkunfvjp+fHzfffDP79u2zVJepqSm6du2Kr68vwcHB7Nu3r+QjPT2d2NhYbGxs6N+/P3FxcaVtZ8+eJTQ0FFtbW1q3bs3Bgwcr3XqIiIjoJjJ3T0RERAbn008/5e233+aLL77giy++4NChQ5SXl5fkMz4+nrfeegunTp3iww8/xN3dnf3795OSksIbb7zBY489RkJCAosWLWL27Nnk5eUVbX/iiSeIiorijz/+YNu2bfz4449YWFh4yP7WW2/h7+/Pjz/+yJkzZ9ixYwc7duyo1PPII49QWlrKmTNnePPNN+natSuXLl3iyJEjlfqaiIiI6CYyd09ERERkYDZv3kzfvn2JjIwkNDSUf/7zn/z1118l+9TW1vLll1+ybt06Nm3aRL9+/fjyyy9LylRWVjJ16lTWrVtHREQEH3/8MaWlpTzxxBNERUUZtx89epRx48Yxa9Ys+vXrR2VlJa+88gohISHccccdJdvs37+f999/n4SEBPLz89m1axe1tbWsXr261M+IiIiI7iFz90RERGRgCgoKOHToELm5uXh5eREREcH8+fN56623Sm1/8OBBvL29ycjIwNnZmZCQEF588UWysrK4dOmS6WMTJ07E19eXQ4cOsWHDBn799VfT+ePHj2f48OGm+5cvX4+LiwteXl7k5OQQERFBXl4es2fPrvRxERER0V1k7p6IiIjI4FRUVFBdXc3IkSOJiIggNDSUf/3rX6xevbpim5iYGPr3709WVhaurq7ExMQQFxfHsWPHStpWVVUFQLdu3UpG8+bN49KlS4SFhRXsd7vdqNVqPPXUU6SkpBAYGFjq8Y0bNwLQqFEjgoODL3svIiIiohvJ3D0RERGRwWncuDE///wzOTk5AJSWlvLee+/Rv39/7rvvvpJ94uLiKC0tZd++fYXG1NTUkJ2dTefOnYEy4U4IgUwm46WXXuLWrVulgquOHj1KUVFRycjqyJEjtYyNiIiI6F4yd09ERERkcCoqKkhNTWVgYIDFixdTUFDAsWPHePfdd7l48WLFNsuXL2f79u288847+Pv7M3jwYB588EE+++wzAH777TdKS0t5++23efrppxk3bpzxmjVr1jB16lT+/PNP4uPjmT59Oo888kiJ8m63m06dOlFZWcnx48f56aefSE5OxsvLi127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IiIiIiIiIiIiIiKuZhY0bX3B4MGD2b17N2PGjGHTpk3069ePdevWcezYMVtbT09PMjIyeO+99zh48CBPPPEE06dPx8PDw9aWwWBgyJAhODs7G7fHx8eX+AMRERERERERERERERGXqlkfhsvLy7l9+zaHDx+2bQgh6Ny5M8OHD2f69On4+fmRkpJCUFAQEyZMqHgMiqLg7e1dbGkXERERERERERERERHxNsyC+4mIiIiIiIiIiIiIeMnmM3cREREREREREREREU+Zu4iIiIiIiIiIiIiIp8xdRERERERERERERMRTRnUGr7GxkXvuuQcvLy9CQkI4fPiwf0+IiIiIiIiIiIiIiIjIUWYei3jz5s106NCBxYsXM3DgQIqKioiJiWHt2rX+PSEiIiIiIiIiIiIiIiJPmXks4ieffEJmZiZjxoxh5MiRxMXFsXXr1prHFxYWotVqjduzs7MJCAjA3d2d6Ohopk6dWtZYFx8fz6lTp4wfN23aRExMjJcS43m0trYC8Mknn5Q6f+TIEdzd3TEwMODx5ERERERERERERETeKeaxiL///pt///vfLFiwgF69erFjxw46depEaWkprq6uFdu0adOGVatWGR87d+7Ezc2N0NBQMjMz+fzzz2vOnzx5MuPHj+ett97C2tqa3377rWSfNWvWmJYvv/yS7OxssrKyyMjI4KeffvLiYjyj2tpaMjMzyc3N9TfzISIiIiIiIiIiIiJ65cyXeD6jqqrKhLQ3/P333+Tm5pKTk1OyT6dOnRgzZgwA48ePB2D48OHExsYyatQo9u7dWzL+7t27efTRR8nNzeW1115j0qRJfPnllxgMhiJ7vPvuu8a8eMaMGbzzzjusX7+emJgYY3uDBg04c+aMj5WMR0RERERERERERERcp7UlQhcuXLC4gL6qqorf/va3pKamllw7fPgwR48eJTQ0lI0bN5bK7N+/v+b8xYsX8fLyIikpqWxKzYQJE8jMzDS9Nn36dGxtbYmJiQEgLi6O48ePExUVVWKHlhU4nU6CgoLIzMws8fExEREREREREREREZETBlcqOYqIiODq1avExcXx+eef079/fyIjI7l27RpBQUEVj6+oqCA+Pp6ff/7ZtP3DDz+sefzg4GCWLl3Kk08+yfLly5kwYQK9e/cmurq65H5ycnJwcnLC39/fdD4QCBD/fPjppxw7dozB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1cbtFRUVVKvVEQqFiI+PZ9GiRaSnpwMwYMAAvv76azw8PFi2bBmPPPIIPj4+2Nra8vHHH/Pll19WWT87O5vmzZvTp08fAOrVq8cbb7xBQECAXh4REREREREREREREXHprNwdVG5ubjg6OmrCV1paSmJiIv7+/sTHxzN58mSmTJli2T506FC8vb3x9PSkvr7e2PHExMQCP1tjYyNvvvkm69atA8De3p7GjRszYsQIjEYjAQEBbNiwAT8/P+655x6ysrJsB0RERERERERERERERLx2VuYwLl68SG5uLqdPnyY2Npb9+/fTvXt3Dh8+TNu2bXnooYf47bffjPtbW1v54osvGD16NO+8845l3+eff07z5s2N+69fv05lZSXfffcd1tbWLF26lN69e/Pf//7X9LGlS5cyaNAgbr31VgIDA+nfvz/r16+nvLzcmRsREREREREREREREXH1tC/iVq1aRVlZGT179sTX1xeDwcDnn39OXl4ee/fuZceOHfTs2ZPHH3+cQ4cO0bRp03s2hNi8eTOvvvoq8fHxjBs3jk8//ZR169bxxBNP0KlTJ5o2bercnRERERERERERERER8VJZuT9hKqXQarW1bsfW1rbITnng8/lsPwNdt3fvXoYNG8ann356X4a7g/bDug6kH1b7FOxhHPPVUffTHxLPAVlnjLWZaD2wrgPph9U+583741Ol5RARERERERERERERkTlY+LQ7IiIiIiIiIiIiIiJeMndPRERERERERERERETEU+YuIiIiIiIiIiIiIuIpcxdxqWowGMTY2BhWq9Vfzy8vL8fHxwe3261N0jo6Onz0fL1eL5mZmRiNRjo6OmxtGxkaGqK4uJjc3FxaW1t55pln8PPzq3kcUShUXWHC3Nzcgo8lyjgfHx+jra2NyspKanpP0SOOwVCEIAyxpaWF0NBQ7u2YKioq4HQ68fHx4auvvrJ8xWIx8vPz0ev1VFdX4+vrS2lpKUDZOdfS0sJnn33GJ598QsOGDcna2pqgoCDKy8vp7OxEW1sbUVFRrF69mtzcXEpLS+nt7QXg2LFjREVF0dLSgqWlJffffz8Ao0eP5t1337Xt//TTT9m4cSO9vb3Y29sTFBTEtGnTSvoJCAjgwIEDhIeHU1paClAWc7T4lsbGRhITE2ltbaWyslJ9Wc11mJubIz8/H29vbwBu3rxJQUEBLS0t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BzqsyMhI7r77bl544QUkSWLFihX06NGD3Nxc7rnnHidvYezvv/9m3bp1hIaG0r17d4KCghg0aBCJiYmsX7+e6upqpk2bVvEvOnLkSNq0aUNqaqq/VbaMGTNmMGTIEEaNGkXr1q0JDQ0lMjKS1NRUgoKCWLFihf69iDjCLmlMR1ZWFn/99Rfvv/8+P/zwA8uWLWP9+vUkJiYya9YspkyZwrlz5zhw4ABr166t9CxTpkxhyJAhfPjhhzz//PPk5+fTsWNH/vzzzyofzc/P58KFC/Tv39+fQ2qRkpJCaWkp0dHR2Nra0rhxY5KSkkq2OXbsGEuWLOHZZ59l27ZtNG/eHIVCwcaNG/n999954YUXSE9P58iRIwQFBfleeAtAu3btyMrK4v3336d169a4uLjQp08f4+/3339/fvzxR0aNGlX5R6u6uvq3P+xMRmVlJWvWrGHhwoX89NNP/Pnnn3Tu3NlY4+Tn58dzzz1XYX7ZNdp/e7FRnJnVvYuIiIiIiIiIiIiIiLhCuIuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfGUuYuIiIiIiIiIiIiIeMrcRURERERERERERERcZe4iIiIiIiIiIiIiIp4ydxERERERERERERERT5m7iIiIiIiIiIiIiIinzF1ERERERERERERExFPmLiIiIiIiIiIiIiLiKXMXEREREREREREREfH/tmAh+1RyUAgAAAAASUVORK5CYII=" />
+        <div class="brand__text"><strong>ORIXGOLD</strong><span>Jewelry House</span></div>
+      </a>
+        <div class="brand__text"><strong>ORIXGOLD</strong><span>Jewelry House</span></div>
+      </a>
+      <nav class="nav">
+        <a href="#catalog">Каталог</a>
+        <a href="#categories">Категорії</a>
+        <a href="#sizer">Розмір каблучки</a>
+        <a href="#delivery">Доставка і оплата</a>
+        <a href="#contacts">Контакти</a>
+      </nav>
+      <div class="actions">
+        <a class="btn btn--ghost" href="#contacts">Зв'язатися</a>
+        <button class="icon-btn" id="cartButton" aria-label="Кошик">🛍️<span class="badge" id="cartCount">0</span></button>
+      </div>
     </div>
+  </header>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1588449668365-d15e397f6787">
-      <h3>Обручка</h3>
-      <div class="price">14 982 грн</div>
-      <button class="btn-buy">У кошик</button>
+  <main id="home">
+    <section class="catalog-hero">
+      <div class="container">
+        <div class="catalog-hero__box">
+          <div class="crumbs">Головна • Ювелірні прикраси • OrixGold</div>
+          <div class="hero-top">
+            <div class="hero-copy">
+              <h1>Каталог ювелірних прикрас</h1>
+              <p>Великий каталог ювелірних виробів із зручним пошуком, фільтрами та швидким оформленням замовлення.</p>
+            </div>
+            <div class="hero-pills">
+              <span class="pill-chip">Обручки</span>
+              <span class="pill-chip">Каблучки</span>
+              <span class="pill-chip">Сережки</span>
+              <span class="pill-chip">Браслети</span>
+              <span class="pill-chip">Підвіси</span>
+              <span class="pill-chip">Ланцюжки</span>
+              <span class="pill-chip">Шпильки</span>
+              <span class="pill-chip">Хрестики</span>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>8</strong><span>ключових категорій</span></div>
+            <div class="stat"><strong>68</strong><span>позицій уже додано в каталог</span></div>
+            <div class="stat"><strong>10 000+</strong><span>безкоштовна доставка від цієї суми</span></div>
+            <div class="stat"><strong>1 рік</strong><span>гарантія на вироби</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog">
+      <div class="container main-grid">
+        <aside class="sidebar">
+          <h3>Фільтри</h3>
+          <div class="small-note">Оберіть категорію та параметри для пошуку товарів.</div>
+
+          <div class="filter-block">
+            <div class="filter-title"><span>Категорії</span><span>+</span></div>
+            <div class="filter-options">
+              <label class="filter-option"><input type="radio" name="catQuick" checked onclick="setCategory('all')"> Усі товари</label>
+              <label class="filter-option"><input type="radio" name="catQuick" onclick="setCategory('Обручки')"> Обручки</label>
+              <label class="filter-option"><input type="radio" name="catQuick" onclick="setCategory('Каблучки')"> Каблучки</label>
+              <label class="filter-option"><input type="radio" name="catQuick" onclick="setCategory('Сережки')"> Сережки</label>
+              <label class="filter-option"><input type="radio" name="catQuick" onclick="setCategory('Браслети')"> Браслети</label>
+              <label class="filter-option"><input type="radio" name="catQuick" onclick="setCategory('Підвіси')"> Підвіси</label>
+              <label class="filter-option"><input type="radio" name="catQuick" onclick="setCategory('Ланцюжки')"> Ланцюжки</label>
+              <label class="filter-option"><input type="radio" name="catQuick" onclick="setCategory('Шпильки')"> Шпильки</label>
+              <label class="filter-option"><input type="radio" name="catQuick" onclick="setCategory('Хрестики')"> Хрестики</label>
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <div class="filter-title"><span>Метал</span><span>+</span></div>
+            <div class="filter-options">
+              <label class="filter-option"><input type="checkbox"> Жовте золото</label>
+              <label class="filter-option"><input type="checkbox"> Біле золото</label>
+              <label class="filter-option"><input type="checkbox"> Червоне золото</label>
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <div class="filter-title"><span>Покупцям</span><span>+</span></div>
+            <div class="filter-options">
+              <div class="small-note">• Каталог без перевантаженого hero-блоку</div>
+              <div class="small-note">• Великі картки товарів</div>
+              <div class="small-note">• Кошик завжди під рукою</div>
+              <div class="small-note">• Вимірювач каблучки нижче по сторінці</div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="content-panel">
+          <div class="toolbar">
+            <input class="search" id="searchInput" type="text" placeholder="Пошук за назвою або артикулом..." />
+            <div class="summary" id="catalogSummary">Показано весь каталог</div>
+            <select class="select" id="categoryFilter">
+              <option value="all">Усі категорії</option>
+              <option value="Обручки">Обручки</option>
+              <option value="Каблучки">Каблучки</option>
+              <option value="Сережки">Сережки</option>
+              <option value="Браслети">Браслети</option>
+              <option value="Підвіси">Підвіси</option>
+              <option value="Ланцюжки">Ланцюжки</option>
+              <option value="Шпильки">Шпильки</option>
+              <option value="Хрестики">Хрестики</option>
+            </select>
+            <select class="select" id="sortFilter">
+              <option value="default">Сортування</option>
+              <option value="cheap">Спочатку дешевші</option>
+              <option value="expensive">Спочатку дорожчі</option>
+            </select>
+          </div>
+
+          <div class="products" id="productsGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="categories">
+      <div class="container lower-grid">
+        <article class="panel" id="delivery">
+          <h2>Доставка і оплата</h2>
+          <p>Інформація про доставку та оплату замовлень.</p>
+          <div class="checklist">
+            <div class="check"><i>1</i><div><strong>Доставка</strong><div class="notice">Нова Пошта у відділення або кур'єром. Термін виготовлення й відправки — до 10 робочих днів.</div></div></div>
+            <div class="check"><i>2</i><div><strong>Безкоштовна доставка</strong><div class="notice">Вироби вартістю понад 10 000 грн відправляються безкоштовно.</div></div></div>
+            <div class="check"><i>3</i><div><strong>Оплата</strong><div class="notice">Онлайн банківською карткою або банківським переказом після оформлення.</div></div></div>
+            <div class="check"><i>4</i><div><strong>Гарантія</strong><div class="notice">Гарантія на вироби — 1 рік, а для частини виробів з діамантами можлива більша гарантія.</div></div></div>
+          </div>
+        </article>
+
+        <article class="panel" id="sizer">
+          <h2>Розмір каблучки</h2>
+          <p>Інструмент для визначення розміру каблучки.</p>
+          <div class="ring-tool"><div class="sizer-circle" id="sizerCircle"></div></div>
+          <div class="ruler"><span>14</span><input type="range" min="14" max="23" step="0.5" value="17" id="ringRange" /><span>23</span></div>
+          <div><span class="pill-info">Розмір: <span id="ringSizeLabel">17</span></span><span class="pill-info">Діаметр: <span id="ringDiameterLabel">17.0 мм</span></span></div>
+          <div style="margin-top:16px;display:grid;gap:12px">
+            <div class="cal-bar" id="calibrationBar"></div>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:10px"><input id="calibrationInput" type="number" min="40" max="120" step="0.1" value="85.6" /><button class="btn btn--ghost" type="button" onclick="setCalibration()">Калібрувати</button></div>
+            <div class="notice">Стандартна ширина банківської картки — 85.6 мм.</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container lower-grid">
+        <article class="panel">
+          <h2>Контакти</h2>
+          <div class="checklist">
+            <div class="check"><i>✓</i><div><strong>Телефон</strong><div class="notice">+38 (067) 430-40-91</div></div></div>
+            <div class="check"><i>✓</i><div><strong>Email</strong><div class="notice">okshuk@gmail.com</div></div></div>
+            <div class="check"><i>✓</i><div><strong>Соцмережі</strong><div class="notice">Instagram, Facebook, YouTube, TikTok</div></div></div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>Форма заявки</h2>
+          <p>Заповніть форму, і ми зв'яжемося з вами для підтвердження замовлення.</p>
+          <form class="form" id="contactForm">
+            <input type="text" placeholder="Ваше ім'я" required />
+            <input type="tel" placeholder="Телефон" required />
+            <textarea placeholder="Який виріб вас цікавить, артикул, розмір, побажання"></textarea>
+            <button class="btn btn--gold" type="submit">Надіслати заявку</button>
+            <div class="notice" id="formMessage">Форма підготовлена. Наступним кроком можна підключити реальне надсилання менеджеру.</div>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div><strong>ORIXGOLD</strong><p>Сучасний ювелірний магазин OrixGold з великим каталогом прикрас.</p></div>
+        <div><strong>Каталог</strong><p><a href="#catalog">Усі товари</a></p><p><a href="#categories">Категорії</a></p></div>
+        <div><strong>Покупцям</strong><p><a href="#delivery">Доставка і оплата</a></p><p><a href="#sizer">Розмір каблучки</a></p></div>
+        <div><strong>Контакти</strong><p><a href="#contacts">Форма заявки</a></p><p>+38 (067) 430-40-91</p></div>
+      </div>
+      <div class="footer__bottom"><span>© 2026 OrixGold</span><span>Ювелірний дім OrixGold</span></div>
     </div>
+  </footer>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638">
-      <h3>Сережки</h3>
-      <div class="price">11 154 грн</div>
-      <button class="btn-buy">У кошик</button>
-    </div>
+  <div class="overlay" id="overlay" onclick="closeCart()"></div>
+  <aside class="cart" id="cart">
+    <div class="cart__head"><strong style="font-size:22px">Ваш кошик</strong><button class="btn btn--ghost" onclick="closeCart()">Закрити</button></div>
+    <div class="cart__items" id="cartItems"></div>
+    <div class="cart__foot"><div class="cart__total"><span>Разом</span><span id="cartTotal">0 грн</span></div><button class="btn btn--gold" style="width:100%" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'});closeCart();">Перейти до заявки</button></div>
+  </aside>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f">
-      <h3>Браслет</h3>
-      <div class="price">27 002 грн</div>
-      <button class="btn-buy">У кошик</button>
-    </div>
+  <script>
+    const products = [
+      {id:1,name:'Каблучка',sku:'410-0178',category:'Каблучки',price:16108,material:'Жовте золото, діамант',desc:'Каблучка із жовтого золота із діамантовою вставкою.',sizes:'Усі розміри доступні під замовлення',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:2,name:'Обручка',sku:'420-0191',category:'Обручки',price:14982,material:'Жовте золото, діамант',desc:'Американка із жовтого золота.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:3,name:'Обручка',sku:'OR-W-001',category:'Обручки',price:11154,material:'Біле золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:4,name:'Обручка',sku:'OR-W-002',category:'Обручки',price:27002,material:'Червоне золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
+      {id:5,name:'Каблучка',sku:'423-0317',category:'Каблучки',price:25907,material:'Жовте золото, діаманти',desc:'Каблучка у вигляді квіткової гілки із діамантами.',sizes:'Усі розміри доступні під замовлення',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:6,name:'Шпилька',sku:'368-0004',category:'Шпильки',price:1987,material:'Червоне золото, цирконій/діамант',desc:'Шпилька із червоного золота з фігуркою-метеликом.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png'},
+      {id:7,name:'Підвіс',sku:'225-0942',category:'Підвіси',price:8045,material:'Червоне та біле золото, діаманти',desc:'Підвіс у вигляді об’ємної кульки.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:8,name:'Підвіс',sku:'OR-P-001',category:'Підвіси',price:32917,material:'Біле золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:9,name:'Підвіс',sku:'OR-P-002',category:'Підвіси',price:44177,material:'Біле золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png'},
+      {id:10,name:'Підвіс',sku:'OR-P-003',category:'Підвіси',price:36272,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png'},
+      {id:11,name:'Підвіс',sku:'OR-P-004',category:'Підвіси',price:10064,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:12,name:'Підвіс',sku:'OR-P-005',category:'Підвіси',price:22955,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:13,name:'Підвіс',sku:'OR-P-006',category:'Підвіси',price:10451,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:14,name:'Підвіс',sku:'OR-P-007',category:'Підвіси',price:9059,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:15,name:'Підвіс',sku:'OR-P-008',category:'Підвіси',price:8221,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:16,name:'Підвіс',sku:'OR-P-009',category:'Підвіси',price:7241,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:17,name:'Підвіс',sku:'OR-P-010',category:'Підвіси',price:5845,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:18,name:'Хрестик',sku:'305-0902',category:'Хрестики',price:14675,material:'Червоне та біле золото',desc:'Хрестик з деталізованим елементом.',sizes:'Під замовлення',image:''},
+      {id:19,name:'Обручка',sku:'OR-W-003',category:'Обручки',price:17433,material:'Золото',desc:'Новинка з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:20,name:'Обручка',sku:'OR-W-004',category:'Обручки',price:33752,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
+      {id:21,name:'Обручка',sku:'OR-W-005',category:'Обручки',price:13266,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:22,name:'Обручка',sku:'OR-W-006',category:'Обручки',price:13412,material:'Золото',desc:'Новинка з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:23,name:'Обручка',sku:'OR-W-007',category:'Обручки',price:15216,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
+      {id:24,name:'Обручка',sku:'OR-W-008',category:'Обручки',price:15638,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
+      {id:25,name:'Обручка',sku:'OR-W-009',category:'Обручки',price:11446,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:26,name:'Обручка',sku:'OR-W-010',category:'Обручки',price:27941,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
+      {id:27,name:'Обручка',sku:'OR-W-011',category:'Обручки',price:11153,material:'Золото',desc:'Новинка з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:28,name:'Обручка',sku:'OR-W-012',category:'Обручки',price:7249,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:29,name:'Каблучка',sku:'OR-R-001',category:'Каблучки',price:214432,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:30,name:'Каблучка',sku:'OR-R-002',category:'Каблучки',price:128393,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:31,name:'Каблучка',sku:'OR-R-003',category:'Каблучки',price:70475,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:32,name:'Каблучка',sku:'OR-R-004',category:'Каблучки',price:55266,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:33,name:'Каблучка',sku:'OR-R-005',category:'Каблучки',price:43368,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:34,name:'Каблучка',sku:'OR-R-006',category:'Каблучки',price:44868,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:35,name:'Каблучка',sku:'OR-R-007',category:'Каблучки',price:41630,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:36,name:'Каблучка',sku:'OR-R-008',category:'Каблучки',price:32523,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:37,name:'Каблучка',sku:'OR-R-009',category:'Каблучки',price:29193,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:38,name:'Каблучка',sku:'OR-R-010',category:'Каблучки',price:23669,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:39,name:'Каблучка',sku:'OR-R-011',category:'Каблучки',price:28187,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:40,name:'Каблучка',sku:'OR-R-012',category:'Каблучки',price:26937,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:41,name:'Сережки',sku:'OR-E-001',category:'Сережки',price:87480,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:42,name:'Сережки',sku:'OR-E-002',category:'Сережки',price:61628,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:43,name:'Сережки',sku:'OR-E-003',category:'Сережки',price:63829,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:44,name:'Сережки',sku:'OR-E-004',category:'Сережки',price:52065,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:45,name:'Сережки',sku:'OR-E-005',category:'Сережки',price:45263,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:46,name:'Сережки',sku:'OR-E-006',category:'Сережки',price:50509,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:47,name:'Сережки',sku:'OR-E-007',category:'Сережки',price:41345,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:48,name:'Сережки',sku:'OR-E-008',category:'Сережки',price:34570,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:49,name:'Сережки',sku:'OR-E-009',category:'Сережки',price:29908,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:50,name:'Сережки',sku:'OR-E-010',category:'Сережки',price:36088,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:51,name:'Ланцюжок',sku:'OR-C-001',category:'Ланцюжки',price:58700,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:52,name:'Ланцюжок',sku:'OR-C-002',category:'Ланцюжки',price:102725,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:53,name:'Ланцюжок',sku:'OR-C-003',category:'Ланцюжки',price:29350,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:54,name:'Ланцюжок',sku:'OR-C-004',category:'Ланцюжки',price:17610,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:55,name:'Ланцюжок',sku:'OR-C-005',category:'Ланцюжки',price:23480,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:56,name:'Ланцюжок',sku:'OR-C-006',category:'Ланцюжки',price:46960,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:57,name:'Ланцюжок',sku:'OR-C-007',category:'Ланцюжки',price:73375,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:58,name:'Ланцюжок',sku:'OR-C-008',category:'Ланцюжки',price:38155,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:59,name:'Ланцюжок',sku:'OR-C-009',category:'Ланцюжки',price:146750,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:60,name:'Браслет',sku:'OR-B-001',category:'Браслети',price:100000,material:'Золото',desc:'Модель з категорії браслетів.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:61,name:'Шпилька',sku:'OR-S-001',category:'Шпильки',price:3559,material:'Золото',desc:'Модель з категорії шпильок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:62,name:'Шпилька',sku:'OR-S-002',category:'Шпильки',price:2521,material:'Золото',desc:'Модель з категорії шпильок.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:63,name:'Хрестик',sku:'OR-X-001',category:'Хрестики',price:3668,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:64,name:'Хрестик',sku:'OR-X-002',category:'Хрестики',price:2876,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:65,name:'Хрестик',sku:'OR-X-003',category:'Хрестики',price:2641,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:66,name:'Хрестик',sku:'OR-X-004',category:'Хрестики',price:8511,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:67,name:'Хрестик',sku:'OR-X-005',category:'Хрестики',price:6085,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:68,name:'Хрестик',sku:'OR-X-006',category:'Хрестики',price:5429,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''}
+    ];
 
-  </div>
-</div>
+    let cartItemsState = [];
+    let pxPerMm = 3.0;
+    const productsGrid = document.getElementById('productsGrid');
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const sortFilter = document.getElementById('sortFilter');
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
+    const cartPanel = document.getElementById('cart');
+    const overlay = document.getElementById('overlay');
+    const ringRange = document.getElementById('ringRange');
+    const ringSizeLabel = document.getElementById('ringSizeLabel');
+    const ringDiameterLabel = document.getElementById('ringDiameterLabel');
+    const sizerCircle = document.getElementById('sizerCircle');
+    const catalogSummary = document.getElementById('catalogSummary');
 
+    function formatPrice(value){return new Intl.NumberFormat('uk-UA').format(value)+' грн'}
+    function setCategory(value){categoryFilter.value=value;renderProducts()}
+
+    function renderProducts(){
+      let filtered=[...products];
+      const term=searchInput.value.trim().toLowerCase();
+      const category=categoryFilter.value;
+      const sort=sortFilter.value;
+      if(term){filtered=filtered.filter(p=>p.name.toLowerCase().includes(term)||String(p.sku).toLowerCase().includes(term))}
+      if(category!=='all'){filtered=filtered.filter(p=>p.category===category)}
+      if(sort==='cheap'){filtered.sort((a,b)=>a.price-b.price)}
+      if(sort==='expensive'){filtered.sort((a,b)=>b.price-a.price)}
+      catalogSummary.textContent = category==='all' ? `Показано ${filtered.length} товарів` : `${category}: ${filtered.length} товарів`;
+      if(!filtered.length){productsGrid.innerHTML='<div class="panel" style="grid-column:1/-1;text-align:center"><h3 style="margin-top:0">Нічого не знайдено</h3><p class="notice">Спробуйте змінити запит або фільтр.</p></div>';return}
+      productsGrid.innerHTML=filtered.map(product=>`
+        <article class="product">
+          <div class="product__media">${product.image?`<img src="${product.image}" alt="${product.name}">`:`<div class="product__placeholder">✦</div>`}</div>
+          <div class="product__body">
+            <div class="product__meta"><span>${product.category}</span><span>${product.material}</span></div>
+            <h3>${product.name}</h3>
+            <div class="product__sku">Артикул: ${product.sku}</div>
+            <p class="product__desc">${product.desc}</p>
+            <div class="product__meta"><span>${product.sizes}</span></div>
+            <div class="product__price">${formatPrice(product.price)}</div>
+            <div class="product__footer">
+              <button class="btn btn--ghost" onclick="quickOrder('${product.name.replace(/'/g,"&#39;")}')">Швидке замовлення</button>
+              <button class="btn btn--gold" onclick="addToCart(${product.id})">У кошик</button>
+            </div>
+          </div>
+        </article>`).join('');
+    }
+
+    function addToCart(id){const product=products.find(p=>p.id===id);const found=cartItemsState.find(item=>item.id===id);if(found){found.qty+=1}else{cartItemsState.push({...product,qty:1})}updateCart();openCart()}
+    function removeFromCart(id){cartItemsState=cartItemsState.filter(item=>item.id!==id);updateCart()}
+    function updateCart(){const count=cartItemsState.reduce((s,i)=>s+i.qty,0);const total=cartItemsState.reduce((s,i)=>s+i.qty*i.price,0);cartCount.textContent=count;cartTotal.textContent=formatPrice(total);if(!cartItemsState.length){cartItems.innerHTML='<div class="empty">У кошику поки порожньо.</div>';return}cartItems.innerHTML=cartItemsState.map(item=>`<div class="cart-item"><div class="cart-thumb">${item.sku!=='—'?String(item.sku).split('-')[0]:'OR'}</div><div><strong>${item.name}</strong><p>${item.category} • ${item.qty} шт.</p><p>${formatPrice(item.price)}</p></div><button class="mini-btn" onclick="removeFromCart(${item.id})">Видалити</button></div>`).join('')}
+    function openCart(){cartPanel.classList.add('open');overlay.classList.add('show')}
+    function closeCart(){cartPanel.classList.remove('open');overlay.classList.remove('show')}
+    function quickOrder(name){document.getElementById('contacts').scrollIntoView({behavior:'smooth'});document.getElementById('formMessage').textContent='Обраний товар: '+name}
+    function updateRingSizer(){const size=parseFloat(ringRange.value);ringSizeLabel.textContent=size.toFixed(1).replace('.0','');ringDiameterLabel.textContent=size.toFixed(1)+' мм';const px=size*pxPerMm;sizerCircle.style.width=px+'px';sizerCircle.style.height=px+'px'}
+    function setCalibration(){const input=document.getElementById('calibrationInput');const bar=document.getElementById('calibrationBar');const mm=parseFloat(input.value)||85.6;pxPerMm=bar.offsetWidth/mm;updateRingSizer()}
+
+    searchInput.addEventListener('input',renderProducts);
+    categoryFilter.addEventListener('change',renderProducts);
+    sortFilter.addEventListener('change',renderProducts);
+    document.getElementById('cartButton').addEventListener('click',openCart);
+    ringRange.addEventListener('input',updateRingSizer);
+    document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('formMessage').textContent='Заявка заповнена. Наступним кроком можна підключити реальне надсилання менеджеру.';this.reset()});
+
+    renderProducts();updateCart();updateRingSizer();
+  </script>
 </body>
 </html>
