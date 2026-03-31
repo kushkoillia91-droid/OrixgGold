@@ -1,194 +1,183 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OrixGold — Ювелірний дім</title>
-  <meta name="description" content="OrixGold — ювелірний магазин з каталогом, кошиком, формою замовлення та вимірювачем розміру каблучки." />
-  <style>
-    :root {
-      --bg:#fbf7f2; --surface:#fffdfb; --text:#231b16; --muted:#76695d; --line:#e7ddd1;
-      --gold:#b68c53; --gold-dark:#8f6939; --dark:#1f1713; --danger:#b34747; --radius:26px;
-      --shadow:0 18px 60px rgba(35,27,22,.08);
-    }
-    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
-    img{display:block;max-width:100%} a{text-decoration:none;color:inherit} button,input,select,textarea{font:inherit}
-    .container{width:min(1200px,calc(100% - 32px));margin:0 auto}
-    .topbar{background:var(--dark);color:#f7ecde;font-size:14px;padding:10px 0}.topbar__row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    .header{position:sticky;top:0;z-index:40;background:rgba(251,247,242,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(231,221,209,.9)}
-    .header__row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 0}.brand{display:flex;flex-direction:column;gap:2px;min-width:165px}.brand strong{font-size:28px;letter-spacing:.08em}.brand span{font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
-    .nav{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}.nav a{color:var(--muted);font-weight:500}.nav a:hover{color:var(--text)}
-    .actions{display:flex;align-items:center;gap:10px}.btn{border:none;border-radius:999px;padding:14px 22px;cursor:pointer;transition:.2s ease;font-weight:600}.btn:hover{transform:translateY(-1px)}
-    .btn--gold{background:var(--gold);color:#fff;box-shadow:0 10px 28px rgba(182,140,83,.25)} .btn--gold:hover{background:var(--gold-dark)}
-    .btn--ghost{background:#fff;color:var(--text);border:1px solid var(--line)} .btn--dark{background:var(--dark);color:#fff}
-    .icon-btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer;position:relative}
-    .badge{position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--dark);color:#fff;font-size:12px;display:grid;place-items:center}
-    .hero{padding:30px 0 24px}.hero__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}.hero__content,.hero__visual{border-radius:32px;border:1px solid var(--line);overflow:hidden;box-shadow:var(--shadow)}
-    .hero__content{background:linear-gradient(180deg,#fffdfb 0%,#f3eadf 100%);padding:56px;min-height:590px;display:flex;flex-direction:column;justify-content:center}.eyebrow{color:var(--gold-dark);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:16px}
-    h1{font-size:clamp(38px,6vw,68px);line-height:1.04;margin:0 0 18px}.lead{color:var(--muted);font-size:18px;max-width:580px;margin-bottom:26px}.hero__cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
-    .hero__facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.fact{background:rgba(255,255,255,.74);border:1px solid var(--line);border-radius:20px;padding:16px}.fact strong{display:block;font-size:22px;margin-bottom:5px}.fact span{color:var(--muted);font-size:14px}
-    .hero__visual{background:linear-gradient(180deg,#fff9f2 0%,#ead9c4 100%);min-height:590px;display:grid;grid-template-rows:1fr auto}.hero__visual img{width:100%;height:100%;object-fit:contain;padding:42px 30px 0}
-    .hero__card{margin:0 24px 24px;padding:18px 20px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:24px;display:flex;justify-content:space-between;gap:12px;align-items:end}.hero__card p{color:var(--muted);margin:6px 0 0}.hero__price{font-size:30px;font-weight:700}
-    section{padding:34px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:22px}.section-head h2{margin:0;font-size:clamp(28px,4vw,42px)}.section-head p{margin:8px 0 0;color:var(--muted);max-width:720px}
-    .features,.info-grid,.measure-grid,.contact-grid,.footer__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.feature,.panel{background:var(--surface);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:26px}.feature strong{display:block;font-size:22px;margin-bottom:8px}.feature p,.panel p{color:var(--muted);margin:0}
-    .toolbar{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}.search,.select{height:52px;border-radius:999px;border:1px solid var(--line);background:#fff;padding:0 18px}.search{flex:1 1 320px}
-    .products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:var(--surface);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
-    .product__media{aspect-ratio:1 / 1.04;background:linear-gradient(180deg,#fffaf4 0%,#efe2d3 100%);display:grid;place-items:center;overflow:hidden}.product__media img{width:100%;height:100%;object-fit:contain;padding:18px}
-    .product__placeholder{width:72%;aspect-ratio:1;border-radius:50%;border:16px solid rgba(182,140,83,.75);display:grid;place-items:center;color:var(--gold-dark);font-size:30px;font-weight:700;background:radial-gradient(circle,rgba(255,255,255,.55) 0%,transparent 60%)}
-    .product__body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}.product__meta{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:13px}.product h3{margin:0;font-size:20px}.product__sku{color:var(--muted);font-size:13px}.product__price{font-size:24px;font-weight:700}.product__desc{color:var(--muted);font-size:14px;margin:0}.product__footer{display:flex;gap:10px;margin-top:auto}.product__footer .btn{flex:1}
-    .checklist{display:grid;gap:12px;margin-top:18px}.check{display:flex;gap:12px;align-items:start}.check i{width:26px;height:26px;border-radius:50%;background:#f1e3d2;display:grid;place-items:center;flex:0 0 auto;font-style:normal;color:var(--gold-dark);font-weight:700}
-    .ring-tool{background:linear-gradient(180deg,#fffaf5 0%,#efe1cf 100%);border-radius:24px;min-height:340px;display:grid;place-items:center;position:relative;overflow:hidden}.ring-tool::after{content:'';position:absolute;left:20px;right:20px;bottom:26px;height:2px;background:rgba(31,23,19,.12)}
-    .sizer-circle{width:120px;height:120px;border-radius:50%;border:12px solid rgba(182,140,83,.9);box-shadow:inset 0 0 18px rgba(255,255,255,.45),0 18px 42px rgba(182,140,83,.22);transition:.2s ease;background:radial-gradient(circle,rgba(255,255,255,.42) 0%,transparent 62%)}
-    .ruler{display:flex;align-items:center;gap:12px;margin-top:12px}.ruler input{width:100%}.pill{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:999px;background:#f2e9df;font-weight:600;width:fit-content}.cal-bar{height:54px;width:260px;max-width:100%;border-radius:18px;background:linear-gradient(90deg,#ead2ae 0%,#b68c53 100%);border:1px solid var(--line)}
-    .form{display:grid;gap:14px}.form input,.form select,.form textarea{width:100%;padding:15px 16px;border-radius:16px;border:1px solid var(--line);background:#fff}.form textarea{min-height:130px;resize:vertical}.notice{color:var(--muted);font-size:14px}
-    .footer{background:var(--dark);color:#f6ebde;margin-top:30px;padding:38px 0 18px}.footer a,.footer p{color:#dacaba}.footer strong{color:#fff;display:inline-block;margin-bottom:10px}.footer__bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:24px;padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#cfbead;font-size:14px}
-    .overlay{position:fixed;inset:0;background:rgba(31,23,19,.38);opacity:0;visibility:hidden;transition:.25s ease;z-index:48}.overlay.show{opacity:1;visibility:visible}.cart{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:var(--surface);border-left:1px solid var(--line);box-shadow:-16px 0 40px rgba(31,23,19,.12);transform:translateX(100%);transition:.28s ease;z-index:50;display:flex;flex-direction:column}.cart.open{transform:translateX(0)}.cart__head,.cart__foot{padding:18px;border-bottom:1px solid var(--line)}.cart__head{display:flex;justify-content:space-between;gap:12px;align-items:center}.cart__items{flex:1;overflow:auto;padding:16px 18px;display:grid;gap:12px;align-content:start}.cart-item{background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px;display:grid;grid-template-columns:58px 1fr auto;gap:12px;align-items:center}.cart-thumb{width:58px;height:58px;border-radius:16px;background:linear-gradient(180deg,#fffaf4 0%,#efe2d3 100%);display:grid;place-items:center;font-size:18px;font-weight:700;color:var(--gold-dark)}.cart-item p{margin:0;color:var(--muted);font-size:13px}.cart-item strong{display:block}.cart__total{display:flex;justify-content:space-between;font-size:18px;font-weight:700;margin-bottom:12px}.mini-btn{border:none;background:transparent;color:var(--danger);cursor:pointer;font-weight:600}.empty{background:#fff;border:1px dashed var(--line);border-radius:22px;padding:28px;text-align:center;color:var(--muted)}
-    @media (max-width:1080px){.hero__grid,.features,.info-grid,.measure-grid,.contact-grid,.footer__grid,.products{grid-template-columns:repeat(2,1fr)}.hero__content,.hero__visual{min-height:auto}}
-    @media (max-width:860px){.header__row{flex-wrap:wrap}.nav{order:3;width:100%;justify-content:flex-start}.hero__grid,.features,.info-grid,.measure-grid,.contact-grid,.footer__grid,.products,.hero__facts{grid-template-columns:1fr}.hero__content{padding:30px}.hero__card{flex-direction:column;align-items:start}.toolbar{align-items:stretch}.search,.select{width:100%}.product__footer{flex-direction:column}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIX — ювелірний дім</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f5f2;
+  color: #222;
+}
+
+/* HEADER */
+.header {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.header__inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav {
+  display: flex;
+  gap: 25px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: #c8a96a;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 8px 15px;
+  border: 1px solid #c8a96a;
+  background: transparent;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* TITLE */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+/* CATALOG */
+.catalog {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 15px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+}
+
+.card h3 {
+  font-size: 16px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.btn-buy {
+  background: #c8a96a;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+</style>
+
 </head>
 <body>
-  <div class="topbar"><div class="container topbar__row"><span>Orix — ювелірний дім</span><span>+38 (067) 430-40-91 • okshuk@gmail.com</span></div></div>
-  <header class="header"><div class="container header__row"><a class="brand" href="#home"><strong>ORIXGOLD</strong><span>Jewelry house</span></a><nav class="nav"><a href="#catalog">Каталог</a><a href="#categories">Категорії</a><a href="#sizer">Розмір каблучки</a><a href="#delivery">Доставка і оплата</a><a href="#contacts">Контакти</a></nav><div class="actions"><a class="btn btn--ghost" href="#contacts">Зв'язатися</a><button class="icon-btn" id="cartButton" aria-label="Кошик">🛍️<span class="badge" id="cartCount">0</span></button></div></div></header>
-  <main>
-    <section class="hero" id="home"><div class="container hero__grid"><div class="hero__content"><div class="eyebrow">Ювелірний дім Orix</div><h1>Вишукані прикраси з оновленим каталогом і зручним замовленням.</h1><p class="lead">Каталог з актуальними категоріями, пошуком, кошиком, блоком доставки й інтерактивним підбором розміру каблучки.</p><div class="hero__cta"><a class="btn btn--gold" href="#catalog">Перейти в каталог</a><a class="btn btn--ghost" href="#sizer">Визначити розмір</a></div><div class="hero__facts"><div class="fact"><strong>8</strong><span>основних категорій</span></div><div class="fact"><strong>10 000+</strong><span>безкоштовна доставка від цієї суми</span></div><div class="fact"><strong>1 рік</strong><span>гарантія на вироби</span></div></div></div><div class="hero__visual"><img src="https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png" alt="Каблучка Orix" /><div class="hero__card"><div><strong style="font-size:22px;">Каблучка</strong><p>Жовте золото з діамантом • артикул 410-0178</p></div><div class="hero__price">16 108 ₴</div></div></div></div></section>
-    <section id="categories"><div class="container"><div class="section-head"><div><h2>Категорії</h2><p>Структура каталогу побудована під категорії чинного сайту Orix.</p></div></div><div class="features"><article class="feature"><strong>Обручки</strong><p>Американка, класика, двоколірні, триколірні, доріжки, з візерунком.</p></article><article class="feature"><strong>Каблучки</strong><p>Заручальні, із камінням, без вставок.</p></article><article class="feature"><strong>Сережки</strong><p>Пусети, з дорогоцінним камінням, без вставок.</p></article><article class="feature"><strong>Браслети</strong><p>З дорогоцінним камінням та без вставок.</p></article><article class="feature"><strong>Підвіси</strong><p>Зі вставками та без вставок.</p></article><article class="feature"><strong>Ланцюжки</strong><p>Моделі із червоного золота.</p></article><article class="feature"><strong>Шпильки</strong><p>Окремі акцентні моделі.</p></article><article class="feature"><strong>Хрестики</strong><p>Окрема категорія релігійних прикрас.</p></article></div></div></section>
-    <section id="catalog"><div class="container"><div class="section-head"><div><h2>Каталог товарів</h2><p>Каталог очищено від демо-текстів. Залишено тільки реальні категорії та реальні товари, які вдалося підтвердити з сайту.</p></div></div><div class="toolbar"><input class="search" id="searchInput" type="text" placeholder="Пошук за назвою або артикулом..." /><select class="select" id="categoryFilter"><option value="all">Усі категорії</option><option value="Обручки">Обручки</option><option value="Каблучки">Каблучки</option><option value="Сережки">Сережки</option><option value="Браслети">Браслети</option><option value="Підвіси">Підвіси</option><option value="Ланцюжки">Ланцюжки</option><option value="Шпильки">Шпильки</option><option value="Хрестики">Хрестики</option></select><select class="select" id="sortFilter"><option value="default">Сортування</option><option value="cheap">Спочатку дешевші</option><option value="expensive">Спочатку дорожчі</option></select></div><div class="products" id="productsGrid"></div></div></section>
-    <section><div class="container info-grid"><article class="panel" id="delivery"><div class="eyebrow">Доставка і оплата</div><h2 style="margin-top:0;">Умови замовлення</h2><div class="checklist"><div class="check"><i>1</i><div><strong>Доставка</strong><div style="color:var(--muted)">Нова Пошта у відділення або кур'єром. Термін виготовлення й відправки — до 10 робочих днів.</div></div></div><div class="check"><i>2</i><div><strong>Безкоштовна доставка</strong><div style="color:var(--muted)">Вироби вартістю понад 10 000 грн відправляються безкоштовно.</div></div></div><div class="check"><i>3</i><div><strong>Оплата</strong><div style="color:var(--muted)">Онлайн банківською карткою або банківським переказом після оформлення.</div></div></div><div class="check"><i>4</i><div><strong>Гарантія</strong><div style="color:var(--muted)">На сайті зазначено 1 рік гарантії на вироби, а для частини виробів з діамантами — 10 років.</div></div></div></div></article><article class="panel"><div class="eyebrow">Контактна інформація</div><h2 style="margin-top:0;">Orix</h2><div class="checklist"><div class="check"><i>✓</i><div><strong>Телефон</strong><div style="color:var(--muted)">+38 (067) 430-40-91</div></div></div><div class="check"><i>✓</i><div><strong>Email</strong><div style="color:var(--muted)">okshuk@gmail.com</div></div></div><div class="check"><i>✓</i><div><strong>Соцмережі</strong><div style="color:var(--muted)">Instagram, Facebook, YouTube, TikTok</div></div></div></div></article></div></section>
-    <section id="sizer"><div class="container measure-grid"><article class="panel"><div class="eyebrow">Розмір каблучки</div><h2 style="margin-top:0;">Вимірювач</h2><div class="ring-tool"><div class="sizer-circle" id="sizerCircle"></div></div><div class="ruler"><span>14</span><input type="range" min="14" max="23" step="0.5" value="17" id="ringRange" /><span>23</span></div><div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px"><div class="pill">Розмір: <span id="ringSizeLabel">17</span></div><div class="pill">Діаметр: <span id="ringDiameterLabel">17.0 мм</span></div></div></article><article class="panel"><div class="eyebrow">Калібрування екрана</div><h2 style="margin-top:0;">Налаштування</h2><p>Приклади банківську картку до смуги нижче. Якщо смуга не збігається по ширині, введи фактичну ширину еталона в міліметрах та натисни кнопку.</p><div style="display:grid;gap:14px;margin-top:18px"><div class="cal-bar" id="calibrationBar"></div><div style="display:grid;grid-template-columns:1fr auto;gap:10px"><input id="calibrationInput" type="number" min="40" max="120" step="0.1" value="85.6" /><button class="btn btn--ghost" type="button" onclick="setCalibration()">Калібрувати</button></div><p class="notice">Стандартна ширина банківської картки — 85.6 мм.</p></div></article></div></section>
-    <section id="contacts"><div class="container contact-grid"><article class="panel"><div class="eyebrow">Замовлення</div><h2 style="margin-top:0;">Форма заявки</h2><form class="form" id="contactForm"><input type="text" placeholder="Ваше ім'я" required /><input type="tel" placeholder="Телефон" required /><textarea placeholder="Який виріб вас цікавить, розмір, додаткові побажання"></textarea><button class="btn btn--gold" type="submit">Надіслати заявку</button><div class="notice" id="formMessage">Поки що форма працює як інтерфейс. Наступним кроком можна підключити реальне надсилання.</div></form></article><article class="panel"><div class="eyebrow">Кошик</div><h2 style="margin-top:0;">Оформлення</h2><p>Додай товари у кошик і переходь до заявки. Після цього можна буде підключити Telegram, email або оплату.</p><div class="checklist"><div class="check"><i>1</i><div><strong>Обери товар</strong><div style="color:var(--muted)">Додай потрібну позицію в кошик.</div></div></div><div class="check"><i>2</i><div><strong>Заповни заявку</strong><div style="color:var(--muted)">Вкажи ім'я, телефон і побажання.</div></div></div><div class="check"><i>3</i><div><strong>Підтвердження</strong><div style="color:var(--muted)">На наступному етапі можна додати реальне надсилання менеджеру.</div></div></div></div></article></div></section>
-  </main>
-  <footer class="footer"><div class="container"><div class="footer__grid"><div><strong>ORIXGOLD</strong><p>Ювелірний сайт з каталогом, кошиком і вимірювачем розміру каблучки.</p></div><div><strong>Каталог</strong><p><a href="#catalog">Товари</a></p><p><a href="#categories">Категорії</a></p></div><div><strong>Покупцям</strong><p><a href="#delivery">Доставка і оплата</a></p><p><a href="#sizer">Розмір каблучки</a></p></div><div><strong>Контакти</strong><p><a href="#contacts">Форма заявки</a></p><p>+38 (067) 430-40-91</p></div></div><div class="footer__bottom"><span>© 2026 OrixGold</span><span>Оновлена версія без демо-текстів</span></div></div></footer>
-  <div class="overlay" id="overlay" onclick="closeCart()"></div>
-  <aside class="cart" id="cart"><div class="cart__head"><strong style="font-size:22px">Ваш кошик</strong><button class="btn btn--ghost" onclick="closeCart()">Закрити</button></div><div class="cart__items" id="cartItems"></div><div class="cart__foot"><div class="cart__total"><span>Разом</span><span id="cartTotal">0 грн</span></div><button class="btn btn--gold" style="width:100%" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'});closeCart();">Перейти до заявки</button></div></aside>
-  <script>
-    const products = [
-      {id:1,name:'Каблучка',sku:'410-0178',category:'Каблучки',price:16108,material:'Жовте золото, діамант',desc:'Каблучка із жовтого золота із діамантовою вставкою.',sizes:'Усі розміри доступні під замовлення',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:2,name:'Обручка',sku:'420-0191',category:'Обручки',price:14982,material:'Жовте золото, діамант',desc:'Американка із жовтого золота.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
-      {id:3,name:'Обручка',sku:'OR-W-001',category:'Обручки',price:11154,material:'Біле золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
-      {id:4,name:'Обручка',sku:'OR-W-002',category:'Обручки',price:27002,material:'Червоне золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
-      {id:5,name:'Каблучка',sku:'423-0317',category:'Каблучки',price:25907,material:'Жовте золото, діаманти',desc:'Каблучка у вигляді квіткової гілки із діамантами.',sizes:'Усі розміри доступні під замовлення',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:6,name:'Шпилька',sku:'368-0004',category:'Шпильки',price:1987,material:'Червоне золото, цирконій/діамант',desc:'Шпилька із червоного золота з фігуркою-метеликом.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png'},
-      {id:7,name:'Підвіс',sku:'225-0942',category:'Підвіси',price:8045,material:'Червоне та біле золото, діаманти',desc:'Підвіс у вигляді об’ємної кульки.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
-      {id:8,name:'Підвіс',sku:'OR-P-001',category:'Підвіси',price:32917,material:'Біле золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
-      {id:9,name:'Підвіс',sku:'OR-P-002',category:'Підвіси',price:44177,material:'Біле золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png'},
-      {id:10,name:'Підвіс',sku:'OR-P-003',category:'Підвіси',price:36272,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png'},
-      {id:11,name:'Підвіс',sku:'OR-P-004',category:'Підвіси',price:10064,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
-      {id:12,name:'Підвіс',sku:'OR-P-005',category:'Підвіси',price:22955,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
-      {id:13,name:'Підвіс',sku:'OR-P-006',category:'Підвіси',price:10451,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
-      {id:14,name:'Підвіс',sku:'OR-P-007',category:'Підвіси',price:9059,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
-      {id:15,name:'Підвіс',sku:'OR-P-008',category:'Підвіси',price:8221,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
-      {id:16,name:'Підвіс',sku:'OR-P-009',category:'Підвіси',price:7241,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
-      {id:17,name:'Підвіс',sku:'OR-P-010',category:'Підвіси',price:5845,material:'Золото',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
-      {id:18,name:'Хрестик',sku:'305-0902',category:'Хрестики',price:14675,material:'Червоне та біле золото',desc:'Хрестик з деталізованим елементом.',sizes:'Під замовлення',image:''},
-      {id:19,name:'Обручка',sku:'OR-W-003',category:'Обручки',price:17433,material:'Золото',desc:'Новинка з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
-      {id:20,name:'Обручка',sku:'OR-W-004',category:'Обручки',price:33752,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
-      {id:21,name:'Обручка',sku:'OR-W-005',category:'Обручки',price:13266,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
-      {id:22,name:'Обручка',sku:'OR-W-006',category:'Обручки',price:13412,material:'Золото',desc:'Новинка з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
-      {id:23,name:'Обручка',sku:'OR-W-007',category:'Обручки',price:15216,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
-      {id:24,name:'Обручка',sku:'OR-W-008',category:'Обручки',price:15638,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
-      {id:25,name:'Обручка',sku:'OR-W-009',category:'Обручки',price:11446,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
-      {id:26,name:'Обручка',sku:'OR-W-010',category:'Обручки',price:27941,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'},
-      {id:27,name:'Обручка',sku:'OR-W-011',category:'Обручки',price:11153,material:'Золото',desc:'Новинка з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
-      {id:28,name:'Обручка',sku:'OR-W-012',category:'Обручки',price:7249,material:'Золото',desc:'Модель з категорії обручок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
-      {id:29,name:'Каблучка',sku:'OR-R-001',category:'Каблучки',price:214432,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:30,name:'Каблучка',sku:'OR-R-002',category:'Каблучки',price:128393,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:31,name:'Каблучка',sku:'OR-R-003',category:'Каблучки',price:70475,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:32,name:'Каблучка',sku:'OR-R-004',category:'Каблучки',price:55266,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:33,name:'Каблучка',sku:'OR-R-005',category:'Каблучки',price:43368,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:34,name:'Каблучка',sku:'OR-R-006',category:'Каблучки',price:44868,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:35,name:'Каблучка',sku:'OR-R-007',category:'Каблучки',price:41630,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:36,name:'Каблучка',sku:'OR-R-008',category:'Каблучки',price:32523,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:37,name:'Каблучка',sku:'OR-R-009',category:'Каблучки',price:29193,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:38,name:'Каблучка',sku:'OR-R-010',category:'Каблучки',price:23669,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:39,name:'Каблучка',sku:'OR-R-011',category:'Каблучки',price:28187,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:40,name:'Каблучка',sku:'OR-R-012',category:'Каблучки',price:26937,material:'Жовте золото',desc:'Модель з категорії каблучок.',sizes:'Уточнюйте у менеджера',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:41,name:'Сережки',sku:'OR-E-001',category:'Сережки',price:87480,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:42,name:'Сережки',sku:'OR-E-002',category:'Сережки',price:61628,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:43,name:'Сережки',sku:'OR-E-003',category:'Сережки',price:63829,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:44,name:'Сережки',sku:'OR-E-004',category:'Сережки',price:52065,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:45,name:'Сережки',sku:'OR-E-005',category:'Сережки',price:45263,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:46,name:'Сережки',sku:'OR-E-006',category:'Сережки',price:50509,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:47,name:'Сережки',sku:'OR-E-007',category:'Сережки',price:41345,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:48,name:'Сережки',sku:'OR-E-008',category:'Сережки',price:34570,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:49,name:'Сережки',sku:'OR-E-009',category:'Сережки',price:29908,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:50,name:'Сережки',sku:'OR-E-010',category:'Сережки',price:36088,material:'Золото',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:51,name:'Ланцюжок',sku:'OR-C-001',category:'Ланцюжки',price:58700,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:52,name:'Ланцюжок',sku:'OR-C-002',category:'Ланцюжки',price:102725,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:53,name:'Ланцюжок',sku:'OR-C-003',category:'Ланцюжки',price:29350,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:54,name:'Ланцюжок',sku:'OR-C-004',category:'Ланцюжки',price:17610,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:55,name:'Ланцюжок',sku:'OR-C-005',category:'Ланцюжки',price:23480,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:56,name:'Ланцюжок',sku:'OR-C-006',category:'Ланцюжки',price:46960,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:57,name:'Ланцюжок',sku:'OR-C-007',category:'Ланцюжки',price:73375,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:58,name:'Ланцюжок',sku:'OR-C-008',category:'Ланцюжки',price:38155,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:59,name:'Ланцюжок',sku:'OR-C-009',category:'Ланцюжки',price:146750,material:'Червоне золото',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:60,name:'Браслет',sku:'OR-B-001',category:'Браслети',price:100000,material:'Золото',desc:'Модель з категорії браслетів.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:61,name:'Шпилька',sku:'OR-S-001',category:'Шпильки',price:3559,material:'Золото',desc:'Модель з категорії шпильок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:62,name:'Шпилька',sku:'OR-S-002',category:'Шпильки',price:2521,material:'Золото',desc:'Модель з категорії шпильок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:63,name:'Хрестик',sku:'OR-X-001',category:'Хрестики',price:3668,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:64,name:'Хрестик',sku:'OR-X-002',category:'Хрестики',price:2876,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:65,name:'Хрестик',sku:'OR-X-003',category:'Хрестики',price:2641,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:66,name:'Хрестик',sku:'OR-X-004',category:'Хрестики',price:8511,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:67,name:'Хрестик',sku:'OR-X-005',category:'Хрестики',price:6085,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:68,name:'Хрестик',sku:'OR-X-006',category:'Хрестики',price:5429,material:'Червоне/біле золото',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''}
-    ];
 
-    let cartItemsState = [];
-    let pxPerMm = 3.0;
-    const productsGrid = document.getElementById('productsGrid');
-    const searchInput = document.getElementById('searchInput');
-    const categoryFilter = document.getElementById('categoryFilter');
-    const sortFilter = document.getElementById('sortFilter');
-    const cartItems = document.getElementById('cartItems');
-    const cartCount = document.getElementById('cartCount');
-    const cartTotal = document.getElementById('cartTotal');
-    const cartPanel = document.getElementById('cart');
-    const overlay = document.getElementById('overlay');
-    const ringRange = document.getElementById('ringRange');
-    const ringSizeLabel = document.getElementById('ringSizeLabel');
-    const ringDiameterLabel = document.getElementById('ringDiameterLabel');
-    const sizerCircle = document.getElementById('sizerCircle');
+<header class="header">
+  <div class="header__inner">
 
-    function formatPrice(value){return new Intl.NumberFormat('uk-UA').format(value)+' грн'}
+    <!-- ЛОГО (ТВОЄ) -->
+    <div class="logo">
+      <img src="https://i.imgur.com/6XGQx9p.png" alt="ORIX">
+    </div>
 
-    function renderProducts(){
-      let filtered=[...products];
-      const term=searchInput.value.trim().toLowerCase();
-      const category=categoryFilter.value;
-      const sort=sortFilter.value;
-      if(term){filtered=filtered.filter(p=>p.name.toLowerCase().includes(term)||String(p.sku).toLowerCase().includes(term))}
-      if(category!=='all'){filtered=filtered.filter(p=>p.category===category)}
-      if(sort==='cheap'){filtered.sort((a,b)=>a.price-b.price)}
-      if(sort==='expensive'){filtered.sort((a,b)=>b.price-a.price)}
-      if(!filtered.length){productsGrid.innerHTML='<div class="panel" style="grid-column:1/-1;text-align:center"><h3 style="margin-top:0">Нічого не знайдено</h3><p>Спробуйте змінити запит або фільтр.</p></div>';return}
-      productsGrid.innerHTML=filtered.map(product=>`
-        <article class="product">
-          <div class="product__media">${product.image?`<img src="${product.image}" alt="${product.name}">`:`<div class="product__placeholder">✦</div>`}</div>
-          <div class="product__body">
-            <div class="product__meta"><span>${product.category}</span><span>${product.material}</span></div>
-            <h3>${product.name}</h3>
-            <div class="product__sku">Артикул: ${product.sku}</div>
-            <p class="product__desc">${product.desc}</p>
-            <div class="product__meta"><span>${product.sizes}</span></div>
-            <div class="product__price">${formatPrice(product.price)}</div>
-            <div class="product__footer"><button class="btn btn--ghost" onclick="quickOrder('${product.name.replace(/'/g,"&#39;")}')">Швидке замовлення</button><button class="btn btn--gold" onclick="addToCart(${product.id})">У кошик</button></div>
-          </div>
-        </article>`).join('');
-    }
+    <!-- МЕНЮ -->
+    <nav class="nav">
+      <a href="#">Каталог</a>
+      <a href="#">Категорії</a>
+      <a href="#">Розмір каблучки</a>
+      <a href="#">Доставка</a>
+      <a href="#">Контакти</a>
+    </nav>
 
-    function addToCart(id){const product=products.find(p=>p.id===id);const found=cartItemsState.find(item=>item.id===id);if(found){found.qty+=1}else{cartItemsState.push({...product,qty:1})}updateCart();openCart()}
-    function removeFromCart(id){cartItemsState=cartItemsState.filter(item=>item.id!==id);updateCart()}
-    function updateCart(){const count=cartItemsState.reduce((s,i)=>s+i.qty,0);const total=cartItemsState.reduce((s,i)=>s+i.qty*i.price,0);cartCount.textContent=count;cartTotal.textContent=formatPrice(total);if(!cartItemsState.length){cartItems.innerHTML='<div class="empty">У кошику поки порожньо.</div>';return}cartItems.innerHTML=cartItemsState.map(item=>`<div class="cart-item"><div class="cart-thumb">${item.sku!=='—'?item.sku.split('-')[0]:'OR'}</div><div><strong>${item.name}</strong><p>${item.category} • ${item.qty} шт.</p><p>${formatPrice(item.price)}</p></div><button class="mini-btn" onclick="removeFromCart(${item.id})">Видалити</button></div>`).join('')}
-    function openCart(){cartPanel.classList.add('open');overlay.classList.add('show')}
-    function closeCart(){cartPanel.classList.remove('open');overlay.classList.remove('show')}
-    function quickOrder(name){document.getElementById('contacts').scrollIntoView({behavior:'smooth'});document.getElementById('formMessage').textContent='Обраний товар: '+name}
+    <div class="actions">
+      <button class="btn">Зв'язатися</button>
+    </div>
 
-    function updateRingSizer(){const size=parseFloat(ringRange.value);ringSizeLabel.textContent=size.toFixed(1).replace('.0','');ringDiameterLabel.textContent=size.toFixed(1)+' мм';const px=size*pxPerMm;sizerCircle.style.width=px+'px';sizerCircle.style.height=px+'px'}
-    function setCalibration(){const input=document.getElementById('calibrationInput');const bar=document.getElementById('calibrationBar');const mm=parseFloat(input.value)||85.6;pxPerMm=bar.offsetWidth/mm;updateRingSizer()}
+  </div>
+</header>
 
-    searchInput.addEventListener('input',renderProducts);categoryFilter.addEventListener('change',renderProducts);sortFilter.addEventListener('change',renderProducts);document.getElementById('cartButton').addEventListener('click',openCart);ringRange.addEventListener('input',updateRingSizer);
-    document.getElementById('contactForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('formMessage').textContent='Заявка заповнена. Наступним кроком можна підключити реальне надсилання менеджеру.';this.reset()});
-    renderProducts(); updateCart(); updateRingSizer();
-  </script>
+<div class="container">
+  <h1>Каталог ювелірних прикрас</h1>
+
+  <div class="catalog">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e">
+      <h3>Каблучка золота</h3>
+      <div class="price">16 108 грн</div>
+      <button class="btn-buy">У кошик</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1588449668365-d15e397f6787">
+      <h3>Обручка</h3>
+      <div class="price">14 982 грн</div>
+      <button class="btn-buy">У кошик</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638">
+      <h3>Сережки</h3>
+      <div class="price">11 154 грн</div>
+      <button class="btn-buy">У кошик</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f">
+      <h3>Браслет</h3>
+      <div class="price">27 002 грн</div>
+      <button class="btn-buy">У кошик</button>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>
