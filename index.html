@@ -883,7 +883,15 @@
             <div class="check"><i>2</i><div><strong>Піджени повзунок</strong><div style="color:var(--muted)">Співстав внутрішній діаметр каблучки з колом на екрані.</div></div></div>
             <div class="check"><i>3</i><div><strong>Збережи розмір</strong><div style="color:var(--muted)">Після цього вибери відповідний розмір при оформленні замовлення.</div></div></div>
           </div>
-          <p class="notice" style="margin-top:22px;">Пізніше сюди можна додати PDF-шаблон для друку, калібрування банківською карткою або інтерактивний точний вимірювач.</p>
+          <div class="form" style="margin-top:22px;">
+            <label style="font-weight:600;">Калібрування екрана</label>
+            <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;">
+              <input id="calibrationInput" type="number" min="40" max="120" step="0.5" value="85.6" placeholder="Ширина картки в мм" />
+              <button class="btn btn--ghost" type="button" onclick="setCalibration()">Калібрувати</button>
+            </div>
+            <p class="notice">Постав банківську картку до еталонної смуги, зміни значення при потребі і натисни «Калібрувати».</p>
+            <div id="calibrationBar" style="height:54px;border-radius:18px;background:linear-gradient(90deg,#e7d3b2,#b58c52);width:260px;max-width:100%;border:1px solid var(--line);"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -977,95 +985,79 @@
     const products = [
       {
         id: 1,
-        name: 'Каблучка Aurora',
+        name: 'Каблучка',
         category: 'Каблучки',
-        price: 3290,
-        sizes: '16 / 16.5 / 17 / 17.5 / 18',
-        material: 'Срібло 925',
-        desc: 'Лаконічна каблучка з каменем, яка пасує і на щодень, і на подарунок.',
+        price: 16108,
+        sizes: 'Усі розміри доступні під замовлення',
+        material: 'Жовте золото з діамантом',
+        desc: 'Каблучка із жовтого золота з діамантовою вставкою. Артикул 410-0178.',
         icon: '💍',
-        shape: 'ring'
+        shape: 'ring',
+        image: 'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'
       },
       {
         id: 2,
-        name: 'Каблучка Milano',
-        category: 'Каблучки',
-        price: 2890,
-        sizes: '15.5 / 16 / 17 / 18',
-        material: 'Срібло 925',
-        desc: 'Мінімалістичний дизайн з тонким профілем та благородним блиском.',
+        name: 'Обручка',
+        category: 'Обручки',
+        price: 11154,
+        sizes: 'Уточнюйте у менеджера',
+        material: 'Біле золото',
+        desc: 'Реальний товар з головної сторінки Orix.',
         icon: '💍',
-        shape: 'ring'
+        shape: 'ring',
+        image: 'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'
       },
       {
         id: 3,
-        name: 'Сережки Stella',
-        category: 'Сережки',
-        price: 2590,
-        sizes: 'Універсальний',
-        material: 'Срібло 925',
-        desc: 'Акуратні сережки з чистою геометрією для повсякденного образу.',
-        icon: '✨',
-        shape: 'earring'
+        name: 'Обручка',
+        category: 'Обручки',
+        price: 27002,
+        sizes: 'Уточнюйте у менеджера',
+        material: 'Червоне золото',
+        desc: 'Реальний товар з головної сторінки Orix.',
+        icon: '💍',
+        shape: 'ring',
+        image: 'https://static.wixstatic.com/media/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_12d6507a6d954c00b080a69e22c512d4~mv2.png'
       },
       {
         id: 4,
-        name: 'Браслет Grace',
-        category: 'Браслети',
-        price: 3490,
-        sizes: '17 / 18 / 19',
-        material: 'Срібло 925',
-        desc: 'Витончений браслет, який легко поєднувати з годинником або каблучками.',
-        icon: '🪄',
-        shape: 'bracelet'
+        name: 'Шпилька',
+        category: 'Шпильки',
+        price: 1987,
+        sizes: 'Під замовлення',
+        material: 'Червоне золото, цирконій/діамант',
+        desc: 'Шпилька із червоного золота з фігуркою-метеликом. Артикул 368-0004.',
+        icon: '✨',
+        shape: 'earring',
+        image: 'https://static.wixstatic.com/media/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png'
       },
       {
         id: 5,
-        name: 'Ланцюжок Nova',
-        category: 'Ланцюжки',
-        price: 3990,
-        sizes: '45 см / 50 см',
-        material: 'Срібло 925',
-        desc: 'Базовий ланцюжок у преміальній подачі з м'яким золотистим блиском.',
+        name: 'Підвіс',
+        category: 'Підвіси',
+        price: 32917,
+        sizes: 'Уточнюйте у менеджера',
+        material: 'Біле золото',
+        desc: 'Реальний підвіс з головної сторінки Orix.',
         icon: '🔗',
-        shape: 'chain'
+        shape: 'chain',
+        image: 'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'
       },
       {
         id: 6,
-        name: 'Сережки Crystal',
-        category: 'Сережки',
-        price: 2790,
-        sizes: 'Універсальний',
-        material: 'Срібло 925',
-        desc: 'Світлі акцентні сережки, які додають образу виразності.',
-        icon: '✨',
-        shape: 'earring'
-      },
-      {
-        id: 7,
-        name: 'Браслет Velvet',
-        category: 'Браслети',
-        price: 3090,
-        sizes: '16 / 17 / 18',
-        material: 'Срібло 925',
-        desc: 'Тонкий елегантний браслет для тих, хто любить стриману розкіш.',
-        icon: '🪄',
-        shape: 'bracelet'
-      },
-      {
-        id: 8,
-        name: 'Підвіска Shine',
-        category: 'Ланцюжки',
-        price: 2390,
-        sizes: '45 см',
-        material: 'Срібло 925',
-        desc: 'Підвіска з чистим силуетом для подарунка або особистої колекції.',
+        name: 'Підвіс',
+        category: 'Підвіси',
+        price: 44177,
+        sizes: 'Уточнюйте у менеджера',
+        material: 'Біле золото',
+        desc: 'Реальний підвіс з головної сторінки Orix.',
         icon: '🔗',
-        shape: 'chain'
+        shape: 'chain',
+        image: 'https://static.wixstatic.com/media/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png/v1/fill/w_673%2Ch_507%2Cal_c%2Cq_85%2Cenc_avif%2Cquality_auto/6b2377_3eda3e02f98d4903985e182e1ca0775a~mv2.png'
       }
     ];
 
-    let cart = [];
+    let cartItemsState = [];
 
     const productsGrid = document.getElementById('productsGrid');
     const searchInput = document.getElementById('searchInput');
@@ -1074,7 +1066,7 @@
     const cartItems = document.getElementById('cartItems');
     const cartCount = document.getElementById('cartCount');
     const cartTotal = document.getElementById('cartTotal');
-    const cart = document.getElementById('cart');
+    const cartPanel = document.getElementById('cart');
     const overlay = document.getElementById('overlay');
 
     function formatPrice(value) {
@@ -1108,7 +1100,7 @@
       productsGrid.innerHTML = filtered.map(product => `
         <article class="product">
           <div class="product__media">
-            <div class="shape ${product.shape}"></div>
+            ${product.image ? `<img src="${product.image}" alt="${product.name}" style="width:100%;height:100%;object-fit:contain;padding:18px;">` : `<div class="shape ${product.shape}"></div>`}
           </div>
           <div class="product__body">
             <div class="product__meta">
@@ -1132,33 +1124,33 @@
 
     function addToCart(id) {
       const product = products.find(p => p.id === id);
-      const found = cart.find(item => item.id === id);
+      const found = cartItemsState.find(item => item.id === id);
       if (found) {
         found.qty += 1;
       } else {
-        cart.push({ ...product, qty: 1 });
+        cartItemsState.push({ ...product, qty: 1 });
       }
       updateCart();
       openCart();
     }
 
     function removeFromCart(id) {
-      cart = cart.filter(item => item.id !== id);
+      cartItemsState = cartItemsState.filter(item => item.id !== id);
       updateCart();
     }
 
     function updateCart() {
-      const count = cart.reduce((sum, item) => sum + item.qty, 0);
-      const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+      const count = cartItemsState.reduce((sum, item) => sum + item.qty, 0);
+      const total = cartItemsState.reduce((sum, item) => sum + item.qty * item.price, 0);
       cartCount.textContent = count;
       cartTotal.textContent = formatPrice(total);
 
-      if (!cart.length) {
+      if (!cartItemsState.length) {
         cartItems.innerHTML = '<div class="empty">У кошику поки порожньо.<br>Додай товар із каталогу.</div>';
         return;
       }
 
-      cartItems.innerHTML = cart.map(item => `
+      cartItems.innerHTML = cartItemsState.map(item => `
         <div class="cart-item">
           <div class="cart-thumb">${item.icon}</div>
           <div>
@@ -1172,12 +1164,12 @@
     }
 
     function openCart() {
-      document.getElementById('cart').classList.add('open');
+      cartPanel.classList.add('open');
       overlay.classList.add('show');
     }
 
     function closeCart() {
-      document.getElementById('cart').classList.remove('open');
+      cartPanel.classList.remove('open');
       overlay.classList.remove('show');
     }
 
@@ -1201,12 +1193,24 @@
     const ringDiameterLabel = document.getElementById('ringDiameterLabel');
     const sizerCircle = document.getElementById('sizerCircle');
 
+    let pxPerMm = 3.0;
+
     function updateRingSizer() {
       const size = parseFloat(ringRange.value);
       ringSizeLabel.textContent = size.toFixed(1).replace('.0', '');
       ringDiameterLabel.textContent = size.toFixed(1) + ' мм';
-      const px = 65 + (size - 14) * 11;
-      sizerCircle.style.setProperty('--ring-size', px + 'px');
+      const px = size * pxPerMm;
+      sizerCircle.style.width = px + 'px';
+      sizerCircle.style.height = px + 'px';
+    }
+
+    function setCalibration() {
+      const input = document.getElementById('calibrationInput');
+      const bar = document.getElementById('calibrationBar');
+      const mm = parseFloat(input.value) || 85.6;
+      const barPx = bar.offsetWidth;
+      pxPerMm = barPx / mm;
+      updateRingSizer();
     }
 
     ringRange.addEventListener('input', updateRingSizer);
