@@ -9,7 +9,7 @@
     :root{
       --bg:#f7f3ee;
       --surface:#ffffff;
-      --surface-soft:#f2ebe3;
+      --surface-soft:#f4ece3;
       --text:#241c17;
       --muted:#7b6f64;
       --line:#e7ddd1;
@@ -17,7 +17,7 @@
       --gold:#b88c52;
       --gold-dark:#916a37;
       --shadow:0 18px 40px rgba(36,28,23,.08);
-      --radius:28px;
+      --shadow-soft:0 20px 40px rgba(36,28,23,.08);
     }
 
     *{box-sizing:border-box}
@@ -33,7 +33,7 @@
     img{display:block;max-width:100%}
     a{text-decoration:none;color:inherit}
     button,input,textarea{font:inherit}
-    .container{width:min(1280px,calc(100% - 32px));margin:0 auto}
+    .container{width:min(1320px,calc(100% - 32px));margin:0 auto}
 
     .topline{
       background:#fff;
@@ -122,6 +122,10 @@
       background:#fff;
       border:1px solid var(--line);
       color:var(--brown);
+    }
+    .btn--small{
+      padding:10px 14px;
+      font-size:14px;
     }
 
     .icon-btn{
@@ -318,11 +322,11 @@
     }
 
     .hero{
-      padding:26px 0 18px;
+      padding:26px 0 16px;
     }
     .hero__grid{
       display:grid;
-      grid-template-columns:1.1fr .9fr;
+      grid-template-columns:1.08fr .92fr;
       gap:20px;
       align-items:stretch;
     }
@@ -349,7 +353,7 @@
     }
     .hero h1{
       margin:0;
-      font-size:70px;
+      font-size:72px;
       line-height:.95;
       letter-spacing:-.03em;
     }
@@ -357,7 +361,7 @@
       margin:16px 0 0;
       font-size:19px;
       color:var(--muted);
-      max-width:640px;
+      max-width:650px;
     }
     .hero__actions{
       display:flex;
@@ -404,8 +408,8 @@
     }
     .hero__glow{
       position:absolute;
-      width:420px;
-      height:420px;
+      width:430px;
+      height:430px;
       border-radius:50%;
       background:radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(255,255,255,.52) 32%, rgba(255,255,255,0) 72%);
       top:50%;
@@ -419,12 +423,12 @@
       filter:drop-shadow(0 22px 36px rgba(55,38,17,.17));
     }
     .hero__image--one{
-      width:350px;
-      transform:translate(-90px,-36px) rotate(-12deg);
+      width:360px;
+      transform:translate(-94px,-34px) rotate(-12deg);
     }
     .hero__image--two{
-      width:300px;
-      transform:translate(118px,88px) rotate(13deg);
+      width:306px;
+      transform:translate(124px,86px) rotate(13deg);
     }
     .hero__card{
       background:#fff;
@@ -457,31 +461,31 @@
     }
 
     .section{
-      padding:16px 0;
+      padding:12px 0;
     }
     .section__head{
       display:flex;
       justify-content:space-between;
       align-items:end;
       gap:18px;
-      margin-bottom:18px;
+      margin-bottom:16px;
       flex-wrap:wrap;
     }
     .section__head h2{
       margin:0;
-      font-size:44px;
+      font-size:42px;
       line-height:1;
       letter-spacing:-.03em;
     }
     .section__head p{
       margin:0;
       color:var(--muted);
-      max-width:720px;
+      max-width:760px;
     }
 
     .categories{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
+      grid-template-columns:repeat(4,minmax(0,1fr));
       gap:16px;
     }
     .category{
@@ -498,7 +502,7 @@
     }
     .category:hover{
       transform:translateY(-3px);
-      box-shadow:0 20px 36px rgba(36,28,23,.09);
+      box-shadow:var(--shadow-soft);
     }
     .category__badge{
       width:54px;
@@ -529,22 +533,21 @@
 
     .featured{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
+      grid-template-columns:repeat(4,minmax(0,1fr));
       gap:16px;
     }
     .product{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:26px;
+      border-radius:28px;
       overflow:hidden;
-      box-shadow:var(--shadow);
+      box-shadow:var(--shadow-soft);
       display:flex;
       flex-direction:column;
       transition:.2s ease;
     }
     .product:hover{
       transform:translateY(-3px);
-      box-shadow:0 20px 36px rgba(36,28,23,.09);
     }
     .product__media{
       aspect-ratio:1 / 1.02;
@@ -556,10 +559,10 @@
       width:100%;
       height:100%;
       object-fit:contain;
-      padding:16px;
+      padding:18px;
     }
     .product__body{
-      padding:16px 16px 18px;
+      padding:18px;
       display:flex;
       flex-direction:column;
       gap:8px;
@@ -587,16 +590,15 @@
       font-size:30px;
       font-weight:800;
       color:var(--brown);
-      margin-top:4px;
+      margin-top:auto;
     }
     .product__footer{
       display:flex;
       gap:8px;
-      margin-top:auto;
+      margin-top:8px;
     }
     .product__footer .btn{
       flex:1;
-      padding:12px 12px;
       font-size:14px;
     }
 
@@ -859,7 +861,7 @@
 
     @media (max-width:640px){
       .container{width:min(100%,calc(100% - 20px))}
-      .hero h1{font-size:42px}
+      .hero h1{font-size:44px}
       .section__head h2{font-size:34px}
       .featured,
       .categories,
@@ -904,6 +906,9 @@
       .mega-filters{
         border-top:1px solid var(--line);
         padding-top:14px;
+      }
+      .product__footer{
+        flex-direction:column;
       }
     }
   </style>
@@ -952,7 +957,7 @@
               </div>
 
               <div class="mega-main">
-                <h3>Каблучки</h3>
+                <h3>Популярні переходи</h3>
                 <div class="mega-cards">
                   <a class="mega-card" href="catalog.html?category=Обручки">
                     <div class="mega-card__img">
@@ -960,35 +965,35 @@
                     </div>
                     <strong>Обручки</strong>
                   </a>
-                  <a class="mega-card" href="catalog.html?category=Каблучки">
-                    <div class="mega-card__img">
-                      <img src="https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png" alt="Для заручин">
-                    </div>
-                    <strong>Для заручин</strong>
-                  </a>
-                  <a class="mega-card" href="catalog.html?category=Обручки">
-                    <div class="mega-card__img">
-                      <img src="https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png" alt="Біле золото">
-                    </div>
-                    <strong>Біле золото</strong>
-                  </a>
-                  <a class="mega-card" href="catalog.html?category=Каблучки">
+                  <a class="mega-card" href="catalog.html?category=Каблучки&stone=diamond">
                     <div class="mega-card__img">
                       <img src="https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png" alt="З діамантами">
                     </div>
                     <strong>З діамантами</strong>
                   </a>
-                  <a class="mega-card" href="catalog.html?category=Каблучки">
+                  <a class="mega-card" href="catalog.html?category=Обручки&metal=white">
                     <div class="mega-card__img">
-                      <img src="https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png" alt="Тонкі">
+                      <img src="https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png" alt="Біле золото">
                     </div>
-                    <strong>Тонкі</strong>
+                    <strong>Біле золото</strong>
+                  </a>
+                  <a class="mega-card" href="catalog.html?category=Сережки">
+                    <div class="mega-card__img">
+                      <img src="https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png" alt="Сережки">
+                    </div>
+                    <strong>Сережки</strong>
+                  </a>
+                  <a class="mega-card" href="catalog.html?category=Підвіси">
+                    <div class="mega-card__img">
+                      <img src="https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png" alt="Підвіси">
+                    </div>
+                    <strong>Підвіси</strong>
                   </a>
                   <a class="mega-card" href="catalog.html">
                     <div class="mega-card__img">
-                      <img src="https://static.wixstatic.com/media/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png" alt="Ще">
+                      <img src="https://static.wixstatic.com/media/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png" alt="Весь каталог">
                     </div>
-                    <strong>Ще категорії</strong>
+                    <strong>Весь каталог</strong>
                   </a>
                 </div>
               </div>
@@ -996,15 +1001,15 @@
               <div class="mega-filters">
                 <h4>Швидкий підбір</h4>
                 <div class="mega-filter-list">
-                  <a href="catalog.html?category=Обручки"><span>Обручки</span><span>всі</span></a>
-                  <a href="catalog.html?category=Каблучки"><span>Вид каблучок</span><span>всі</span></a>
-                  <a href="catalog.html"><span>Колір металу</span><span>всі</span></a>
-                  <a href="catalog.html"><span>Проба</span><span>всі</span></a>
-                  <a href="catalog.html"><span>Для кого</span><span>всі</span></a>
-                  <a href="catalog.html"><span>Обробка металу</span><span>всі</span></a>
-                  <a href="catalog.html"><span>Вставка</span><span>всі</span></a>
-                  <a href="catalog.html"><span>Колір каменю</span><span>всі</span></a>
-                  <a href="catalog.html"><span>Пропозиції</span><span>всі</span></a>
+                  <a href="catalog.html?category=Обручки"><span>Обручки</span><span>усі</span></a>
+                  <a href="catalog.html?category=Каблучки"><span>Каблучки</span><span>усі</span></a>
+                  <a href="catalog.html?metal=yellow"><span>Жовте золото</span><span>фільтр</span></a>
+                  <a href="catalog.html?metal=white"><span>Біле золото</span><span>фільтр</span></a>
+                  <a href="catalog.html?metal=red"><span>Червоне золото</span><span>фільтр</span></a>
+                  <a href="catalog.html?stone=diamond"><span>З діамантами</span><span>фільтр</span></a>
+                  <a href="catalog.html?stone=none"><span>Без вставки</span><span>фільтр</span></a>
+                  <a href="catalog.html?category=Сережки"><span>Сережки</span><span>усі</span></a>
+                  <a href="catalog.html?category=Ланцюжки"><span>Ланцюжки</span><span>усі</span></a>
                 </div>
               </div>
             </div>
@@ -1053,7 +1058,7 @@
             <div>
               <div class="eyebrow">Ювелірний дім Orix</div>
               <h1>Прикраси, що залишаються важливими</h1>
-              <p>Сучасний ювелірний магазин з акцентом на обручки, каблучки, сережки та подарункові прикраси. Зручний каталог, швидка консультація і комфортне оформлення замовлення.</p>
+              <p>Сучасний ювелірний магазин із зручним каталогом, швидким підбором, категоріями та красивою подачею товарів для важливих моментів і щоденного стилю.</p>
 
               <div class="hero__actions">
                 <a class="btn btn--gold" href="catalog.html">Перейти в каталог</a>
@@ -1063,9 +1068,9 @@
 
             <div class="hero__stats">
               <div class="stat"><strong>8</strong><span>ключових категорій</span></div>
+              <div class="stat"><strong>24</strong><span>акуратні позиції в каталозі</span></div>
               <div class="stat"><strong>10 000+</strong><span>безкоштовна доставка від цієї суми</span></div>
               <div class="stat"><strong>1 рік</strong><span>гарантія на вироби</span></div>
-              <div class="stat"><strong>Швидко</strong><span>зручний підбір і консультація</span></div>
             </div>
           </div>
 
@@ -1079,7 +1084,7 @@
             <div class="hero__card">
               <div>
                 <strong>Обручки та каблучки</strong>
-                <p>Провідні категорії OrixGold для важливих моментів і щоденного стилю.</p>
+                <p>Провідні категорії OrixGold для важливих подій, заручин і щоденного стилю.</p>
               </div>
               <div class="hero__price">від 11 154 грн</div>
             </div>
@@ -1093,7 +1098,7 @@
         <div class="section__head">
           <div>
             <h2>Категорії</h2>
-            <p>Швидкі входи в найпопулярніші розділи магазину.</p>
+            <p>Швидкі переходи у найважливіші розділи магазину.</p>
           </div>
           <a class="btn btn--ghost" href="catalog.html">Увесь каталог</a>
         </div>
@@ -1191,12 +1196,12 @@
             </div>
             <div class="product__body">
               <div class="product__meta"><span>Каблучки</span><span>Жовте золото, діамант</span></div>
-              <h3>Каблучка</h3>
+              <h3>Каблучка з діамантом</h3>
               <p class="product__desc">Каблучка із жовтого золота із діамантовою вставкою.</p>
               <div class="product__price">16 108 грн</div>
               <div class="product__footer">
-                <a class="btn btn--ghost" href="catalog.html?category=Каблучки">Детальніше</a>
-                <a class="btn btn--gold" href="#contacts">Замовити</a>
+                <a class="btn btn--ghost" href="catalog.html?category=Каблучки">Дивитися</a>
+                <a class="btn btn--gold" href="catalog.html?category=Каблучки&stone=diamond">У каталог</a>
               </div>
             </div>
           </article>
@@ -1207,12 +1212,12 @@
             </div>
             <div class="product__body">
               <div class="product__meta"><span>Обручки</span><span>Жовте золото</span></div>
-              <h3>Обручка</h3>
+              <h3>Обручка американка</h3>
               <p class="product__desc">Американка із жовтого золота.</p>
               <div class="product__price">14 982 грн</div>
               <div class="product__footer">
-                <a class="btn btn--ghost" href="catalog.html?category=Обручки">Детальніше</a>
-                <a class="btn btn--gold" href="#contacts">Замовити</a>
+                <a class="btn btn--ghost" href="catalog.html?category=Обручки">Дивитися</a>
+                <a class="btn btn--gold" href="catalog.html?category=Обручки">У каталог</a>
               </div>
             </div>
           </article>
@@ -1223,12 +1228,12 @@
             </div>
             <div class="product__body">
               <div class="product__meta"><span>Підвіси</span><span>Червоне та біле золото</span></div>
-              <h3>Підвіс</h3>
+              <h3>Підвіс кулька</h3>
               <p class="product__desc">Підвіс у вигляді об’ємної кульки.</p>
               <div class="product__price">8 045 грн</div>
               <div class="product__footer">
-                <a class="btn btn--ghost" href="catalog.html?category=Підвіси">Детальніше</a>
-                <a class="btn btn--gold" href="#contacts">Замовити</a>
+                <a class="btn btn--ghost" href="catalog.html?category=Підвіси">Дивитися</a>
+                <a class="btn btn--gold" href="catalog.html?category=Підвіси">У каталог</a>
               </div>
             </div>
           </article>
@@ -1239,12 +1244,12 @@
             </div>
             <div class="product__body">
               <div class="product__meta"><span>Шпильки</span><span>Червоне золото</span></div>
-              <h3>Шпилька</h3>
+              <h3>Шпилька метелик</h3>
               <p class="product__desc">Шпилька із червоного золота з фігуркою-метеликом.</p>
               <div class="product__price">1 987 грн</div>
               <div class="product__footer">
-                <a class="btn btn--ghost" href="catalog.html?category=Шпильки">Детальніше</a>
-                <a class="btn btn--gold" href="#contacts">Замовити</a>
+                <a class="btn btn--ghost" href="catalog.html?category=Шпильки">Дивитися</a>
+                <a class="btn btn--gold" href="catalog.html?category=Шпильки">У каталог</a>
               </div>
             </div>
           </article>
@@ -1257,12 +1262,12 @@
         <div class="banners">
           <div class="banner">
             <div>
-              <div class="eyebrow">Подарунковий вибір</div>
+              <div class="eyebrow">Подарункові сценарії</div>
               <h3>Прикраси для важливих моментів</h3>
-              <p>Добірки для заручин, подарунка, хрестин або щоденного стилю. Головна сторінка має швидко вести в правильний сценарій покупки.</p>
+              <p>Добірки для заручин, подарунка, щоденного стилю або особливого випадку. Головна сторінка веде від емоції до зручного каталогу.</p>
               <div class="hero__actions">
-                <a class="btn btn--gold" href="catalog.html">Обрати прикрасу</a>
-                <a class="btn btn--ghost" href="#contacts">Підібрати з менеджером</a>
+                <a class="btn btn--gold" href="catalog.html?category=Каблучки&stone=diamond">Для заручин</a>
+                <a class="btn btn--ghost" href="catalog.html?category=Підвіси">На подарунок</a>
               </div>
             </div>
             <div class="banner__gift">✦</div>
@@ -1275,7 +1280,7 @@
             <div class="trust__grid">
               <div class="trust__item">
                 <strong>Зручний каталог</strong>
-                <span>Повний каталог із фільтрами та швидким пошуком.</span>
+                <span>Повний каталог із фільтрами та швидким підбором.</span>
               </div>
               <div class="trust__item">
                 <strong>Безкоштовна доставка</strong>
@@ -1296,7 +1301,7 @@
         <div class="split">
           <div class="sizer-call" id="sizer">
             <h3>Не знаєте розмір каблучки?</h3>
-            <p>На сайті вже є інструмент для визначення розміру — це окремий зручний блок, який можна відкрити прямо з головної.</p>
+            <p>На сайті вже є інструмент для визначення розміру. Перехід веде одразу в каталог до блоку вимірювача.</p>
             <div class="sizer-preview">
               <div class="ring-demo"></div>
             </div>
