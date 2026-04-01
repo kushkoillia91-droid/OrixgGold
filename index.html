@@ -54,53 +54,54 @@
     .header{
       position:sticky;
       top:0;
-      z-index:50;
-      background:rgba(247,243,238,.92);
+      z-index:100;
+      background:rgba(247,243,238,.96);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
     }
-    .header__row{
+
+    .header__top{
       display:grid;
-      grid-template-columns:auto 1fr auto;
-      gap:24px;
+      grid-template-columns:1fr auto 1fr;
       align-items:center;
-      padding:14px 0;
+      gap:20px;
+      padding:14px 0 10px;
+    }
+
+    .header__left,
+    .header__right{
+      display:flex;
+      align-items:center;
+      gap:20px;
+    }
+
+    .header__right{
+      justify-content:flex-end;
     }
 
     .brand{
       display:flex;
+      justify-content:center;
       align-items:center;
-      gap:14px;
-      min-width:210px;
     }
+
     .brand__logo{
-      width:128px;
-      height:78px;
+      width:170px;
+      height:92px;
       display:block;
       flex:0 0 auto;
     }
 
-    .nav{
-      display:flex;
-      justify-content:center;
-      gap:24px;
-      flex-wrap:wrap;
-    }
-    .nav a{
+    .mini-link{
       font-weight:600;
       color:#6f6459;
     }
-    .nav a:hover{color:var(--brown)}
+    .mini-link:hover{color:var(--brown)}
 
-    .actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
     .btn{
       border:none;
       border-radius:999px;
-      padding:13px 20px;
+      padding:12px 18px;
       cursor:pointer;
       font-weight:600;
       transition:.2s ease;
@@ -108,6 +109,7 @@
       align-items:center;
       justify-content:center;
       gap:8px;
+      white-space:nowrap;
     }
     .btn:hover{transform:translateY(-1px)}
     .btn--gold{
@@ -120,6 +122,199 @@
       background:#fff;
       border:1px solid var(--line);
       color:var(--brown);
+    }
+
+    .icon-btn{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      background:#fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      position:relative;
+      font-size:18px;
+    }
+    .badge{
+      position:absolute;
+      top:-4px;
+      right:-4px;
+      min-width:22px;
+      height:22px;
+      padding:0 6px;
+      border-radius:999px;
+      background:var(--brown);
+      color:#fff;
+      font-size:12px;
+      display:grid;
+      place-items:center;
+    }
+
+    .header__bottom{
+      border-top:1px solid var(--line);
+    }
+
+    .nav{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:28px;
+      min-height:58px;
+      position:relative;
+    }
+
+    .nav-item{
+      position:relative;
+      display:flex;
+      align-items:center;
+      height:58px;
+    }
+
+    .nav-link{
+      font-weight:700;
+      color:#6d6258;
+      display:flex;
+      align-items:center;
+      height:100%;
+    }
+    .nav-link:hover{color:var(--brown)}
+
+    .mega-menu{
+      position:absolute;
+      top:100%;
+      left:50%;
+      transform:translateX(-50%) translateY(12px);
+      width:min(1240px,calc(100vw - 32px));
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:0 24px 60px rgba(36,28,23,.14);
+      padding:22px;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:.22s ease;
+      z-index:120;
+    }
+
+    .nav-item--catalog:hover .mega-menu{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    .mega-menu__grid{
+      display:grid;
+      grid-template-columns:240px 1fr 280px;
+      gap:18px;
+      align-items:start;
+    }
+
+    .mega-side{
+      border-right:1px solid var(--line);
+      padding-right:18px;
+      display:grid;
+      gap:10px;
+    }
+
+    .mega-side__item{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:10px 8px;
+      border-radius:16px;
+      transition:.18s ease;
+    }
+    .mega-side__item:hover{
+      background:var(--surface-soft);
+    }
+
+    .mega-side__icon{
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      border:1px solid var(--line);
+      display:grid;
+      place-items:center;
+      font-size:14px;
+      font-weight:800;
+      color:var(--gold-dark);
+      background:#fff;
+      flex:0 0 auto;
+    }
+
+    .mega-main h3{
+      margin:2px 0 14px;
+      font-size:24px;
+      line-height:1;
+    }
+
+    .mega-cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .mega-card{
+      background:var(--surface-soft);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      min-height:122px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:.18s ease;
+    }
+    .mega-card:hover{
+      background:#fff;
+      transform:translateY(-2px);
+    }
+
+    .mega-card__img{
+      height:56px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .mega-card__img img{
+      max-height:56px;
+      object-fit:contain;
+    }
+    .mega-card strong{
+      font-size:15px;
+      line-height:1.2;
+    }
+
+    .mega-filters{
+      border-left:1px solid var(--line);
+      padding-left:18px;
+    }
+    .mega-filters h4{
+      margin:2px 0 14px;
+      font-size:20px;
+      line-height:1;
+    }
+    .mega-filter-list{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px 18px;
+    }
+    .mega-filter-list a{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      font-weight:600;
+      color:#5f554c;
+      border-bottom:1px dashed #ded0c0;
+      padding-bottom:6px;
+    }
+    .mega-filter-list a span:last-child{
+      color:#c34f3c;
+      font-size:12px;
+      text-transform:uppercase;
     }
 
     .hero{
@@ -606,30 +801,59 @@
       .categories{
         grid-template-columns:repeat(2,1fr);
       }
-      .hero__top{
-        grid-template-columns:1fr;
-      }
-      .hero__chips{
-        justify-content:flex-start;
-      }
       .hero__stats{
         grid-template-columns:repeat(2,1fr);
       }
       .social__grid{
         grid-template-columns:repeat(2,1fr);
       }
+      .mega-menu{
+        width:min(980px,calc(100vw - 24px));
+      }
+      .mega-menu__grid{
+        grid-template-columns:220px 1fr;
+      }
+      .mega-filters{
+        grid-column:1/-1;
+        border-left:none;
+        border-top:1px solid var(--line);
+        padding-left:0;
+        padding-top:18px;
+      }
     }
 
     @media (max-width:960px){
-      .header__row{
+      .header__top{
         grid-template-columns:1fr;
         justify-items:start;
+      }
+      .brand{
+        justify-content:flex-start;
+      }
+      .header__left,
+      .header__right{
+        width:100%;
+        justify-content:flex-start;
+        flex-wrap:wrap;
       }
       .nav{
         justify-content:flex-start;
       }
       .footer__grid{
         grid-template-columns:1fr 1fr;
+      }
+      .mega-menu{
+        position:static;
+        transform:none;
+        width:100%;
+        margin-top:8px;
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+        display:none;
+      }
+      .nav-item--catalog:hover .mega-menu{
+        display:block;
       }
     }
 
@@ -642,7 +866,9 @@
       .hero__stats,
       .social__grid,
       .trust__grid,
-      .footer__grid{
+      .footer__grid,
+      .mega-cards,
+      .mega-filter-list{
         grid-template-columns:1fr;
       }
       .hero__visual{
@@ -664,7 +890,20 @@
         grid-template-columns:1fr;
       }
       .brand__logo{
-        width:108px;
+        width:150px;
+      }
+      .mega-menu__grid{
+        grid-template-columns:1fr;
+      }
+      .mega-side{
+        border-right:none;
+        padding-right:0;
+        border-bottom:1px solid var(--line);
+        padding-bottom:14px;
+      }
+      .mega-filters{
+        border-top:1px solid var(--line);
+        padding-top:14px;
       }
     }
   </style>
@@ -678,28 +917,130 @@
   </div>
 
   <header class="header">
-    <div class="container header__row">
+    <div class="container header__top">
+      <div class="header__left">
+        <div class="nav-item nav-item--catalog">
+          <a class="mini-link" href="catalog.html">Каталог</a>
+
+          <div class="mega-menu">
+            <div class="mega-menu__grid">
+              <div class="mega-side">
+                <a class="mega-side__item" href="catalog.html">
+                  <div class="mega-side__icon">KB</div>
+                  <strong>Каблучки</strong>
+                </a>
+                <a class="mega-side__item" href="catalog.html">
+                  <div class="mega-side__icon">SR</div>
+                  <strong>Сережки</strong>
+                </a>
+                <a class="mega-side__item" href="catalog.html">
+                  <div class="mega-side__icon">LN</div>
+                  <strong>Ланцюжки</strong>
+                </a>
+                <a class="mega-side__item" href="catalog.html">
+                  <div class="mega-side__icon">PD</div>
+                  <strong>Підвіси</strong>
+                </a>
+                <a class="mega-side__item" href="catalog.html">
+                  <div class="mega-side__icon">BR</div>
+                  <strong>Браслети</strong>
+                </a>
+                <a class="mega-side__item" href="catalog.html">
+                  <div class="mega-side__icon">HR</div>
+                  <strong>Хрестики</strong>
+                </a>
+              </div>
+
+              <div class="mega-main">
+                <h3>Каблучки</h3>
+                <div class="mega-cards">
+                  <a class="mega-card" href="catalog.html">
+                    <div class="mega-card__img">
+                      <img src="https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png" alt="Обручки">
+                    </div>
+                    <strong>Обручки</strong>
+                  </a>
+                  <a class="mega-card" href="catalog.html">
+                    <div class="mega-card__img">
+                      <img src="https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png" alt="Для заручин">
+                    </div>
+                    <strong>Для заручин</strong>
+                  </a>
+                  <a class="mega-card" href="catalog.html">
+                    <div class="mega-card__img">
+                      <img src="https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png" alt="Біле золото">
+                    </div>
+                    <strong>Біле золото</strong>
+                  </a>
+                  <a class="mega-card" href="catalog.html">
+                    <div class="mega-card__img">
+                      <img src="https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png" alt="З діамантами">
+                    </div>
+                    <strong>З діамантами</strong>
+                  </a>
+                  <a class="mega-card" href="catalog.html">
+                    <div class="mega-card__img">
+                      <img src="https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png" alt="Тонкі">
+                    </div>
+                    <strong>Тонкі</strong>
+                  </a>
+                  <a class="mega-card" href="catalog.html">
+                    <div class="mega-card__img">
+                      <img src="https://static.wixstatic.com/media/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png/v1/fill/w_300,h_220,al_c,q_85,enc_avif,quality_auto/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png" alt="Ще">
+                    </div>
+                    <strong>Ще категорії</strong>
+                  </a>
+                </div>
+              </div>
+
+              <div class="mega-filters">
+                <h4>Швидкий підбір</h4>
+                <div class="mega-filter-list">
+                  <a href="catalog.html"><span>Колір металу</span><span>всі</span></a>
+                  <a href="catalog.html"><span>Проба</span><span>всі</span></a>
+                  <a href="catalog.html"><span>Для кого</span><span>всі</span></a>
+                  <a href="catalog.html"><span>Обробка металу</span><span>всі</span></a>
+                  <a href="catalog.html"><span>Вставка</span><span>всі</span></a>
+                  <a href="catalog.html"><span>Вид каблучок</span><span>всі</span></a>
+                  <a href="catalog.html"><span>Колір каменю</span><span>всі</span></a>
+                  <a href="catalog.html"><span>Пропозиції</span><span>всі</span></a>
+                  <a href="catalog.html"><span>Обручки</span><span>всі</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="mini-link" href="catalog.html">Пошук товарів</a>
+      </div>
+
       <a class="brand" href="index.html" aria-label="OrixGold home">
-        <svg class="brand__logo" viewBox="0 0 180 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Orix logo">
-          <circle cx="52" cy="34" r="28" fill="#cfcfcf"/>
-          <path d="M34 12 L46 12 L57 34 L47 57 L36 57 L46 34 Z" fill="#ffffff" opacity="0.95"/>
-          <path d="M64 17 C58 23 53 30 50 37 C48 42 47 46 50 49 C54 53 61 49 64 42 C66 37 66 28 64 17 Z" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="52" y="86" text-anchor="middle" font-size="26" font-family="Arial, sans-serif" font-weight="300" fill="#222">ORIX</text>
-          <text x="118" y="88" text-anchor="start" font-size="12" font-family="Arial, sans-serif" font-style="italic" fill="#b2a69a">Ювелірний дім</text>
+        <svg class="brand__logo" viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Orix logo">
+          <circle cx="60" cy="38" r="30" fill="#d2d2d2"/>
+          <path d="M42 14 L54 14 L66 38 L55 62 L44 62 L54 38 Z" fill="#ffffff"/>
+          <path d="M74 19 C66 26 60 34 57 42 C55 48 56 53 61 56 C66 59 74 54 76 46 C79 39 79 29 74 19 Z" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="60" y="95" text-anchor="middle" font-size="28" font-family="Arial, sans-serif" font-weight="300" fill="#222">ORIX</text>
+          <text x="118" y="98" text-anchor="start" font-size="13" font-family="Arial, sans-serif" font-style="italic" fill="#b2a69a">Ювелірний дім</text>
         </svg>
       </a>
 
-      <nav class="nav">
-        <a href="#categories">Категорії</a>
-        <a href="#featured">Хіти</a>
-        <a href="#gift">Подарунки</a>
-        <a href="#sizer">Розмір каблучки</a>
-        <a href="#contacts">Контакти</a>
-      </nav>
-
-      <div class="actions">
+      <div class="header__right">
+        <a class="mini-link" href="#gift">Подарунки</a>
+        <a class="mini-link" href="#contacts">Контакти</a>
         <a class="btn btn--ghost" href="catalog.html">Каталог</a>
-        <a class="btn btn--gold" href="#contacts">Консультація</a>
+        <button class="icon-btn" aria-label="Кошик">🛍️<span class="badge">0</span></button>
+      </div>
+    </div>
+
+    <div class="header__bottom">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav-item"><a class="nav-link" href="#categories">Категорії</a></div>
+          <div class="nav-item"><a class="nav-link" href="#featured">Хіти</a></div>
+          <div class="nav-item"><a class="nav-link" href="#gift">Подарунки</a></div>
+          <div class="nav-item"><a class="nav-link" href="#sizer">Розмір каблучки</a></div>
+          <div class="nav-item"><a class="nav-link" href="#contacts">Контакти</a></div>
+        </nav>
       </div>
     </div>
   </header>
