@@ -190,6 +190,21 @@
       font-weight:600;
       color:#5f554c;
     }
+    .chip-btn{
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .chip-btn:hover{
+      background:#fff;
+      color:var(--brown);
+      transform:translateY(-1px);
+    }
+    .chip-btn.active{
+      background:var(--gold);
+      color:#fff;
+      border-color:var(--gold);
+    }
+
     .hero__stats{
       display:grid;
       grid-template-columns:repeat(4,1fr);
@@ -665,9 +680,9 @@
       <nav class="nav">
         <a href="index.html#categories">Категорії</a>
         <a href="index.html#featured">Хіти</a>
-        <a href="catalog.html#sizer">Розмір каблучки</a>
-        <a href="catalog.html#delivery">Доставка і оплата</a>
-        <a href="index.html#contacts">Контакти</a>
+        <a href="#sizer">Розмір каблучки</a>
+        <a href="#delivery">Доставка і оплата</a>
+        <a href="#contacts">Контакти</a>
       </nav>
 
       <div class="actions">
@@ -687,17 +702,20 @@
               <h1>Каталог ювелірних прикрас</h1>
               <p>Великий каталог ювелірних виробів із зручним пошуком, фільтрами та швидким оформленням замовлення.</p>
             </div>
+
             <div class="hero__chips">
-              <span class="chip">Обручки</span>
-              <span class="chip">Каблучки</span>
-              <span class="chip">Сережки</span>
-              <span class="chip">Браслети</span>
-              <span class="chip">Підвіси</span>
-              <span class="chip">Ланцюжки</span>
-              <span class="chip">Шпильки</span>
-              <span class="chip">Хрестики</span>
+              <button class="chip chip-btn active" onclick="setCategory('all')">Усі</button>
+              <button class="chip chip-btn" onclick="setCategory('Обручки')">Обручки</button>
+              <button class="chip chip-btn" onclick="setCategory('Каблучки')">Каблучки</button>
+              <button class="chip chip-btn" onclick="setCategory('Сережки')">Сережки</button>
+              <button class="chip chip-btn" onclick="setCategory('Браслети')">Браслети</button>
+              <button class="chip chip-btn" onclick="setCategory('Підвіси')">Підвіси</button>
+              <button class="chip chip-btn" onclick="setCategory('Ланцюжки')">Ланцюжки</button>
+              <button class="chip chip-btn" onclick="setCategory('Шпильки')">Шпильки</button>
+              <button class="chip chip-btn" onclick="setCategory('Хрестики')">Хрестики</button>
             </div>
           </div>
+
           <div class="hero__stats">
             <div class="stat"><strong>8</strong><span>ключових категорій</span></div>
             <div class="stat"><strong>18</strong><span>позицій уже додано в каталог</span></div>
@@ -894,6 +912,19 @@
 
     function setCategory(value){
       categoryFilter.value = value;
+
+      document.querySelectorAll('.chip-btn').forEach(btn=>{
+        btn.classList.remove('active');
+        if ((value === 'all' && btn.textContent.trim() === 'Усі') || btn.textContent.trim() === value){
+          btn.classList.add('active');
+        }
+      });
+
+      document.querySelectorAll('input[name="catQuick"]').forEach(input=>{
+        const labelText = input.parentElement.textContent.trim();
+        input.checked = (value === 'all' && labelText === 'Усі товари') || labelText === value;
+      });
+
       renderProducts();
     }
 
@@ -1026,11 +1057,52 @@
       updateRingSizer();
     }
 
+    function applyCategoryFromUrl(){
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get('category');
+
+      if(!category) return;
+
+      const validCategories = [
+        'Обручки',
+        'Каблучки',
+        'Сережки',
+        'Браслети',
+        'Підвіси',
+        'Ланцюжки',
+        'Шпильки',
+        'Хрестики'
+      ];
+
+      if(validCategories.includes(category)){
+        setCategory(category);
+      }
+    }
+
     searchInput.addEventListener('input', renderProducts);
-    categoryFilter.addEventListener('change', renderProducts);
+
+    categoryFilter.addEventListener('change', function(){
+      const value = this.value;
+
+      document.querySelectorAll('.chip-btn').forEach(btn=>{
+        btn.classList.remove('active');
+        if ((value === 'all' && btn.textContent.trim() === 'Усі') || btn.textContent.trim() === value){
+          btn.classList.add('active');
+        }
+      });
+
+      document.querySelectorAll('input[name="catQuick"]').forEach(input=>{
+        const labelText = input.parentElement.textContent.trim();
+        input.checked = (value === 'all' && labelText === 'Усі товари') || labelText === value;
+      });
+
+      renderProducts();
+    });
+
     sortFilter.addEventListener('change', renderProducts);
     document.getElementById('cartButton').addEventListener('click', openCart);
     ringRange.addEventListener('input', updateRingSizer);
+
     document.getElementById('contactForm').addEventListener('submit', function(e){
       e.preventDefault();
       document.getElementById('formMessage').textContent = 'Дякуємо! Ми зв’яжемося з вами найближчим часом.';
@@ -1038,6 +1110,7 @@
     });
 
     renderProducts();
+    applyCategoryFromUrl();
     updateCart();
     updateRingSizer();
   </script>
