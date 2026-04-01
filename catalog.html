@@ -9,7 +9,7 @@
     :root{
       --bg:#f6f3ef;
       --surface:#ffffff;
-      --surface-2:#f2ebe3;
+      --surface-2:#f4ece3;
       --text:#241c17;
       --muted:#7a6d61;
       --line:#e7ddd1;
@@ -18,6 +18,7 @@
       --gold-dark:#916a37;
       --danger:#b64848;
       --shadow:0 14px 34px rgba(36,28,23,.07);
+      --shadow-soft:0 20px 40px rgba(36,28,23,.08);
     }
 
     *{box-sizing:border-box}
@@ -33,7 +34,7 @@
     img{display:block;max-width:100%}
     a{text-decoration:none;color:inherit}
     button,input,select,textarea{font:inherit}
-    .container{width:min(1280px,calc(100% - 32px));margin:0 auto}
+    .container{width:min(1320px,calc(100% - 32px));margin:0 auto}
 
     .topline{
       background:#fff;
@@ -54,7 +55,7 @@
     .header{
       position:sticky;
       top:0;
-      z-index:40;
+      z-index:50;
       background:rgba(246,243,239,.94);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
@@ -116,6 +117,11 @@
       border:1px solid var(--line);
       color:var(--brown);
     }
+    .btn--small{
+      padding:10px 14px;
+      font-size:14px;
+    }
+
     .icon-btn{
       width:46px;
       height:46px;
@@ -143,12 +149,12 @@
     }
 
     .hero{
-      padding:24px 0 18px;
+      padding:24px 0 14px;
     }
     .hero__box{
       background:linear-gradient(180deg,#faf7f3 0%,#efe7de 100%);
       border:1px solid var(--line);
-      border-radius:30px;
+      border-radius:32px;
       padding:24px;
       box-shadow:var(--shadow);
     }
@@ -165,7 +171,7 @@
     }
     .hero__copy h1{
       margin:0 0 10px;
-      font-size:54px;
+      font-size:58px;
       line-height:1.02;
       letter-spacing:-.03em;
     }
@@ -278,11 +284,153 @@
       justify-content:flex-end;
     }
 
+    .section{
+      padding:12px 0;
+    }
+    .section__head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:18px;
+      margin-bottom:16px;
+      flex-wrap:wrap;
+    }
+    .section__head h2{
+      margin:0;
+      font-size:40px;
+      line-height:1;
+      letter-spacing:-.03em;
+    }
+    .section__head p{
+      margin:0;
+      color:var(--muted);
+      max-width:760px;
+    }
+
+    .featured{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+      margin-bottom:8px;
+    }
+    .featured-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:var(--shadow-soft);
+      transition:.2s ease;
+      display:flex;
+      flex-direction:column;
+    }
+    .featured-card:hover{
+      transform:translateY(-3px);
+    }
+    .featured-card__media{
+      aspect-ratio:1 / 1;
+      background:linear-gradient(180deg,#fffaf4 0%,#f2e7da 100%);
+      display:grid;
+      place-items:center;
+    }
+    .featured-card__media img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      padding:18px;
+    }
+    .featured-card__body{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      flex:1;
+    }
+    .featured-card__meta{
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      color:var(--muted);
+      font-size:12px;
+      flex-wrap:wrap;
+    }
+    .featured-card h3{
+      margin:0;
+      font-size:22px;
+      line-height:1.1;
+    }
+    .featured-card p{
+      margin:0;
+      color:#665b51;
+      font-size:14px;
+    }
+    .featured-card__price{
+      font-size:30px;
+      font-weight:800;
+      color:var(--brown);
+      margin-top:auto;
+    }
+    .featured-card__footer{
+      display:flex;
+      gap:8px;
+      margin-top:8px;
+    }
+    .featured-card__footer .btn{
+      flex:1;
+    }
+
+    .categories-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+    }
+    .cat-tile{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:26px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      transition:.2s ease;
+      min-height:180px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .cat-tile:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow-soft);
+    }
+    .cat-tile__badge{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      background:linear-gradient(180deg,#f4e1c2 0%,#cc9a52 100%);
+      color:#fff;
+      font-weight:800;
+      display:grid;
+      place-items:center;
+      font-size:18px;
+    }
+    .cat-tile h3{
+      margin:18px 0 6px;
+      font-size:24px;
+      line-height:1.05;
+    }
+    .cat-tile p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .cat-tile strong{
+      margin-top:18px;
+      color:var(--gold-dark);
+      font-size:14px;
+    }
+
     .catalog-layout{
       display:grid;
       grid-template-columns:280px 1fr;
       gap:18px;
-      padding:6px 0 34px;
+      padding:6px 0 24px;
       align-items:start;
     }
     .sidebar,.content-panel,.panel{
@@ -359,13 +507,13 @@
 
     .products{
       display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:16px;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
     }
     .product{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:24px;
+      border-radius:26px;
       overflow:hidden;
       display:flex;
       flex-direction:column;
@@ -377,7 +525,7 @@
       box-shadow:0 18px 34px rgba(36,28,23,.08);
     }
     .product__media{
-      aspect-ratio:1 / 1.04;
+      aspect-ratio:1 / 1.02;
       background:linear-gradient(180deg,#fffaf4 0%,#f2e7da 100%);
       display:grid;
       place-items:center;
@@ -387,21 +535,38 @@
       width:100%;
       height:100%;
       object-fit:contain;
-      padding:16px;
+      padding:18px;
     }
     .product__placeholder{
-      width:72%;
+      width:78%;
+      aspect-ratio:1;
+      border-radius:28px;
+      background:linear-gradient(180deg,#f8efe5 0%,#ecdfcf 100%);
+      border:1px solid #e3d6c8;
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .product__placeholder::before{
+      content:'';
+      width:60%;
       aspect-ratio:1;
       border-radius:50%;
       border:14px solid rgba(184,140,82,.8);
-      display:grid;
-      place-items:center;
-      font-size:28px;
+      display:block;
+      box-shadow:inset 0 0 18px rgba(255,255,255,.45);
+    }
+    .product__placeholder span{
+      position:absolute;
+      bottom:14px;
+      font-weight:800;
       color:var(--gold-dark);
-      background:radial-gradient(circle,rgba(255,255,255,.56) 0%,transparent 62%);
+      font-size:14px;
+      letter-spacing:.08em;
     }
     .product__body{
-      padding:16px 16px 18px;
+      padding:18px;
       display:flex;
       flex-direction:column;
       gap:8px;
@@ -417,8 +582,8 @@
     }
     .product h3{
       margin:0;
-      font-size:19px;
-      line-height:1.2;
+      font-size:21px;
+      line-height:1.15;
     }
     .product__sku{
       font-size:12px;
@@ -430,15 +595,15 @@
       margin:0;
     }
     .product__price{
-      font-size:26px;
+      font-size:28px;
       font-weight:800;
       color:var(--brown);
-      margin-top:2px;
+      margin-top:auto;
     }
     .product__footer{
       display:flex;
       gap:8px;
-      margin-top:auto;
+      margin-top:8px;
     }
     .product__footer .btn{
       flex:1;
@@ -685,8 +850,16 @@
     }
 
     @media (max-width:1180px){
-      .products{grid-template-columns:repeat(3,minmax(0,1fr))}
-      .toolbar{grid-template-columns:1fr 1fr 1fr}
+      .featured,
+      .categories-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .products{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .toolbar{
+        grid-template-columns:1fr 1fr 1fr;
+      }
       .summary{grid-column:1/-1}
       .hero__top{grid-template-columns:1fr}
       .hero__chips{justify-content:flex-start}
@@ -696,15 +869,26 @@
     @media (max-width:980px){
       .header__row{grid-template-columns:1fr;justify-items:start}
       .nav{justify-content:flex-start}
-      .catalog-layout,.sections,.footer__grid{grid-template-columns:1fr}
+      .catalog-layout,
+      .sections,
+      .footer__grid{
+        grid-template-columns:1fr;
+      }
       .sidebar{position:static}
-      .products{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
     @media (max-width:640px){
-      .hero__copy h1{font-size:36px}
-      .products,.hero__stats{grid-template-columns:1fr}
+      .hero__copy h1{font-size:38px}
+      .featured,
+      .categories-grid,
+      .products,
+      .hero__stats{
+        grid-template-columns:1fr;
+      }
       .toolbar{grid-template-columns:1fr}
-      .product__footer{flex-direction:column}
+      .product__footer,
+      .featured-card__footer{
+        flex-direction:column;
+      }
       .brand__logo{width:108px}
     }
   </style>
@@ -732,7 +916,7 @@
       <nav class="nav">
         <a href="index.html#categories">Категорії</a>
         <a href="index.html#featured">Хіти</a>
-        <a href="#sizer">Розмір каблучки</a>
+        <a href="#catalog-grid">Товари</a>
         <a href="#delivery">Доставка і оплата</a>
         <a href="#contacts">Контакти</a>
       </nav>
@@ -753,7 +937,7 @@
           <div class="hero__top">
             <div class="hero__copy">
               <h1>Каталог ювелірних прикрас</h1>
-              <p>Великий каталог ювелірних виробів із зручним пошуком, фільтрами та швидким оформленням замовлення.</p>
+              <p>Великий каталог ювелірних виробів із зручним пошуком, швидким підбором і комфортним оформленням замовлення.</p>
             </div>
 
             <div class="hero__chips">
@@ -771,7 +955,7 @@
 
           <div class="hero__stats">
             <div class="stat"><strong>8</strong><span>ключових категорій</span></div>
-            <div class="stat"><strong>18</strong><span>позицій уже додано в каталог</span></div>
+            <div class="stat"><strong>24</strong><span>позиції у красивому каталозі</span></div>
             <div class="stat"><strong>10 000+</strong><span>безкоштовна доставка від цієї суми</span></div>
             <div class="stat"><strong>1 рік</strong><span>гарантія на вироби</span></div>
           </div>
@@ -809,14 +993,76 @@
             </div>
 
             <div class="quick-reset">
-              <button class="btn btn--ghost" type="button" onclick="resetQuickFilters()">Скинути швидкий підбір</button>
+              <button class="btn btn--ghost btn--small" type="button" onclick="resetQuickFilters()">Скинути швидкий підбір</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="catalog">
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2>Популярне</h2>
+            <p>Добірка товарів, з яких найчастіше починається знайомство з колекцією.</p>
+          </div>
+        </div>
+
+        <div class="featured" id="featuredGrid"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2>Категорії каталогу</h2>
+            <p>Швидкі переходи у потрібний розділ без зайвого пошуку.</p>
+          </div>
+        </div>
+
+        <div class="categories-grid">
+          <button class="cat-tile" onclick="setCategory('Обручки')">
+            <div>
+              <div class="cat-tile__badge">OB</div>
+              <h3>Обручки</h3>
+              <p>Класичні та сучасні моделі для важливих моментів.</p>
+            </div>
+            <strong>Перейти →</strong>
+          </button>
+
+          <button class="cat-tile" onclick="setCategory('Каблучки')">
+            <div>
+              <div class="cat-tile__badge">KB</div>
+              <h3>Каблучки</h3>
+              <p>Діамантові та щоденні каблучки у витонченому стилі.</p>
+            </div>
+            <strong>Перейти →</strong>
+          </button>
+
+          <button class="cat-tile" onclick="setCategory('Сережки')">
+            <div>
+              <div class="cat-tile__badge">SR</div>
+              <h3>Сережки</h3>
+              <p>Лаконічні й акцентні моделі для подарунка і себе.</p>
+            </div>
+            <strong>Перейти →</strong>
+          </button>
+
+          <button class="cat-tile" onclick="setCategory('Браслети')">
+            <div>
+              <div class="cat-tile__badge">BR</div>
+              <h3>Браслети</h3>
+              <p>Стильні прикраси для щоденного образу.</p>
+            </div>
+            <strong>Перейти →</strong>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog-grid">
       <div class="container catalog-layout">
         <aside class="sidebar">
           <h3>Фільтри</h3>
@@ -838,20 +1084,11 @@
           </div>
 
           <div class="filter-block">
-            <div class="filter-title"><span>Метал</span><span>+</span></div>
-            <div class="filter-options">
-              <label class="filter-option"><input type="checkbox" disabled> Жовте золото</label>
-              <label class="filter-option"><input type="checkbox" disabled> Біле золото</label>
-              <label class="filter-option"><input type="checkbox" disabled> Червоне золото</label>
-            </div>
-          </div>
-
-          <div class="filter-block">
             <div class="filter-title"><span>Покупцям</span><span>+</span></div>
             <div class="filter-options small-note">
               <div>• Великий каталог товарів</div>
-              <div>• Кошик завжди під рукою</div>
-              <div>• Швидкий підбір працює зверху сторінки</div>
+              <div>• Швидкий підбір зверху сторінки</div>
+              <div>• Робочий кошик і форма заявки</div>
             </div>
           </div>
         </aside>
@@ -859,7 +1096,7 @@
         <div class="content-panel">
           <div class="toolbar">
             <input class="search" id="searchInput" type="text" placeholder="Пошук за назвою або артикулом..." />
-            <div class="summary" id="catalogSummary">Показано 18 товарів</div>
+            <div class="summary" id="catalogSummary">Показано 0 товарів</div>
             <select class="select" id="categoryFilter">
               <option value="all">Усі категорії</option>
               <option value="Обручки">Обручки</option>
@@ -941,7 +1178,7 @@
     <div class="container">
       <div class="footer__grid">
         <div><strong>ORIXGOLD</strong><p>Сучасний ювелірний магазин OrixGold з великим каталогом прикрас.</p></div>
-        <div><strong>Каталог</strong><p><a href="catalog.html">Усі товари</a></p><p><a href="#categories">Категорії</a></p></div>
+        <div><strong>Каталог</strong><p><a href="catalog.html">Усі товари</a></p><p><a href="#catalog-grid">Товари</a></p></div>
         <div><strong>Покупцям</strong><p><a href="#delivery">Доставка і оплата</a></p><p><a href="#sizer">Розмір каблучки</a></p></div>
         <div><strong>Контакти</strong><p><a href="#contacts">Форма заявки</a></p><p>+38 (067) 430-40-91</p></div>
       </div>
@@ -958,24 +1195,30 @@
 
   <script>
     const products = [
-      {id:1,name:'Каблучка',sku:'410-0178',category:'Каблучки',price:16108,material:'Жовте золото, діамант',metal:'yellow',stone:'diamond',desc:'Каблучка із жовтого золота із діамантовою вставкою.',sizes:'Усі розміри доступні під замовлення',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:2,name:'Обручка',sku:'420-0191',category:'Обручки',price:14982,material:'Жовте золото, діамант',metal:'yellow',stone:'diamond',desc:'Американка із жовтого золота.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
-      {id:3,name:'Обручка',sku:'OR-W-001',category:'Обручки',price:11154,material:'Біле золото',metal:'white',stone:'none',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:4,name:'Обручка',sku:'OR-W-002',category:'Обручки',price:27002,material:'Червоне золото',metal:'red',stone:'none',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:5,name:'Каблучка',sku:'423-0317',category:'Каблучки',price:25907,material:'Жовте золото, діаманти',metal:'yellow',stone:'diamond',desc:'Каблучка у вигляді квіткової гілки із діамантами.',sizes:'Усі розміри доступні під замовлення',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
-      {id:6,name:'Шпилька',sku:'368-0004',category:'Шпильки',price:1987,material:'Червоне золото, цирконій/діамант',metal:'red',stone:'diamond',desc:'Шпилька із червоного золота з фігуркою-метеликом.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png'},
-      {id:7,name:'Підвіс',sku:'225-0942',category:'Підвіси',price:8045,material:'Червоне та біле золото, діаманти',metal:'red',stone:'diamond',desc:'Підвіс у вигляді об’ємної кульки.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
-      {id:8,name:'Підвіс',sku:'OR-P-001',category:'Підвіси',price:32917,material:'Біле золото',metal:'white',stone:'none',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:9,name:'Підвіс',sku:'OR-P-002',category:'Підвіси',price:44177,material:'Біле золото',metal:'white',stone:'none',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:10,name:'Підвіс',sku:'OR-P-003',category:'Підвіси',price:36272,material:'Золото',metal:'yellow',stone:'none',desc:'Модель з каталогу Orix.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:11,name:'Сережки',sku:'OR-E-001',category:'Сережки',price:87480,material:'Золото',metal:'yellow',stone:'diamond',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:12,name:'Сережки',sku:'OR-E-002',category:'Сережки',price:61628,material:'Золото',metal:'yellow',stone:'none',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:13,name:'Сережки',sku:'OR-E-003',category:'Сережки',price:63829,material:'Золото',metal:'white',stone:'diamond',desc:'Модель з категорії сережок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:14,name:'Браслет',sku:'OR-B-001',category:'Браслети',price:100000,material:'Золото',metal:'yellow',stone:'none',desc:'Модель з категорії браслетів.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:15,name:'Ланцюжок',sku:'OR-C-001',category:'Ланцюжки',price:58700,material:'Червоне золото',metal:'red',stone:'none',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:16,name:'Ланцюжок',sku:'OR-C-002',category:'Ланцюжки',price:102725,material:'Червоне золото',metal:'red',stone:'none',desc:'Модель з категорії ланцюжків.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:17,name:'Шпилька',sku:'OR-S-001',category:'Шпильки',price:3559,material:'Золото',metal:'yellow',stone:'none',desc:'Модель з категорії шпильок.',sizes:'Уточнюйте у менеджера',image:''},
-      {id:18,name:'Хрестик',sku:'OR-X-001',category:'Хрестики',price:3668,material:'Червоне/біле золото',metal:'red',stone:'none',desc:'Модель з категорії хрестиків.',sizes:'Уточнюйте у менеджера',image:''}
+      {id:1,name:'Каблучка з діамантом',sku:'410-0178',category:'Каблучки',price:16108,material:'Жовте золото, діамант',metal:'yellow',stone:'diamond',desc:'Каблучка із жовтого золота із діамантовою вставкою.',sizes:'Усі розміри доступні під замовлення',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:2,name:'Обручка американка',sku:'420-0191',category:'Обручки',price:14982,material:'Жовте золото, діамант',metal:'yellow',stone:'diamond',desc:'Американка із жовтого золота.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_1c1a72ee39b54d55bc4a5f33e6b645ba~mv2.png'},
+      {id:3,name:'Обручка класична',sku:'OR-W-001',category:'Обручки',price:11154,material:'Біле золото',metal:'white',stone:'none',desc:'Лаконічна класична модель для щоденного носіння.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:4,name:'Обручка фактурна',sku:'OR-W-002',category:'Обручки',price:27002,material:'Червоне золото',metal:'red',stone:'none',desc:'Більш виразна фактура та теплий відтінок металу.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:5,name:'Каблучка квітка',sku:'423-0317',category:'Каблучки',price:25907,material:'Жовте золото, діаманти',metal:'yellow',stone:'diamond',desc:'Каблучка у вигляді квіткової гілки із діамантами.',sizes:'Усі розміри доступні під замовлення',image:'https://static.wixstatic.com/media/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_39e8f04da31a4f708f04f265849c02a8~mv2.png'},
+      {id:6,name:'Шпилька метелик',sku:'368-0004',category:'Шпильки',price:1987,material:'Червоне золото, цирконій/діамант',metal:'red',stone:'diamond',desc:'Шпилька із червоного золота з фігуркою-метеликом.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_4765e43735a7464d8870efa5424bc3ee~mv2.png'},
+      {id:7,name:'Підвіс кулька',sku:'225-0942',category:'Підвіси',price:8045,material:'Червоне та біле золото, діаманти',metal:'red',stone:'diamond',desc:'Підвіс у вигляді об’ємної кульки.',sizes:'Під замовлення',image:'https://static.wixstatic.com/media/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png/v1/fill/w_673,h_507,al_c,q_85,enc_avif,quality_auto/6b2377_a18d180f385e4a7c8d327d8c969379b3~mv2.png'},
+      {id:8,name:'Підвіс мінімал',sku:'OR-P-001',category:'Підвіси',price:32917,material:'Біле золото',metal:'white',stone:'none',desc:'Мінімалістичний підвіс у сучасному стилі.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:9,name:'Підвіс геометрія',sku:'OR-P-002',category:'Підвіси',price:44177,material:'Біле золото',metal:'white',stone:'none',desc:'Геометрична форма та чистий силует.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:10,name:'Підвіс класичний',sku:'OR-P-003',category:'Підвіси',price:36272,material:'Золото',metal:'yellow',stone:'none',desc:'Класична подарункова прикраса.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:11,name:'Сережки діамантові',sku:'OR-E-001',category:'Сережки',price:87480,material:'Золото',metal:'yellow',stone:'diamond',desc:'Елегантні сережки для особливих випадків.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:12,name:'Сережки щоденні',sku:'OR-E-002',category:'Сережки',price:61628,material:'Золото',metal:'yellow',stone:'none',desc:'Спокійна модель на кожен день.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:13,name:'Сережки білі',sku:'OR-E-003',category:'Сережки',price:63829,material:'Золото',metal:'white',stone:'diamond',desc:'Світла посадка металу і делікатний блиск.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:14,name:'Браслет базовий',sku:'OR-B-001',category:'Браслети',price:100000,material:'Золото',metal:'yellow',stone:'none',desc:'Браслет із чистою сучасною лінією.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:15,name:'Ланцюжок тонкий',sku:'OR-C-001',category:'Ланцюжки',price:58700,material:'Червоне золото',metal:'red',stone:'none',desc:'Легкий ланцюжок для щоденного носіння.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:16,name:'Ланцюжок об’ємний',sku:'OR-C-002',category:'Ланцюжки',price:102725,material:'Червоне золото',metal:'red',stone:'none',desc:'Більш виразна модель з щільним плетінням.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:17,name:'Шпилька мінімал',sku:'OR-S-001',category:'Шпильки',price:3559,material:'Золото',metal:'yellow',stone:'none',desc:'Лаконічна ювелірна деталь для акценту.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:18,name:'Хрестик класичний',sku:'OR-X-001',category:'Хрестики',price:3668,material:'Червоне/біле золото',metal:'red',stone:'none',desc:'Традиційна форма у стриманому виконанні.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:19,name:'Каблучка тонка',sku:'OR-R-004',category:'Каблучки',price:18750,material:'Біле золото',metal:'white',stone:'none',desc:'Тонка посадка, стриманий силует.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:20,name:'Каблучка солітер',sku:'OR-R-005',category:'Каблучки',price:34800,material:'Жовте золото, діамант',metal:'yellow',stone:'diamond',desc:'Класичний солітер для заручин.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:21,name:'Обручка сатин',sku:'OR-W-006',category:'Обручки',price:22800,material:'Біле золото',metal:'white',stone:'none',desc:'Матова сатинова поверхня та чиста форма.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:22,name:'Сережки краплі',sku:'OR-E-007',category:'Сережки',price:42500,material:'Червоне золото',metal:'red',stone:'none',desc:'М’яка витягнута форма у теплому відтінку.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:23,name:'Браслет тонкий',sku:'OR-B-008',category:'Браслети',price:48700,material:'Біле золото',metal:'white',stone:'diamond',desc:'Тонкий браслет з делікатними вставками.',sizes:'Уточнюйте у менеджера',image:''},
+      {id:24,name:'Підвіс знак',sku:'OR-P-009',category:'Підвіси',price:14500,material:'Жовте золото',metal:'yellow',stone:'none',desc:'Лаконічний символічний підвіс на подарунок.',sizes:'Уточнюйте у менеджера',image:''}
     ];
 
     let cartItemsState = [];
@@ -984,6 +1227,7 @@
     let activeStone = null;
 
     const productsGrid = document.getElementById('productsGrid');
+    const featuredGrid = document.getElementById('featuredGrid');
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
     const sortFilter = document.getElementById('sortFilter');
@@ -1068,6 +1312,7 @@
       syncCategoryUI(value);
       updateUrlParams();
       renderProducts();
+      scrollToCatalog();
     }
 
     function applyQuickFilter(type, value){
@@ -1087,6 +1332,7 @@
       highlightQuickButtons();
       updateUrlParams();
       renderProducts();
+      scrollToCatalog();
     }
 
     function resetQuickFilters(){
@@ -1099,7 +1345,7 @@
       renderProducts();
     }
 
-    function renderProducts(){
+    function getFilteredProducts(){
       let filtered = [...products];
       const term = searchInput.value.trim().toLowerCase();
       const category = categoryFilter.value;
@@ -1127,6 +1373,19 @@
       if(sort === 'cheap') filtered.sort((a,b) => a.price - b.price);
       if(sort === 'expensive') filtered.sort((a,b) => b.price - a.price);
 
+      return filtered;
+    }
+
+    function renderPlaceholder(category){
+      return `
+        <div class="product__placeholder">
+          <span>${getPlaceholderLabel(category)}</span>
+        </div>
+      `;
+    }
+
+    function renderProducts(){
+      const filtered = getFilteredProducts();
       catalogSummary.textContent = `Показано ${filtered.length} товарів`;
 
       if(!filtered.length){
@@ -1137,7 +1396,7 @@
       productsGrid.innerHTML = filtered.map(product => {
         const visual = product.image
           ? `<img src="${product.image}" alt="${product.name}">`
-          : `<div class="product__placeholder">${getPlaceholderLabel(product.category)}</div>`;
+          : renderPlaceholder(product.category);
 
         return `
           <article class="product">
@@ -1156,6 +1415,28 @@
             </div>
           </article>`;
       }).join('');
+    }
+
+    function renderFeatured(){
+      const featuredProducts = products.filter(p => p.image).slice(0,4);
+
+      featuredGrid.innerHTML = featuredProducts.map(product => `
+        <article class="featured-card">
+          <div class="featured-card__media">
+            <img src="${product.image}" alt="${product.name}">
+          </div>
+          <div class="featured-card__body">
+            <div class="featured-card__meta"><span>${product.category}</span><span>${product.material}</span></div>
+            <h3>${product.name}</h3>
+            <p>${product.desc}</p>
+            <div class="featured-card__price">${formatPrice(product.price)}</div>
+            <div class="featured-card__footer">
+              <button class="btn btn--ghost" onclick="setCategory('${product.category}')">Дивитися</button>
+              <button class="btn btn--gold" onclick="addToCart(${product.id})">У кошик</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
     }
 
     function addToCart(id){
@@ -1257,6 +1538,11 @@
       highlightQuickButtons();
     }
 
+    function scrollToCatalog(){
+      const section = document.getElementById('catalog-grid');
+      if(section) section.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
     searchInput.addEventListener('input', renderProducts);
 
     categoryFilter.addEventListener('change', function(){
@@ -1277,6 +1563,7 @@
     });
 
     applyFiltersFromUrl();
+    renderFeatured();
     renderProducts();
     updateCart();
     updateRingSizer();
